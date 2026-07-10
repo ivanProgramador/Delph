@@ -1,0 +1,52 @@
+unit unitLoop;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    mmoNumeros: TMemo;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+ var
+   i:integer;
+
+begin
+
+   {
+     O i começa valendo 0
+     então quando passa do "to" ele começa o loop
+     o objeto e ateingir 10 ciclos
+     ele desce adiciona uma linha ao componente memo
+     volta e verifica o i se ele não for igual a 10
+     ele repete o fluxo ate que ele seja
+
+   }
+   for i := 0 to 10 do
+
+   begin
+      mmoNumeros.Lines.Add('Numero' + IntToStr(i))
+   end;
+
+
+end;
+
+end.
