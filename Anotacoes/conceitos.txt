@@ -1,0 +1,20 @@
+DELPH 
+
+A ideia do delph é ser uma ferramenta do tipo RAD( Rapid Development Aplication) a ideia é acelerar o desenvolvimento de aplicações desktop
+e aplicações mobile de forma geral.
+
+Dentro do delph existem 2 formas de desenvolver
+ 
+VCL -> para plataforma Windows automação comercial e sistemas desktop 
+
+FireMonkey -> são aplicações multiplataforma (roda em várias plataformas WINDOWS,MAC,IOS,ANDROID) seguindo o mesmo conceito do java e sua jvm
+
+
+
+
+ 
+
+ 
+ 
+   
+    

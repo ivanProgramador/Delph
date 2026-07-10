@@ -1,0 +1,103 @@
+unit unitCalculadora;
+
+interface
+
+ {
+
+  Lista da bibliotecas de compentes que estão sendo usadas essas seriam as classes
+  das quais esses componetes herdam os métodos
+ }
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+ {Lista dos componetes que estão sendo usados}
+type
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    txtNumero1: TEdit;
+    txtNumero2: TEdit;
+    Label2: TLabel;
+    txtResultado: TEdit;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+{
+  Nessa área as variáveis são delacradas
+
+  variaveis tipos numericos
+
+      NumeroReal: Real;
+      NumeroInteiro: Integer;
+
+  variaveis de texto
+
+      nome: String;
+
+  variáveis logicas
+
+      maiorDeIdade: Booleam;
+
+
+}
+
+var
+  numero1: Real;
+  numero2: Real;
+  resultado: Real;
+
+begin
+
+  {
+    Na inteface eu tenho componentes que recebem os valores do
+    numero1  e do numero2 essa componentes servem para entrada de
+    texto, por isso eu preciso converter para poder fazer um calculo
+    com os valores recebidos então quando eu escrevo
+
+         txtNumero1.text
+
+    estou me referrindo ao texto recebido pelo componente
+    e então eu atribuo esses valores para as variáveis
+
+    float é um tipo de dado que normalmente é usado em calculos por isso
+    eu não estou convertendo pra Real
+
+   }
+
+   numero1 := StrToFloat(txtNumero1.text);
+   numero2 := StrToFloat(txtNumero2.text);
+
+   {
+     apos recebido eu faço o calculo e coloco a soma dentro da variavel resultado
+   }
+
+   resultado := numero1 + numero2;
+
+   {
+     agora eu preciso colocar o resultado dentro de um componente
+     para que ele possa ser mostrado porém agora o resultado é um
+     numero que precisa ser convertido em texto para que possa ser mostrado
+     então eu converto ele para texto novamente
+   }
+
+   txtResultado.Text := FloatToStr(resultado);
+
+
+end;
+
+
+end.

@@ -1,0 +1,36 @@
+Iniciando um aplicativo 
+1 - file 
+2 - new windows vcl aplication (se for uma aplicação vcl) se for uma firemonkey a opção a ser escolhida é a multi-device
+  
+Quando um aplicação é criada a primeira coisa a ser gerada é um componente vazio o nome inicial do compoente é form1 no Delph 
+um componente em si é um objeto com atributos
+
+Um form possui suas dimensões,titulo,nome,cor,texto entre outros atributos, como a ideia principal é o conceito RAD ccomo todos os 
+componentes ele tem eventos que são acionados de varias formas nisso é possivel controlar oque acontece quando o componente recebe 
+um click, quando o mouse passa sobre ele, isso possibilita que atraves do codigo inserido em cada evento o desenvovedor possa determinar
+o proximo passo do sistema com base nas ações do usuário.
+
+Usando como exemplo uma tela de login no conceito RAD eu posso inserir dentro do form1 
+
+form1
+ 1 - Tlabel com o texto "Usuário"
+ 2 - Tlabel2 com o texto "senha"
+ 3 - Tedit  para receber o usuario 
+ 4 - Tedit2  para receber a senha  
+
+ 3 - Tbutton com o texto "entrar" é no evento de onclick dele eu posso colocar um codigo que capture os carateres recebidos nos dois 
+     Tedit e faça uma consulta na base de dados pra verificar se eles atendem aos requisitos do login.
+
+E da mesma forma que eu fiz com um botão eu posso fazer com botões de menu,barras,tabelas,scrolls entre outros componentes. 
+
+Como a interface grafica ja esta pronta não exsite a necessidade de escrever todo o codigo que envolve ela essa é a ideia de uma ferramenta RAD
+     
+        
+
+
+   
+
+          
+
+    
+ 
