@@ -1,0 +1,5 @@
+Os executaveis depois de compilados ficam no caminho 
+
+Variaveis Calculadora\Win32\Debug
+
+Uma pasta "Win32/Debug" é gerada de forma automática dentro da pasta do projeto  
