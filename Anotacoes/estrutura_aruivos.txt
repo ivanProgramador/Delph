@@ -1,0 +1,39 @@
+quando um aplicação é compilada ela possui alguns arquivos associados a ela 
+no delph abaixo eu vou listar alguns formatos a lista pode se taualizar aos longo das aulas.
+
+
+arquivo.pas  
+
+ o pas vem de pascal basicamente esse arquivo é o formulario, ele contem o  codigo da aplicação, ou seja Unit.pas = unidade pascal
+
+arquivo.dfm 
+
+  Esse arquivo contem a posição dos elementos dentro do formulário, e tambem 
+  os valores dos atrinutos como 
+  dimensão,cor,fonte, entre outros dados como se fosse um construtor 
+
+arquivo.dproj
+
+   Esse arquivo e a junção dos anteriores ele literalmente é o projeto,
+   ele é aberto pela ide pra fazer alterações no projeto cso seja necessário
+
+arquivo.dpr
+
+   Funciona como um ponto de entrada do programa como se fosse o coração sistema, quando um nova tela ou componte é iserido no projeto o .dpr recebe uma nova linha, e quando processador executa o sistema e faz a leitura dela 
+esse novo componete aparece.
+
+arquivo.dprojlocal
+
+   Serve pra guardar os stado do seu porjeto dntro da sua maquina localmente
+   coisas do tipo abas abertas,breakpoints,caso esse arivo seja apagado ele    não vai travar o projeto ele so vai esquecer as suas configurações locais.
+
+       
+
+    
+
+ 
+
+   
+
+
+  

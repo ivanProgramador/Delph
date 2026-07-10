@@ -1,0 +1,43 @@
+unit uniTiposDeDados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TForm1 = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+  {
+     incluido variaveis e testando tipos
+     como se trata de uma liguagem procedural fortemente tipada
+     então se eu quiser declarar a variável eu preciso literalmente dizer a que tipo
+     essa variável pertente
+
+     numero1: Integer;
+     nome: String;
+     ativo: Booleam;
+
+     O TIPO ABAIXO É USADO EM VALORES DE MOEDAS DE FORMA GERAL
+
+     imposto: Currency;
+
+
+  }
+
+
+
+implementation
+
+{$R *.dfm}
+
+end.

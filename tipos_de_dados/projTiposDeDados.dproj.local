@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/10 11:52:54.079,=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/07/10 11:53:41.965,C:\delph\tipos_de_dados\uniTiposDeDados.dfm=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2026/07/10 11:53:41.965,C:\delph\tipos_de_dados\uniTiposDeDados.pas=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/07/10 11:54:08.121,C:\delph\tipos_de_dados\projTiposDeDados.dproj=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
