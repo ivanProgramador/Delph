@@ -1,0 +1,83 @@
+PROCEDURES
+
+Procedures sao um gupo de comandos que o porcessador lê para executar as açoes como 
+um algoritmo.
+
+Esse é um exemplo de procedure mas ela esta explicando o seguinte:
+
+1 -> quem esta chamando ela é um botão chamado "Button1" 
+2 -> ele esta chamndo ela usando o metodo Click()
+3 -> o metodo click desse botão chama essa procedure para o próprio objeto
+  
+para o delph cada componente desses é uma classe com seus metodos e atributos
+então quando eu chamo o mentodo "Button1Click" eu vou buscar ele da classe principal 
+"Buttom" e como o "Button1" é um objeto eu preciso passar ele como parámetro parar que a classe 
+principal saiba qual dos objetos dela precisa desse metodo.  
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+Bloco "begin e end" é dento desse bloco que as coisas acontecem e´aqui que é definido oque aocntece quando o 
+click é feito no botão   
+
+
+begin
+
+end;
+
+procedure do click no modod normal fica assim: 
+
+    procedure TForm1.Button1Click(Sender: TObject);
+    begin
+
+    end;
+
+criando um procedimento
+
+Um procedimento pode ser delcarado ou criado dentro de 3 sessoes do codigo 
+1 - sessão type
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+
+
+2 - sessaõ private 
+  private
+        procedure FormCreate(Sender: TObject);
+  end;
+
+3 - sessaõ public 
+
+  public
+
+    procedure FormCreate(Sender: TObject);
+
+  end;
+
+Qual ea diferença entre essas 3 sessoes de codigo ?
+1 - sessão type ele vai ser acessivel de qulquer lugar (global)
+2 - global também 
+3 - visivel so dentro da unit 
+
+fazendo uma procedure 
+  
+  procedure MinhaProcedure;
+
+depois de declarar a minha prcedure eu preciso implementar ela na sessão implementation
+
+    procedure TForm1.MinhaProcedure;
+    begin 
+
+    end;
+
+
+
+ 
+
+
+
+
