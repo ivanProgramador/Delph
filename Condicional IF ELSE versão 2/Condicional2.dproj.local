@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/09 23:28:18.576,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/09 23:36:54.771,C:\Delph\Condicional IF ELSE versão 2\unitCondicional2.dfm=C:\Delph\Unit1.dfm</Transaction>
+    <Transaction>2026/07/09 23:36:54.771,C:\Delph\Condicional IF ELSE versão 2\unitCondicional2.pas=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/09 23:49:44.568,C:\Delph\Condicional IF ELSE versão 2\Condicional2.dproj=C:\Delph\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
