@@ -1,0 +1,28 @@
+Conversão (casting)
+
+A conversão de variaveis delph acontece atráves de funções nativas
+dele abaixo coloquei alguns exelos mais existem mauito mais funcções 
+de conversão 
+
+converte string parar float -> strToFloat();
+
+converte float pra string -> floatToStr();
+
+converte string para float e se ele receber um valor invalido ele deixa o valor 0 como padrão,
+depedendo do contexto é mais interessante usar isso pra manter o sistema rodando,mesmo depois de receber
+um valor invalido, mas é importante testar que tipo de operação o usuario esta fazendo porque existe um 
+risco de divisoes por zero, oque pode fazer o porcessador avançar a linha e travar na proxima, então 
+o interessante é usar essa função de conversão para não travar e depois mostrar uma aviso ao usuario 
+dizendo a ele e pra digitar um valor valido.    
+ 
+1 - usuário digitou valor invalido 
+
+ StrToFloatDef(edt2,0);
+
+2 - manda o aviso e limpa o campo
+
+--------------------------------------------------------------------------------------------------------
+ 
+
+
+  

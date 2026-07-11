@@ -1,0 +1,63 @@
+unit view.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    edt1: TEdit;
+    edt2: TEdit;
+    Button1: TButton;
+    edt3: TEdit;
+    procedure FormCreate(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+
+ var
+  valor1, valor2, total: double;
+
+begin
+
+   {
+     A conversão dos valores usando o "StrToFloatDef()" evita a trava do codigo
+     em um caso onde o usuário digite o valor errado, a ideia e fazer um calculo
+     entre o valor1 e o valor 2 caso o usuario passe um texto ele recebe 0 por
+     pádrão
+
+     StrToFloatDef(edt1.Text,0)
+
+
+   }
+
+   valor1 := StrToFloatDef(edt1.Text,0);
+
+   valor2 := StrToFloatDef(edt2.Text,0);
+
+   total := valor1 + valor2;
+
+   edt3.Text := FloatToStr(total);
+
+
+
+
+
+
+end;
+
+end.

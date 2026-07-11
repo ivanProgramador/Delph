@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/11 09:48:03.090,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/11 09:49:18.317,C:\Delph\conversao de variaveis\view.principal.pas=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/11 09:49:18.317,C:\Delph\conversao de variaveis\view.principal.dfm=C:\Delph\Unit1.dfm</Transaction>
+    <Transaction>2026/07/11 09:49:43.350,C:\Delph\Conversao_variaveis.dproj=C:\Delph\Project1.dproj</Transaction>
+    <Transaction>2026/07/11 10:18:03.309,C:\Delph\conversao de variaveis\Conversao_variaveis.dproj=C:\Delph\Conversao_variaveis.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
