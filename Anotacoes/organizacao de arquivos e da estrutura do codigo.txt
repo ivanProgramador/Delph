@@ -1,0 +1,93 @@
+A organização dos nomes dos arquivos deve seguir analogia de um cardapio 
+é importante ter essa noção inicial porque como o delph e compilado um 
+arquivo fora de ordem pode gerar problemas.
+
+Visão(Telas)unit
+
+view.principal
+
+Projeto
+ 
+O nome do projeto seria o nome do sistema porque esse aquivo se refere ao software de forma geral  
+
+meuprojeto.dproj 
+
+apos essas modificações fica mais facil dentificar os componentes
+
+-----------------------------------------------------------------------------------------------------------------------
+unit view.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TForm1 = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end. 
+
+---------------------------------------------------------------------------------------------------------------------------
+
+inserindo funções ou componentes atráves do codigo
+
+no delph a diretiva usada é o "uses" no codigo abaixo eu separei a sessão uses pra mostrar as libs que ela importa  
+para ver o codigo dessas libs basta colocar o mouse sobre elas e clicar com o botão direito vai aparece uma link para
+dentro do codigo.  
+
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants, 
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls, 
+  Vcl.Forms, 
+  Vcl.Dialogs;
+
+----------------------------------------------------------------------------------------------------------------------
+
+A sessão type serve para controlar o acesso das funções ela podem ser:
+
+publicas -> globais acessiveis de qualquer ponto do codigo 
+
+privadas -> acessiveis somente dentro da unit onde forrma declaradas  
+
+----------------------------------------------------------------------------------------------------------------------
+type
+  TForm1 = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+    
