@@ -1,0 +1,74 @@
+unit view.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    edt1: TEdit;
+    Button1: TButton;
+    edt2: TEdit;
+    Label2: TLabel;
+    Edit3: TEdit;
+    Button2: TButton;
+    Edit4: TEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure Label2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+begin
+
+ {covertendo valores de string para inteiro e testando se são maiores ou iguais}
+
+  if StrToIntDef(edt1.Text,0) >= StrToIntDef(edt2.Text,0) then
+
+    begin
+      ShowMessage('Maior idade');
+    end
+
+  else
+    begin
+      ShowMessage('Menor de idade');
+    end;
+
+
+end;
+
+procedure TForm1.Label2Click(Sender: TObject);
+
+  {testando a diferença entre as strings de 2 campos}
+
+begin
+   if edit3.Text <> edit4.Text then
+
+    begin
+      ShowMessage('CPF valido');
+    end
+
+  else
+    begin
+      ShowMessage('CPF ivalido');
+    end;
+
+
+
+end;
+
+end.

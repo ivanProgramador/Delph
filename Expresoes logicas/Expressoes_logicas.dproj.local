@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/11 10:25:49.532,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/11 10:26:27.638,C:\Delph\Expresoes logicas\view.principal.dfm=C:\Delph\Unit1.dfm</Transaction>
+    <Transaction>2026/07/11 10:26:27.638,C:\Delph\Expresoes logicas\view.principal.pas=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/11 10:26:46.316,C:\Delph\Expressoes_logicas.dproj=C:\Delph\Project1.dproj</Transaction>
+    <Transaction>2026/07/11 11:16:12.989,C:\Delph\Expresoes logicas\Expressoes_logicas.dproj=C:\Delph\Expressoes_logicas.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

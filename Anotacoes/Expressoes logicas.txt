@@ -1,0 +1,43 @@
+Expressões lógicas em delph
+
+> maior que 
+> menor que 
+= igual a 
+<> diferente de 
+
+-------------------------------------------------------------------------------------
+   convertendo valores de string para inteiro e testando se são maiores ou iguais
+
+      if StrToIntDef(edt1.Text,0) >= StrToIntDef(edt2.Text,0) then
+
+        begin
+          ShowMessage('Maior idade');
+        end
+
+      else
+        begin
+          ShowMessage('Menor de idade');
+        end;
+-------------------------------------------------------------------------------------------
+
+comparando dua strings recebidas
+
+-------------------------------------------------------------------------------------------
+begin
+  if edt1.Text <> edt2.Text then
+
+        begin
+          ShowMessage('CPF invalido ');
+        end
+
+      else
+        begin
+          ShowMessage('CPF valido');
+        end;
+
+end;
+-----------------------------------------------------------------------------------------
+
+
+
+ 
