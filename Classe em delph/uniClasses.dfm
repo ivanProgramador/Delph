@@ -10,6 +10,8 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object Label1: TLabel
     Left = 8
@@ -49,9 +51,9 @@ object Form1: TForm1
     OnClick = btnCriarPessoaClick
   end
   object mmResultado: TMemo
-    Left = 392
+    Left = 184
     Top = 8
-    Width = 224
+    Width = 432
     Height = 281
     Lines.Strings = (
       '')

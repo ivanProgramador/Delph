@@ -1,0 +1,152 @@
+unit uniClasses;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  System.Generics.Collections; // <- essa lib guarda listas genericas de objetos
+
+type
+
+  TPessoa = class
+
+    //atributos
+    FNome:string;
+    FIdade:integer;
+    FAltura:double;
+
+    //construtor quando a função creste recebe atributos de tipos diferentes os 2 devem ser seprados por ';'
+    constructor Create(ANome:string; AIdade:integer);
+
+    //medotos
+
+    procedure falar;
+    procedure andar;
+
+  end;
+
+  TForm1 = class(TForm)
+    edtNome: TEdit;
+    edtIdade: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnCriarPessoa: TButton;
+    mmResultado: TMemo;
+    procedure btnCriarPessoaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    ListaDePessoas: TObjectList<TPessoa>; //<- declarando a minha lista
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+
+{construtor e metodos da classe pessoa }
+
+ constructor TPessoa.Create(ANome: string; AIdade: integer);
+
+ {ATENÇÃO AQUI SE NÃO TIVER VARIÁVEL NÃO TEM RETORNO }
+
+  begin
+    FNome  := ANome;   // <-- Essa linha joga o "nome" para a classe
+    FIdade := AIdade;  // <-- Essa linha joga a "idade" para a classe
+
+  end;
+
+    procedure TPessoa.falar;
+        begin
+          ShowMessage('falando');
+        end;
+
+       procedure TPessoa.andar;
+        begin
+          ShowMessage('andar');
+        end;
+
+
+
+procedure TForm1.btnCriarPessoaClick(Sender: TObject);
+
+var
+
+  UmaPessoa: TPessoa; //variavel baseada na classe que vai receber o objeto
+  NomeDigitado:string;
+  IdadeDigitada: integer;
+
+begin
+
+    //se o usuario esquecer de digitar nome ou idade
+
+    if (edtNome.Text = '') or (edtIdade.Text = '') then
+      begin
+        ShowMessage('Por favor preecha o nome e a idade');
+        Exit;
+      end;
+
+    //pegando os valore que o usuario digitou na tela
+
+    NomeDigitado := edtNome.Text;
+
+    //nesse caso eu preciso converter o valor que vem do campo porque o atributo é inteiro
+    //e esse campo vai me entregar texto
+
+    IdadeDigitada := strToInt(edtIdade.Text);
+
+    //criando o objeto e colocando os dados nele
+
+    UmaPessoa := TPessoa.Create(NomeDigitado,IdadeDigitada);
+
+    try
+       //adicionado uma linha no mm com dados do objeto
+       mmResultado.Lines.Add('Pessoa criada: ' + UmaPessoa.FNome + '- Idade : ' + intToStr(UmaPessoa.FIdade)+' anos');
+
+
+        //chamando os metodos
+        UmaPessoa.falar;
+        UmaPessoa.andar;
+
+    finally
+
+        //liberando a memoria
+        UmaPessoa.Free;
+
+  end;
+
+
+
+
+
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  {
+     para que sistema saiba da existencia de uma lista para colocar os dados que ela recebe
+     essa lista deve ser declarada dentro do evento onCreate
+     1 - inspetor de objetos
+     2 - events
+     3 - seleciona o onCreate
+  }
+
+  ListaDePessoas := TObjectList<TPessoa>.Create(True);
+end;
+
+end.

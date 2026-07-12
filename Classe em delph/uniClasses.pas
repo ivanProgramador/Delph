@@ -3,8 +3,17 @@ unit uniClasses;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  System.Generics.Collections; // <- essa lib guarda listas genericas de objetos
 
 type
 
@@ -33,8 +42,11 @@ type
     btnCriarPessoa: TButton;
     mmResultado: TMemo;
     procedure btnCriarPessoaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+    ListaDePessoas: TObjectList<TPessoa>; //<- declarando a minha lista
   public
     { Public declarations }
   end;
@@ -75,7 +87,8 @@ procedure TForm1.btnCriarPessoaClick(Sender: TObject);
 
 var
 
-  UmaPessoa: TPessoa; //variavel baseada na classe que vai receber o objeto
+  NovaPessoa: TPessoa; //variavel baseada na classe que vai receber o objeto
+  PessoaDaLista: TPessoa;
   NomeDigitado:string;
   IdadeDigitada: integer;
 
@@ -89,40 +102,54 @@ begin
         Exit;
       end;
 
-    //pegando os valore que o usuario digitou na tela
+    //pegando os valores vindos dos campos e adicionando no objeto
 
-    NomeDigitado := edtNome.Text;
+    NovaPessoa := TPessoa.Create(edtNome.Text,StrToInt(edtIdade.Text));
 
-    //nesse caso eu preciso converter o valor que vem do campo porque o atributo é inteiro
-    //e esse campo vai me entregar texto
+    //adicionando a lista da memória
+    ListaDePessoas.Add(NovaPessoa);
 
-    IdadeDigitada := strToInt(edtIdade.Text);
+    //limpando  os dados do mm pra redesenhar ele atualizado
 
-    //criando o objeto e colocando os dados nele
+    mmResultado.Clear;
 
-    UmaPessoa := TPessoa.Create(NomeDigitado,IdadeDigitada);
+    //usando um for pra percorrer a lista e mostrar os dados usando o mm
 
-    try
-       //adicionado uma linha no mm com dados do objeto
-       mmResultado.Lines.Add('Pessoa criada: ' + UmaPessoa.FNome + '- Idade : ' + intToStr(UmaPessoa.FIdade)+' anos');
+    for PessoaDalista in ListaDePessoas do
+    begin
+         //adicionado uma linha no mm com dados do objeto
+       mmResultado.Lines.Add('Salvo na memoria ->Nome : ' + PessoaDaLista.FNome + '- Idade : ' + intToStr(PessoaDaLista.FIdade)+' anos');
+    end;
 
+    // zerando os campos depois de salva
+    edtNome.Clear;
+    edtIdade.Clear;
+    edtNome.SetFocus;
 
-        //chamando os metodos
-        UmaPessoa.falar;
-        UmaPessoa.andar;
-
-    finally
-
-        //liberando a memoria
-        UmaPessoa.Free;
-
-  end;
+ end;
 
 
 
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  {
+     para que sistema saiba da existencia de uma lista para colocar os dados que ela recebe
+     essa lista deve ser declarada dentro do evento onCreate
+     1 - inspetor de objetos
+     2 - events
+     3 - seleciona o onCreate
+  }
 
+  ListaDePessoas := TObjectList<TPessoa>.Create(True);
+end;
 
-
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+  {
+    essa lista deve ficar no evento onDestroy para liberar a memoria quando o sistema fechar
+    isso vai evitar vazamento de memoria
+   }
+  ListaDePessoas.Free;
 end;
 
 end.
