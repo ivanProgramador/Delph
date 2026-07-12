@@ -1,0 +1,59 @@
+unit uniClasses;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+
+  TPessoa = class
+
+    //atributos
+    FNome:string;
+    FIdade:integer;
+    FAltura:double;
+
+    //construtor quando a função creste recebe atributos de tipos diferentes os 2 devem ser seprados por ';'
+    constructor Create(ANome:string; AIdade:integer);
+
+    //medotos
+
+    procedure falar;
+    procedure andar;
+
+  end;
+
+  TForm1 = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+  constructor TPessoa.Create(ANome: string; AIdade: integer);
+begin
+
+end;
+
+    procedure TPessoa.falar;
+        begin
+          ShowMessage('falando');
+        end;
+
+       procedure TPessoa.andar;
+        begin
+          ShowMessage('andar');
+        end;
+
+
+
+end.
