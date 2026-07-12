@@ -1,0 +1,64 @@
+unit uMain;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.Buttons,
+  Vcl.StdCtrls,
+  System.Generics.Collections, // chamndo a classe de listas
+  uPessoa;                     // chamando a unit uPessoa que ta com a classe TPessoa dentro dela
+
+type
+  TForm1 = class(TForm)
+    edtNome: TEdit;
+    edtIdade: TEdit;
+    lbPessoas: TListBox;
+    btnAdicionar: TButton;
+    btnApagar: TButton;
+    btnEditar: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
+
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+
+
+    procedure TForm1.btnAdicionarClick(Sender: TObject);
+      begin
+            showMessage('teste');
+      end;
+
+    procedure TForm1.FormCreate(Sender: TObject);
+      begin
+            showMessage('teste');
+      end;
+
+    procedure TForm1.FormDestroy(Sender: TObject);
+      begin
+          showMessage('teste');
+      end;
+
+end.
+

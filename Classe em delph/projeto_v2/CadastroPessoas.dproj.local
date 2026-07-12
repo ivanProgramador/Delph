@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/12 16:03:47.841,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/12 16:04:36.237,C:\Delph\Classe em delph\projeto_v2\uMain.dfm=C:\Delph\Unit1.dfm</Transaction>
+    <Transaction>2026/07/12 16:04:36.237,C:\Delph\Classe em delph\projeto_v2\uMain.pas=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/12 16:05:56.345,C:\Delph\Classe em delph\projeto_v2\CadastroPessoas.dproj=C:\Delph\Project1.dproj</Transaction>
+    <Transaction>2026/07/12 16:16:09.633,=C:\Delph\Classe em delph\projeto_v2\Unit1.pas</Transaction>
+    <Transaction>2026/07/12 16:16:54.961,C:\Delph\Classe em delph\projeto_v2\uPessoa.pas=C:\Delph\Classe em delph\projeto_v2\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

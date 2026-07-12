@@ -1,0 +1,63 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Cadastro Pessoas OO'
+  ClientHeight = 323
+  ClientWidth = 774
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  TextHeight = 15
+  object edtNome: TEdit
+    Left = 8
+    Top = 32
+    Width = 121
+    Height = 23
+    TabOrder = 0
+  end
+  object edtIdade: TEdit
+    Left = 8
+    Top = 61
+    Width = 121
+    Height = 23
+    TabOrder = 1
+  end
+  object lbPessoas: TListBox
+    Left = 273
+    Top = 8
+    Width = 493
+    Height = 257
+    ItemHeight = 15
+    TabOrder = 2
+  end
+  object btnAdicionar: TButton
+    Left = 8
+    Top = 103
+    Width = 129
+    Height = 25
+    Caption = 'btnAdicionar'
+    TabOrder = 3
+    OnClick = btnAdicionarClick
+  end
+  object btnApagar: TButton
+    Left = 273
+    Top = 271
+    Width = 248
+    Height = 25
+    Caption = 'Apagar'
+    TabOrder = 4
+  end
+  object btnEditar: TBitBtn
+    Left = 527
+    Top = 271
+    Width = 239
+    Height = 25
+    Caption = 'Editar'
+    TabOrder = 5
+  end
+end
