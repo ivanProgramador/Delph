@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/12 19:22:06.334,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/12 19:22:24.755,C:\Delph\Gerenciador de scripts delph\uMain.dfm=C:\Delph\Unit1.dfm</Transaction>
+    <Transaction>2026/07/12 19:22:24.755,C:\Delph\Gerenciador de scripts delph\uMain.pas=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/12 19:23:48.006,C:\Delph\Gerenciador de scripts delph\Gerenciador.dproj=C:\Delph\Project1.dproj</Transaction>
+    <Transaction>2026/07/12 19:23:59.201,=C:\Delph\Gerenciador de scripts delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/12 19:24:38.135,C:\Delph\Gerenciador de scripts delph\uScripts.pas=C:\Delph\Gerenciador de scripts delph\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

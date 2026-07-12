@@ -1,0 +1,15 @@
+program Gerenciador_de_scripts;
+
+uses
+  Vcl.Forms,
+  view in 'view.principal' {Form1},
+  uScript in 'uScript.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

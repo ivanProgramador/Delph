@@ -1,0 +1,162 @@
+unit uMain;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.Buttons,
+  Vcl.StdCtrls,
+  System.Generics.Collections, // Biblioteca de listas OO
+  uScript;                     // A Unit que você salvou!
+
+type
+  TForm1 = class(TForm)
+    edtNome: TEdit;
+    edtCaminho: TEdit;
+    cbTipo: TComboBox;
+    lbScripts: TListBox;
+    btnAdicionar: TButton;
+    btnApagar: TButton;
+    btnEditar: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure btnApagarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+  private
+    { Private declarations }
+    FPosicaoEdicao: integer;
+    ListaDeScripts: TObjectList<TScript>; // Nossa lista de objetos do tipo TScript
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+// Procedure que limpa e redesenha o ListBox buscando os dados da ObjectList
+procedure AtualizarListaInterface;
+var
+  Script: TScript;
+begin
+  Form1.lbScripts.Items.Clear;
+
+  for Script in Form1.ListaDeScripts do
+  begin
+    Form1.lbScripts.Items.Add(Script.Nome + ' [' + Script.Tipo + ']');
+  end;
+end;
+
+// Evento disparado assim que o programa abre
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ListaDeScripts := TObjectList<TScript>.Create(True);
+end;
+
+// Evento disparado ao fechar o programa (limpa a memória)
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+  ListaDeScripts.Free;
+end;
+
+// Botão Adicionar
+procedure TForm1.btnAdicionarClick(Sender: TObject);
+var
+  NovoScript: TScript;
+begin
+  if (edtNome.Text = '') or (edtCaminho.Text = '') or (cbTipo.Text = '') then
+  begin
+    ShowMessage('Por favor, preencha todos os campos!');
+    Exit;
+  end;
+
+  // Cria o objeto passando os parâmetros para o construtor
+  NovoScript := TScript.Create(edtNome.Text, edtCaminho.Text, cbTipo.Text);
+  ListaDeScripts.Add(NovoScript);
+
+  AtualizarListaInterface;
+
+  // Limpa os campos para o próximo cadastro
+  edtNome.Clear;
+  edtCaminho.Clear;
+  cbTipo.ItemIndex := -1;
+  edtNome.SetFocus;
+end;
+
+// Botão Apagar
+procedure TForm1.btnApagarClick(Sender: TObject);
+var
+  PosicaoSelecionada: integer;
+begin
+  PosicaoSelecionada := lbScripts.ItemIndex;
+
+  if PosicaoSelecionada = -1 then
+  begin
+    ShowMessage('Por favor, selecione um script na lista para apagar!');
+    Exit;
+  end;
+
+  ListaDeScripts.Delete(PosicaoSelecionada);
+  AtualizarListaInterface;
+end;
+
+// Botão Editar usando controle por TAG
+procedure TForm1.btnEditarClick(Sender: TObject);
+var
+  ScriptSelecionado: TScript;
+begin
+  // Modo Leitura (Tag = 0): Sobe os dados para as caixas
+  if btnEditar.Tag = 0 then
+  begin
+    FPosicaoEdicao := lbScripts.ItemIndex;
+
+    if FPosicaoEdicao = -1 then
+    begin
+      ShowMessage('Selecione um script na lista para editar!');
+      Exit;
+    end;
+
+    ScriptSelecionado := ListaDeScripts[FPosicaoEdicao];
+
+    edtNome.Text    := ScriptSelecionado.Nome;
+    edtCaminho.Text := ScriptSelecionado.Caminho;
+    cbTipo.Text     := ScriptSelecionado.Tipo;
+
+    btnEditar.Caption    := 'Salvar Alteração';
+    btnEditar.Tag        := 1;
+    btnAdicionar.Enabled := False;
+    edtNome.SetFocus;
+  end
+  // Modo Gravação (Tag = 1): Salva por cima do objeto existente
+  else
+  begin
+    if (edtNome.Text = '') or (edtCaminho.Text = '') or (cbTipo.Text = '') then Exit;
+
+    ListaDeScripts[FPosicaoEdicao].Nome    := edtNome.Text;
+    ListaDeScripts[FPosicaoEdicao].Caminho := edtCaminho.Text;
+    ListaDeScripts[FPosicaoEdicao].Tipo    := cbTipo.Text;
+
+    AtualizarListaInterface;
+
+    btnEditar.Caption    := 'Editar Selecionado';
+    btnEditar.Tag        := 0;
+    btnAdicionar.Enabled := True;
+    edtNome.Clear;
+    edtCaminho.Clear;
+    cbTipo.ItemIndex := -1;
+  end;
+end;
+
+end.

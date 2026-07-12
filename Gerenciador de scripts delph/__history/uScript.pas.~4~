@@ -1,0 +1,32 @@
+unit uScript;
+
+interface
+
+type
+  TScript = class
+  private
+    FNome: string;
+    FCaminho: string;
+    FTipo: string;
+  public
+    constructor Create(ANome, ACaminho, ATipo: string);
+
+
+
+    property Nome: string read FNome write FNome;
+    property Caminho: string read FCaminho write FCaminho;
+    property Tipo: string read FTipo write FTipo;
+  end;
+
+implementation
+
+{ TScript }
+
+constructor TScript.Create(ANome, ACaminho, ATipo: string);
+begin
+  FNome    := ANome;
+  FCaminho := ACaminho;
+  FTipo    := ATipo;
+end;
+
+end.

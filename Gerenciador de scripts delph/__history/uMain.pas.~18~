@@ -1,0 +1,289 @@
+unit uMain;
+
+interface
+
+uses
+  Winapi.ShellAPI,
+  System.JSON.Serializers,
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.Buttons,
+  Vcl.StdCtrls,
+  System.Generics.Collections,
+  uScripts,
+  System.IOUtils;
+
+type
+  TForm1 = class(TForm)
+    edtCaminho: TEdit;
+    cbTipo: TComboBox;
+    lbScripts: TListBox;
+    btnAdicionar: TButton;
+    btnApagar: TButton;
+    btnEditar: TButton;
+    edtNome: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    btnExecutar: TButton;
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure btnApagarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure btnExecutarClick(Sender: TObject);
+  private
+    { Private declarations }
+    FPosicaoEdicao: integer;
+    ListaDeScripts: TObjectList<TScript>; // criando a lista de scripts
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+  procedure AtualizarListaInterface;
+    var
+      Script: TScript;
+    begin
+      Form1.lbScripts.Items.Clear;
+
+      for Script in Form1.ListaDeScripts do
+      begin
+        // Exibindo os dados da lista
+        Form1.lbScripts.Items.Add(Script.Nome + ' [' + Script.Tipo + ']');
+      end;
+  end;
+
+
+  // Função que transforma a lista de objetos em JSON e salva no HD
+      procedure SalvarDadosNoDisco;
+      var
+        Serializer: TJsonSerializer;
+        ConteudoJSON: string;
+        CaminhoArquivo: string;
+      begin
+        CaminhoArquivo := ChangeFileExt(Application.ExeName, '.json'); // Salva na mesma pasta do programa
+        Serializer := TJsonSerializer.Create;
+        try
+          // Transforma toda a nossa ObjectList em uma string de texto JSON
+          ConteudoJSON := Serializer.Serialize(Form1.ListaDeScripts);
+
+          // Grava o texto no arquivo de forma permanente
+          TFile.WriteAllText(CaminhoArquivo, ConteudoJSON, TEncoding.UTF8);
+        finally
+          Serializer.Free;
+        end;
+      end;
+
+      // Função que lê o arquivo JSON e reconstrói os objetos na memória
+      procedure CarregarDadosDoDisco;
+      var
+        Serializer: TJsonSerializer;
+        ConteudoJSON: string;
+        CaminhoArquivo: string;
+        ListaTemporaria: TObjectList<TScript>;
+      begin
+        CaminhoArquivo := ChangeFileExt(Application.ExeName, '.json');
+
+        // Se o arquivo ainda não existir (primeira vez rodando), não faz nada
+        if not TFile.Exists(CaminhoArquivo) then Exit;
+
+        Serializer := TJsonSerializer.Create;
+        try
+          // Lê o texto do arquivo
+          ConteudoJSON := TFile.ReadAllText(CaminhoArquivo, TEncoding.UTF8);
+
+          if ConteudoJSON.Trim = '' then Exit;
+
+          // Recria os objetos TScript e joga dentro da nossa lista existente
+          ListaTemporaria := Serializer.Deserialize<TObjectList<TScript>>(ConteudoJSON);
+
+          if ListaTemporaria <> nil then
+          begin
+            Form1.ListaDeScripts.Free; // Limpa a lista vazia inicial
+            Form1.ListaDeScripts := ListaTemporaria; // Assume a lista carregada com os dados
+          end;
+        finally
+          Serializer.Free;
+        end;
+      end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  procedure TForm1.FormCreate(Sender: TObject);
+    begin
+      ListaDeScripts := TObjectList<TScript>.Create(True);
+      CarregarDadosDoDisco;   // <-- BUSCA OS DADOS SALVOS
+      AtualizarListaInterface; // <-- MOSTRA ELES NA TELA
+    end;
+
+    procedure TForm1.FormDestroy(Sender: TObject);
+    begin
+      ListaDeScripts.Free;
+  end;
+
+  procedure TForm1.btnAdicionarClick(Sender: TObject);
+    var
+      NovoScript: TScript;
+    begin
+      if (edtNome.Text = '') or (edtCaminho.Text = '') or (cbTipo.Text = '') then
+      begin
+        ShowMessage('Por favor, preencha todos os campos!');
+        Exit;
+      end;
+
+      NovoScript := TScript.Create(edtNome.Text, edtCaminho.Text, cbTipo.Text);
+      ListaDeScripts.Add(NovoScript);
+
+      AtualizarListaInterface;
+
+      edtNome.Clear;
+      edtCaminho.Clear;
+      cbTipo.ItemIndex := -1;
+      edtNome.SetFocus;
+
+      // ... (fim do código de adicionar)
+      cbTipo.ItemIndex := -1;
+
+      SalvarDadosNoDisco; // <-- ADICIONE AQUI PARA SALVAR AUTOMÁTICO
+      edtNome.SetFocus;
+
+
+  end;
+
+  procedure TForm1.btnApagarClick(Sender: TObject);
+    var
+      PosicaoSelecionada: integer;
+    begin
+      PosicaoSelecionada := lbScripts.ItemIndex;
+
+      if PosicaoSelecionada = -1 then
+      begin
+        ShowMessage('Por favor, selecione um script na lista para apagar!');
+        Exit;
+      end;
+
+      ListaDeScripts.Delete(PosicaoSelecionada);
+      AtualizarListaInterface;
+
+      // ... (fim do código de apagar)
+      ListaDeScripts.Delete(PosicaoSelecionada);
+      AtualizarListaInterface;
+
+      SalvarDadosNoDisco; // <-- ADICIONE AQUI PARA SALVAR A EXCLUSÃO
+  end;
+
+  procedure TForm1.btnEditarClick(Sender: TObject);
+  var
+    ScriptSelecionado: TScript;
+  begin
+    if btnEditar.Tag = 0 then
+    begin
+      FPosicaoEdicao := lbScripts.ItemIndex;
+
+      if FPosicaoEdicao = -1 then
+      begin
+        ShowMessage('Selecione um script na lista para editar!');
+        Exit;
+      end;
+
+    ScriptSelecionado := ListaDeScripts[FPosicaoEdicao];
+
+    edtNome.Text    := ScriptSelecionado.Nome;
+    edtCaminho.Text := ScriptSelecionado.Caminho;
+    cbTipo.Text     := ScriptSelecionado.Tipo;
+
+    btnEditar.Caption    := 'Salvar Alteração';
+    btnEditar.Tag        := 1;
+    btnAdicionar.Enabled := False;
+    edtNome.SetFocus;
+  end
+  else
+      begin
+        if (edtNome.Text = '') or (edtCaminho.Text = '') or (cbTipo.Text = '') then Exit;
+
+        ListaDeScripts[FPosicaoEdicao].Nome    := edtNome.Text;
+        ListaDeScripts[FPosicaoEdicao].Caminho := edtCaminho.Text;
+        ListaDeScripts[FPosicaoEdicao].Tipo    := cbTipo.Text;
+
+        AtualizarListaInterface;
+
+        btnEditar.Caption    := 'Editar Selecionado';
+        btnEditar.Tag        := 0;
+        btnAdicionar.Enabled := True;
+        edtNome.Clear;
+        edtCaminho.Clear;
+        cbTipo.ItemIndex := -1;
+        SalvarDadosNoDisco;
+      end;
+  end;
+
+  procedure TForm1.btnExecutarClick(Sender: TObject);
+    var
+      PosicaoSelecionada: integer;
+      ScriptSelecionado: TScript;
+      Comando, Parametros: string;
+    begin
+
+      PosicaoSelecionada := lbScripts.ItemIndex;
+
+      if PosicaoSelecionada = -1 then
+      begin
+        ShowMessage('Por favor, selecione um script na lista para executar!');
+        Exit;
+      end;
+
+
+      ScriptSelecionado := ListaDeScripts[PosicaoSelecionada];
+
+
+      if ScriptSelecionado.Tipo = 'Batch' then
+      begin
+
+        Comando    := ScriptSelecionado.Caminho;
+        Parametros := '';
+      end
+      else if ScriptSelecionado.Tipo = 'PowerShell' then
+      begin
+
+        Comando    := 'powershell.exe';
+        Parametros := '-NoProfile -ExecutionPolicy Bypass -File "' + ScriptSelecionado.Caminho + '"';
+      end;
+
+
+      ShellExecute(0, 'open', PChar(Comando), PChar(Parametros), nil, SW_SHOWNORMAL);
+    end;
+
+
+
+end.
