@@ -1,0 +1,67 @@
+unit view.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+   {
+    como o delph é procedural as classes que eu vou declarar devem ficar acima
+    das classes ja existentes pra ele poder ler a minha classe e depois as restantes
+   }
+  TPessoa = class
+
+       // atributos de uma classe são chamados de fieds
+
+       nome:string;
+       idade:integer;
+       altura:double;
+       nomeMae:string;
+       nomePai:string;
+
+       //methods -> são as ações de uma classe
+
+       procedure tomarBanho;
+       procedure beberAgua;
+       procedure dormir;
+
+   end;
+
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  Helio: TPessoa;
+
+implementation
+
+  {todos os metodos devem ser declarados temabem na sessaõ de implementacao }
+
+   procedure TPessoa.tomarBanho;
+     begin
+       ShowMessage('Toamando banho ...')
+     end;
+
+    procedure TPessoa.beberAgua;
+     begin
+       ShowMessage('Bebendo agua ...')
+     end;
+
+     procedure TPessoa.dormir;
+     begin
+       ShowMessage('dormindo ...')
+     end;
+
+end.
