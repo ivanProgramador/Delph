@@ -1,0 +1,25 @@
+O delph 12 usa o data Module para organizar os compnetes de conexão psquisando na paleta de componentes
+é possiveel sim encontrar drivers nativos parar bases de dados de codigo aberto e gratuitas, porém quando 
+se trata de um recurso Microsoft que seria nome caso o SQL server é necessario fazer algumas adaptações.
+
+O Firedac na versão comunity ele não trraz esses drivers de forma nativa as opções dele vão ser 
+MySQL
+PostgreSQL
+SQLite 
+Firebird      
+
+No meu caso eu vou precisar usar componentes TADO
+
+TADOConnection (tem a amesma função do TFDConnection)
+TADOQuery      (tem a amesma função do TFDQuery)
+
+quando esse componente for inserido no DM clicando duas vezes ele vai mostrar o menu de conexão 
+1-clicar em build
+2-escolher o pacote de drivers"Microsoft OLE DB provider for SQL server" 
+3-digitar o nome do servidor "localhost" ou se não tiver escolhi instancia padrão "localhost/instancia"
+4-colocar usuario e senha 
+5-escolher a base de dados que será controlada pelo componente
+6-clique em testar conexão
+7-se deu tudo certo ele vai mosntar uma url com todos os dados fornecidos
+8- mudar a propridade login prompt pra false (se não ele vai pedir a senha do banco toda vez que o sistema precisar conectar)
+ 
