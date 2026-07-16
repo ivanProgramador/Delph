@@ -1,0 +1,51 @@
+unit view.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+{chamei a classe pra dentro da unit }
+
+uses Cores;
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+{
+  defini uma varriavel pra ela , isso torna essa variavelç um obejto que pode chamar
+  qualquer metodo da classe
+}
+var numero: TCor;
+
+begin
+  {
+    chamando o metodo cor e usando um
+    "inputBox()" é uma caixa de ntrda de dados que fica dentro de uma telinha de aviso
+    como a minha função precisa receber um numero inteiro eu os um conversor
+    e coloco ela dentro então o meotodo cor recebe o valor do input convertido pra inteiro
+
+
+
+  }
+  numero.Cor(StrToInt(inputBox('Insira uma numero de 1 a 4','Valor:','')));
+end;
+
+end.

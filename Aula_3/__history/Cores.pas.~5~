@@ -1,0 +1,52 @@
+unit Cores;
+
+
+
+interface
+ uses
+  Vcl.Forms,
+  Vcl.Dialogs,
+  System.SysUtils;
+
+ Type
+  TCor = class
+    procedure Cor(n:integer);
+  end;
+
+implementation
+
+   procedure TCor.Cor(n: Integer);
+     begin
+
+       {aqui eu uso a estrutra case pra definir a mensagem com base no numero }
+
+       case n of
+
+        {se n for igual a 1 ele retorna a mensagem, abaixo }
+
+        1 : ShowMessage('Cor: vermelha');
+
+        {se n for igual a 2 ele retorna a mensagem, abaixo }
+
+        2 : ShowMessage('Cor: Azul');
+
+        {se n for igual a 3 ele retorna a mensagem, abaixo }
+
+        3 : ShowMessage('Cor: Verde');
+
+        {se n for igual a 4 ele retorna a mensagem, abaixo }
+
+        4 : ShowMessage('Cor: Amarela');
+
+
+
+
+
+       end;
+
+
+
+
+     end;
+
+end.

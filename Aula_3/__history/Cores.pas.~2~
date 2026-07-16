@@ -1,0 +1,12 @@
+unit Cores;
+
+uses
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.SysUtils;
+
+interface
+
+implementation
+
+end.
