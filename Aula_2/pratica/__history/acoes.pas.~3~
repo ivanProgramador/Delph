@@ -1,0 +1,31 @@
+unit acoes;
+
+interface
+  uses
+    Vcl.Forms,
+    System.SysUtils;
+
+  Type
+   TOperacoes = class
+
+     public
+
+       procedure somar;
+       procedure subtrair;
+       procedure multiplicar;
+       procedure dividir;
+
+     private
+
+   end;
+
+implementation
+var
+  resultado:Real;
+
+   procedure TOperacoes.somar;
+    begin
+       resultado := 5 + 5;
+       ShowMessage(DoubleToStr(resultado));
+    end;
+end.
