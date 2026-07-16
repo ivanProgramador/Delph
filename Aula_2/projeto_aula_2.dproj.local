@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/07/15 22:34:19.745,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/15 22:34:40.355,C:\delph\Aula_2\view.principal.pas=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/15 22:34:40.355,C:\delph\Aula_2\view.principal.dfm=C:\Delph\Unit1.dfm</Transaction>
+    <Transaction>2026/07/15 22:34:56.633,C:\delph\Aula_2\projeto_aula_2.dproj=C:\Delph\Project1.dproj</Transaction>
+    <Transaction>2026/07/15 23:23:34.792,=C:\delph\Aula_2\Unit1.pas</Transaction>
+    <Transaction>2026/07/15 23:24:01.662,C:\delph\Aula_2\Somas.pas=C:\delph\Aula_2\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

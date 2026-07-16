@@ -1,0 +1,39 @@
+Unit 
+
+Uma unit é um grupo indepedente de funções e procedures um porjetos pode ser composto por varias units 
+uma unit é composta por sessões e cada sessão tem sua função especifica o codigo das units é lido de forma
+procedural de cima para baixo então a execução aconte linha por linha de forma procedural
+
+Abaixo coloquei a listagem de sessões e a funcção de cada uma    
+ 
+
+unit view.principal; <- identificação da unit 
+
+interface  <- inicio da interface 
+
+uses   <- carregamento de bibliotecas e units externas
+
+type   <- declaração de classes,procedures e functions
+     
+end;   <- final da sessão type
+
+var    <- declaração de variaveis globais
+
+implementation <- implementação de funções e procedures
+
+end. <- final da unit 
+
+
+Criando uma unit
+ 
+1 - File 
+2 - new 
+3 - unit 
+
+
+
+
+
+
+
+  

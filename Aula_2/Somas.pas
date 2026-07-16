@@ -1,0 +1,56 @@
+unit Somas;
+
+interface
+
+  uses
+
+    Vcl.Forms,
+    Vcl.Dialogs,
+    System.SysUtils;
+
+  Type
+
+    TSoma = class
+
+         procedure Soma;
+         procedure Subtracao;
+         procedure Divisao;
+         procedure Multiplicacao;
+
+      private
+
+      public
+        resultado: Real;
+      End;
+
+
+implementation
+
+    procedure TSoma.Soma;
+     begin
+        resultado := 20 - 5;
+        ShowMessage(FloatToStr(resultado));
+     end;
+
+    procedure TSoma.Subtracao;
+     begin
+         resultado := 20 - 5;
+         ShowMessage(FloatToStr(resultado));
+     end;
+
+    procedure TSoma.Divisao;
+     begin
+        resultado := 5 / 5;
+         ShowMessage(FloatToStr(resultado));
+
+     end;
+
+    procedure TSoma.Multiplicacao;
+     begin
+
+         resultado := 5 * 5;
+         ShowMessage(FloatToStr(resultado));
+
+     end;
+
+end.
