@@ -1,0 +1,18 @@
+A interface da IDE do delph inicialmente fica dividida em 5 partes operacionais 
+ 
+1 - Estructure (Mostra a estrutura hieraquica dos componentes do aplicativo)
+2 - unit (E a  parte central onde ocorre de fato o desenvolvimento ela equivale a area de trabalho)
+3 - object spector (todo o componente é um objeto e o object spector ajuda a configiurar os atributos deles de forma visual sem precisar codificar)
+4 - projects (Mostra em cascata toda a estrutura do projeto pastas e aequivos)
+5 - pallete (Contem os componentes Botoes,tabelas,labels,barra de rolagem, componetes de conexão, parar que possamos arrastar pra dentro do projeto)
+6 - barra de tarefas (contem as opções da ide de forma geral, configurações, comandos do compilador, opçoes de abrir,salvar  o projeto entre outras opções )
+
+Arquivos
+
+.dproj - arquivo do projeto  ele é usado com referencia na hora de abrir novamente um projeto para editar
+.pas   - e a unit seria a view principal de forma geral são telas 
+.dfm   - é arquivo de côdigo que contem as instruções para o processador ler e entender oque eu quero que ele faça 
+.exe   - esse é o sofware gerado dentrro da pasta Win32/debug é esse aquivo que roda no computador do cliente na pasta debug fica o executavel e toddos os recuroso necessarios     pra ele rodar
+
+     
+ 
