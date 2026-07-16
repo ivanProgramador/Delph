@@ -1,0 +1,75 @@
+unit View.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    pnlFundo: TPanel;
+    edtAltura: TEdit;
+    edtPeso: TEdit;
+    btnImc: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    procedure btnImcClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnImcClick(Sender: TObject);
+
+ var
+  imc,peso,altura:Real;
+
+begin
+
+  peso := StrToFloat(edtPeso.Text);
+  altura := StrToFloat(edtAltura.Text);
+
+  imc := peso /(altura * altura );
+
+  if (imc >= 18.5 ) and (imc < 24.9) then
+    begin
+         ShowMessage('Peso ideal');
+    end
+
+  else if (imc >= 30) and (imc < 34.9) then
+    begin
+        ShowMessage('Sobre peso');
+    end
+
+  else if (imc >= 25) and (imc < 29.9) then
+    begin
+          ShowMessage('obesidadde 1');
+    end
+
+  else if (imc >= 35) and (imc < 39.9) then
+    begin
+           ShowMessage('obesidadde 2');
+    end
+
+  else
+     ShowMessage('pedo indefinido');
+  end;
+
+
+
+
+
+
+
+end;
+
+end.
