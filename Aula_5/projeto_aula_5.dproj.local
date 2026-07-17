@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2026/07/16 20:11:07.248,=C:\Delph\Unit1.pas</Transaction>
-    <Transaction>2026/07/16 20:11:31.489,C:\delph\Aula_5\principal.dfm=C:\Delph\Unit1.dfm</Transaction>
-    <Transaction>2026/07/16 20:11:31.489,C:\delph\Aula_5\principal.pas=C:\Delph\Unit1.pas</Transaction>
-    <Transaction>2026/07/16 20:11:52.878,C:\delph\Aula_5\projeto_aula_5.dproj=C:\Delph\Project1.dproj</Transaction>
+	<Transactions>
+    <Transaction>2026/07/16 20:11:07.000.248,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/16 20:11:31.000.489,C:\Delph\Unit1.pas=C:\delph\Aula_5\principal.pas</Transaction>
+    <Transaction>2026/07/16 20:11:31.000.489,C:\Delph\Unit1.dfm=C:\delph\Aula_5\principal.dfm</Transaction>
+    <Transaction>2026/07/16 20:11:52.000.878,C:\Delph\Project1.dproj=C:\delph\Aula_5\projeto_aula_5.dproj</Transaction>
   </Transactions>
 </BorlandProject>

@@ -1,0 +1,57 @@
+Componentes
+
+  São objetos que pertencem a classes nativas do Delph 
+  por exemplo quando eu coloco um botão no meu formulario ele cria uma objeto 
+  que pertence a classe TButton se ele pertence a classe ele pode herdar todos os  
+  atributos e metodos dela. 
+  
+  atrinutos como 
+   - largura
+   - altura
+   - Caption
+   - name(Esse atributo deve ser unico porque é pelo name que ele será referenciado no codigo ) 
+
+  são comuns na maioria desses componentes e assim que como eu tenho a classe "TButton"
+  eu também tenho DBgrid (Tabelas) ,TEdit (campos de texto) que possuem os atrinutos padrão
+  e seus atributos especificos.
+  
+  Existe sim a possibilidade de configurar esses atributios atraves de codigo mas isso levaria 
+  muito tempo por isso a ide usa uma ferramentas chamada Object spector que faz uma lista com esses 
+  atributos e permite editar eles de forma mais rapida.
+
+  Boas práticas de nomenclatura é possivel sim usar regras diferentes mas as regras abaixo mantem o codigo mais organizado
+  de uma forma qque outros desenvolvedores possam entender de forma mais rapida.  
+  
+  labels - lbl(tipo do componente) Nome (oque ele representa ou mostra) = lblNome
+  TButton - btn (tipo do componente ) Salvar (oque ele faz) = btnSalvar
+
+  charCase
+
+  Uma caracteristica importante seria o charCase normalmente essa propridade fica em componetes qque recebem texto
+  ela serve parara normalizar o texto digitado pelo usuário por exemplo seu esclher a opção "ecUpperCase" naão importa 
+  se o usuario não esta usando o caps lock todo o texto digitado dentro del será romalizado pra maiusculo, se eu escolher
+  a ecLowerCase todo o trextto digitado será minusculo mesmo com o caps lock ativado, se eue escolher ecNormal o texto
+  fica extamente como foi digitado.
+
+  
+
+    
+      
+
+
+
+
+
+
+
+
+  
+   
+   
+
+  
+   
+      
+
+      
+    
