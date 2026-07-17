@@ -1,0 +1,112 @@
+unit principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    btnWhile: TButton;
+    btnFor: TButton;
+    btnRepeat: TButton;
+    procedure btnWhileClick(Sender: TObject);
+    procedure btnForClick(Sender: TObject);
+    procedure btnRepeatClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnForClick(Sender: TObject);
+
+ var
+   cont, usu:integer;
+
+begin
+
+
+  {
+    para cada vez que for verdade faça
+    isso siginifica que se o usuario digita o numero 5
+    o for vai rodar o loop 5 vezes uma parar acada usuario
+
+  }
+
+  usu := StrToInt(InputBox('Digite um valor','valor : ',''));
+
+   for cont := 0 to usu do
+    begin
+      ShowMessage(IntToStr(cont));
+    end;
+
+
+
+end;
+
+
+
+
+
+
+
+
+procedure TForm1.btnRepeatClick(Sender: TObject);
+var
+ usu,cont:integer;
+
+begin
+  usu := StrToInt(InputBox('Digite um valor','valor : ',''));
+  cont := 0;
+
+  {
+    o repeat unitil repete o loop ate quee a condição do until seja atendida
+    no caso abaixo enquanto o contador não tiver o mesmo numero de usuarios ele repete o loop
+  }
+  repeat
+    ShowMessage(IntToStr(cont));
+
+     cont := cont + 1;
+
+  until (cont = usu);
+
+end;
+
+procedure TForm1.btnWhileClick(Sender: TObject);
+
+ var
+   cont, usu:integer;
+
+
+begin
+   {
+     A variável usu é do tipo interira porr isso eu estou convertendo o valor que vem do inputBox
+     porque ele vai me retonar um texto
+   }
+  usu := StrToInt(InputBox('Digite um valor','valor : ',''));
+
+  cont := 0;
+
+  //usando o while enquanto for verdade faça
+
+  while cont <= usu do
+   begin
+     ShowMessage(IntToStr(cont));
+     cont := cont + 1;
+   end;
+
+
+
+
+end;
+
+end.
