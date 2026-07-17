@@ -1,0 +1,40 @@
+ Um evento é uma ação que pode ser executada pelo computador ou pelo usuario
+ - clicar
+ - abrir 
+ - fechar
+ - passar o mouse sobre 
+ - fazer um duplo clique
+ No contexto do Delph todos os compoentes tem a abade eventos onde podemos definir oqquer aonetce qquando cada 
+ um deles for feito em relação ao componente, o evento mais usado ate aqui foi o "onClick" eu usei ele pra mostar
+ caixas de texto, adicionar linhas, ler o texto de outros componentes e calcular dados.
+
+ para testar um evento
+ eu usei um TEdit no evento onChange ele monitora o texto do TEdit e cada vez que esse texto muda ele faz alguma coisa
+ no meu caso eu coloquei pra ele mostrar  o texto.
+ 
+  procedure TForm1.edtEventoChange(Sender: TObject);
+    begin
+      ShowMessage(edtEvento.Text);
+    end;
+
+ No exemplo baixo eu uso um evento pra verificar se o mouse esta em cima e se saiu de cima do label e parar cada acão eu mudo texto
+
+ procedure TForm1.lblEventoMouseEnter(Sender: TObject);
+  begin
+     lblEvento.Caption := 'Mouse em cima ';
+  end;
+
+ procedure TForm1.lblEventoMouseLeave(Sender: TObject);
+  begin
+     lblEvento.Caption := 'Mouse saiu ';
+   end;
+
+ end.
+  
+
+  
+ 
+     
+
+     
+    

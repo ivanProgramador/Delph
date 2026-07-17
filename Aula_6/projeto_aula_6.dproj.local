@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2026/07/16 22:13:50.310,=C:\Delph\Unit1.pas</Transaction>
-    <Transaction>2026/07/16 22:14:06.582,C:\delph\Aula_6\principal.dfm=C:\Delph\Unit1.dfm</Transaction>
-    <Transaction>2026/07/16 22:14:06.582,C:\delph\Aula_6\principal.pas=C:\Delph\Unit1.pas</Transaction>
-    <Transaction>2026/07/16 22:14:19.274,C:\delph\Aula_6\projeto_aula_6.dproj=C:\Delph\Project1.dproj</Transaction>
-    <Transaction>2026/07/16 22:15:18.421,=C:\delph\Aula_6\Unit2.pas</Transaction>
-    <Transaction>2026/07/16 22:52:36.234,C:\delph\Aula_6\componentes.pas=C:\delph\Aula_6\Unit2.pas</Transaction>
-    <Transaction>2026/07/16 22:52:36.234,C:\delph\Aula_6\componentes.dfm=C:\delph\Aula_6\Unit2.dfm</Transaction>
+	<Transactions>
+    <Transaction>2026/07/16 22:13:50.000.310,=C:\Delph\Unit1.pas</Transaction>
+    <Transaction>2026/07/16 22:14:06.000.582,C:\Delph\Unit1.pas=C:\delph\Aula_6\principal.pas</Transaction>
+    <Transaction>2026/07/16 22:14:06.000.582,C:\Delph\Unit1.dfm=C:\delph\Aula_6\principal.dfm</Transaction>
+    <Transaction>2026/07/16 22:14:19.000.274,C:\Delph\Project1.dproj=C:\delph\Aula_6\projeto_aula_6.dproj</Transaction>
+    <Transaction>2026/07/16 22:15:18.000.421,=C:\delph\Aula_6\Unit2.pas</Transaction>
+    <Transaction>2026/07/16 22:52:36.000.234,C:\delph\Aula_6\Unit2.pas=C:\delph\Aula_6\componentes.pas</Transaction>
+    <Transaction>2026/07/16 22:52:36.000.234,C:\delph\Aula_6\Unit2.dfm=C:\delph\Aula_6\componentes.dfm</Transaction>
   </Transactions>
 </BorlandProject>
