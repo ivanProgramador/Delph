@@ -4,15 +4,17 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
   TfrmComponentes = class(TForm)
     Label1: TLabel;
     edtNome: TEdit;
-    ComboBox1: TComboBox;
-    Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    cboNome: TComboBox;
+    btnExibirNome: TButton;
+    rgdEscolha: TRadioGroup;
+    memLista: TMemo;
+    procedure btnExibirNomeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,9 +28,31 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmComponentes.Button1Click(Sender: TObject);
+procedure TfrmComponentes.btnExibirNomeClick(Sender: TObject);
 begin
   ShowMessage(edtNome.Text);
+
+  {
+    o componente rgdEscolha se comporta como um array de radio buttons
+    nisso quando eu faço o if testar se o ItemIndex é 0 eu estou testando
+    se a primeira opção foi marcada porque
+      [0] - sim
+      [1] - não
+  }
+
+  if rgdEscolha.ItemIndex = 0 then
+
+  begin
+   
+
+    {
+     se o indicwe form igual a 0 a opçãop esclhida é sim então ele vai adiocnar uma linha
+     no memo
+    }
+
+    memLista.Lines.Add(edtNome.Text + ' ' + cboNome.Text);
+  end;
+
 end;
 
 end.

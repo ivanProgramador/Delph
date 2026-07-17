@@ -33,6 +33,11 @@ Componentes
   a ecLowerCase todo o trextto digitado será minusculo mesmo com o caps lock ativado, se eue escolher ecNormal o texto
   fica extamente como foi digitado.
 
+  dica quando for usar radioGroup não pegar os radioButons da paleta
+  - ir na opção itens e digitar uma opção em cada linha o delph vai gerar os botoes 
+    
+    
+
   
 
     

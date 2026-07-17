@@ -2,8 +2,8 @@ object frmComponentes: TfrmComponentes
   Left = 0
   Top = 0
   Caption = 'frmComponentes'
-  ClientHeight = 217
-  ClientWidth = 369
+  ClientHeight = 440
+  ClientWidth = 275
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,25 +21,52 @@ object frmComponentes: TfrmComponentes
   object edtNome: TEdit
     Left = 74
     Top = 29
-    Width = 121
+    Width = 161
     Height = 23
     TabOrder = 0
   end
-  object ComboBox1: TComboBox
+  object cboNome: TComboBox
     Left = 50
     Top = 72
-    Width = 145
+    Width = 185
     Height = 23
+    ItemIndex = 1
     TabOrder = 1
-    Text = 'ComboBox1'
+    Text = 'FORTALEZA'
+    Items.Strings = (
+      'S'#195'O PAULO '
+      'FORTALEZA'
+      'BRASILIA'
+      'MOSSORO'
+      'BAHIA')
   end
-  object Button1: TButton
-    Left = 120
-    Top = 120
+  object btnExibirNome: TButton
+    Left = 160
+    Top = 376
     Width = 75
     Height = 25
     Caption = 'Exibir Nome'
     TabOrder = 2
-    OnClick = Button1Click
+    OnClick = btnExibirNomeClick
+  end
+  object rgdEscolha: TRadioGroup
+    Left = 50
+    Top = 120
+    Width = 185
+    Height = 105
+    Caption = 'Escolha uma op'#231#227'o'
+    Items.Strings = (
+      'Sim'
+      'N'#227'o')
+    TabOrder = 3
+  end
+  object memLista: TMemo
+    Left = 50
+    Top = 248
+    Width = 185
+    Height = 89
+    Lines.Strings = (
+      '')
+    TabOrder = 4
   end
 end
