@@ -1,0 +1,58 @@
+A comunicação com a base de dados atraves do delph tambem pode ser feita atráves de componentes
+um compnete proncipal usado pra esse fim, seria o DataModule DM esse componente não aparece para
+o usuario a ideia dele é conter todos os componebtes de conexão organizados.
+
+Criar um data module
+1 - File 
+2 -new 
+3 - other
+4 - database 
+5 - Data Module 
+
+Ele parece um formulario como qualquer outro
+mas ele não é visivel na runtime.
+
+Componentes de conexão
+
+Normalmente os componetes de conexão são encontrados no grupo FireDac 
+mas no eu caso eu preciso usar o MSSQL da microsoft ele usa um cmponente 
+chamado ADOConnection.
+
+1 - um duplo cliqque no componente abre um formulario
+2 - no segundo campo de texto cliqque em build ele vai ajudar a contruir uma string de conexão 
+3 - escolha a opção "provider for sql server" 
+4 - digite o nome ou o ip do servidor nomeu caso coloquei localhost
+5 - selecione usar usuario e senha espqcificos e coloqque login e senha da sua base 
+6 - secione a base de dados que voce criou 
+
+fiz uma script do banco com duas tabelas pra poder ter uma banco pra usar 
+
+-- Cria o banco de dados
+CREATE DATABASE ProjetoVenda;
+GO
+
+-- Seleciona o banco
+USE ProjetoVenda;
+GO
+
+-- Cria a tabela de produtos
+CREATE TABLE TBPRODUTO (
+    ID_PROD INT IDENTITY(1,1) PRIMARY KEY,
+    NOME_PROD VARCHAR(30) NOT NULL,
+    QTD_PRO INT NOT NULL,
+    VL_PROD MONEY NOT NULL
+);
+GO
+
+-- Cria a tabela de clientes
+CREATE TABLE TBCLIENTES (
+    ID_CLI INT IDENTITY(1,1) PRIMARY KEY,
+    NOME_CLI VARCHAR(50) NOT NULL
+);
+GO     
+ 
+ 
+  
+ 
+  
+    
