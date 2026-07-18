@@ -40,6 +40,7 @@ object frmClientes: TfrmClientes
     Height = 25
     Caption = 'Salvar'
     TabOrder = 1
+    OnClick = btnSalvarClick
   end
   object btnEditar: TButton
     Left = 208

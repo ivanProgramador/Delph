@@ -14,6 +14,7 @@ type
     btnSalvar: TButton;
     btnEditar: TButton;
     btnExcluir: TButton;
+    procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,5 +27,24 @@ var
 implementation
 
 {$R *.dfm}
+
+uses dmDados;
+
+procedure TfrmClientes.btnSalvarClick(Sender: TObject);
+begin
+  with dmDados.DataModule1.stInsereCliente do
+  begin
+    Close;
+
+    // 1. Força o Delphi a ir buscar os parâmetros no SQL Server
+    Parameters.Refresh;
+
+    // 1. Passa o valor do seu TEdit (txtNome) para o parâmetro da procedure
+    Parameters.ParamByName('@Nome').Value := txtNome.Text;
+
+    // 2. Executa a procedure no SQL Server
+    ExecProc;
+  end;
+end;
 
 end.

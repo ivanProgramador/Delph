@@ -11,6 +11,7 @@ uses
 type
   TDataModule1 = class(TDataModule)
     ADOConnection1: TADOConnection;
+    stInsereCliente: TADOStoredProc;
   private
     { Private declarations }
   public

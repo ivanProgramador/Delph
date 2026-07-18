@@ -1,0 +1,66 @@
+Mesmo apos a conexão é reciso adiconar mais componenetes parara manupuluar os dados na tabelas
+no caso de sse orjeto eu usei um "TADOStoredProc" ele faz a leitura das procedures que eu tenho 
+salvas na base de dados eu tenho rotinas pre-programadas pra inserir,editar e apagar dados 
+
+ sp_AdicionarCliente 
+-------------------------------------------------------------------
+CREATE PROCEDURE sp_AdicionarCliente
+    @Nome VARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    INSERT INTO TBCLIENTES (NOME_CLI)
+    VALUES (@Nome);
+END;
+GO
+------------------------------------------------------------------- 
+  
+ sp_ApagarCliente
+-------------------------------------------------------------------------------
+CREATE PROCEDURE sp_EditarCliente
+    @Id INT,
+    @Nome VARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE TBCLIENTES
+    SET NOME_CLI = @Nome
+    WHERE ID_CLI = @Id;
+END;
+GO
+--------------------------------------------------------------------------------
+
+ sp_EditarCliente
+-------------------------------------------------------------------------------
+CREATE PROCEDURE sp_ApagarCliente
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DELETE FROM TBCLIENTES
+    WHERE ID_CLI = @Id;
+END;
+GO
+-------------------------------------------------------------------------------
+
+ sp_ListarClientes
+-------------------------------------------------------------------------------
+CREATE PROCEDURE sp_ListarClientes
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT ID_CLI, NOME_CLI 
+    FROM TBCLIENTES
+    ORDER BY NOME_CLI;
+END;
+GO
+--------------------------------------------------------------------------------
+
+Então no caso desse porjeto em espacifico eu não preciso de fato escrever sql dentro do codigo 
+so chamar as procedures e passar os parametros 
+
+
