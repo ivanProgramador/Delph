@@ -2,15 +2,17 @@ program projeto_aula_8;
 
 uses
   Vcl.Forms,
-  main in 'main.pas' {Form1},
-  dmDados in 'dmDados.pas' {DataModule1: TDataModule};
+  Clientes in 'Clientes.pas' {frmClientes},
+  dmDados in 'dmDados.pas' {DataModule1: TDataModule},
+  main in 'main.pas' {frmMain};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmClientes, frmClientes);
   Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.
