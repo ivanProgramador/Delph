@@ -1,0 +1,77 @@
+O DBGrid é um componete de tabela que mostra uma lista de dados distribuidas
+em celulas mas pra fazer ele funcionar algumas configurações são necessárias
+
+1 - voltar no DM e colocar o componete TADOQuery 
+2 - acessar o Object inspector e procurar o parametro sql
+    ele vai premitri digitar uma string que seria o select desejado 
+
+Esse componete permite digitar a consulta de forma mais livre porque 
+o usuario pode precisar de tabelas para dados mais especificos então 
+o query serve pra isso.
+
+A consulta que coloquei no parametro SQL dele foi "SELECT * FROM TBCLIENTES"
+
+sempre verificar o atributo conection se ele estver vazio os campos nã vão aparecer nesse ccontesto campos são chamados de parametros.
+
+a proxima etapa é um dataSource porque todo componete TADOQuery precisa ter seu dataSource podem existir sim TADOQuery sem dataSource mas o contrario não pode acontecer nesse projeto.  
+
+1 - coloquei o nome dsCliente 
+2 - fui no DataSet dele e apontei ele pra TADOQuery 
+3 - coloquei o enabled true 
+4 - fui no DBGrid na opção DataSource e apontei para o dsClientes
+
+Depois disso ele vaii trazer os dados para a tabela mas o titulo da coluna 
+esta com o mesmo nome da coluna no SQL server , isso pode dificultar o que os cliente oque esta sendo exibido pra corrigir isso 
+
+1 - selecionei o componente
+2 - cliquei em coluns editor 
+3 - add all fields
+4 - selecionei o campo ID_CLI esse campos tambem é uma componente 
+    no objectSpector tem a Caption dele então eu mudei pra codigo 
+    fiz a mesma coisa com o NOME_CLI e coloquei somente Nome, isso 
+    não muda a coluna na base de dados.
+
+Agora a DBGrid até mostra os dados mas ela so atualiza quando eu fecho o sistema e abro novamente para evitar isso eu coloquei uma logica dentro 
+da procedure do btnSalvar que fecha a conexão do DBGrid e abre novamente 
+fazendo ele buscar o dados de novo e mostrar oque eu acabei de cadastrar
+
+---------------------------------------------------------------------------
+procedure TfrmClientes.btnSalvarClick(Sender: TObject);
+begin
+  with dmDados.DataModule1.stInsereCliente do
+  begin
+
+    Close;
+
+    // 1. Força o Delphi a ir buscar os parâmetros no SQL Server
+    Parameters.Refresh;
+
+    // 1. Passa o valor do seu TEdit (txtNome) para o parâmetro da procedure
+    Parameters.ParamByName('@Nome').Value := txtNome.Text;
+
+    // 2. Executa a procedure no SQL Server
+    ExecProc;
+
+  end;
+
+  //abrindo e fechando a conexão pra atualizar atela
+  with dmDados.DataModule1.ADOQuery1 do
+    begin
+       close;
+       open;
+    end;
+end;
+-----------------------------------------------------------------------------
+
+    
+     
+
+
+
+
+
+ 
+
+ 
+
+   

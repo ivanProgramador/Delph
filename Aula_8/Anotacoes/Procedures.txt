@@ -1,6 +1,12 @@
-Mesmo apos a conexão é reciso adiconar mais componenetes parara manupuluar os dados na tabelas
-no caso de sse orjeto eu usei um "TADOStoredProc" ele faz a leitura das procedures que eu tenho 
-salvas na base de dados eu tenho rotinas pre-programadas pra inserir,editar e apagar dados 
+Mesmo apos a conexão é preciso adicIonar mais componenetes para manipuluar os dados na tabelas
+no caso desse projeto eu usei um "TADOStoredProc" ele faz a leitura das procedures que eu tenho 
+salvas na base de dados eu tenho rotinas pre-programadas pra inserir,editar e apagar dados,
+como se trata de um componente eu faço essas referencias atraves de 2 atributos 
+
+1 - Connetion (Aqui eu passa o componente ADOConnection1 letem todos os dados da conexão ) 
+2 - ProcedureName (com o ADOConnection1 configurado ele tem a comunicação e automaticamente ele vai verr a lista de procedures salvas no banco então eu escolho entre elas)
+
+ 
 
  sp_AdicionarCliente 
 -------------------------------------------------------------------

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmClientes = class(TForm)
@@ -14,6 +14,7 @@ type
     btnSalvar: TButton;
     btnEditar: TButton;
     btnExcluir: TButton;
+    DBGrid1: TDBGrid;
     procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
@@ -31,20 +32,46 @@ implementation
 uses dmDados;
 
 procedure TfrmClientes.btnSalvarClick(Sender: TObject);
-begin
-  with dmDados.DataModule1.stInsereCliente do
-  begin
-    Close;
+      begin
+         //Antes do usuario fazer um ação como gravar dados em uma sistema é uma boa pratica sempre perguntar
+         //se ele relamenete deseja fazer isso em casos de cadastros
 
-    // 1. Força o Delphi a ir buscar os parâmetros no SQL Server
-    Parameters.Refresh;
+          if Application.MessageBox('Deseja salvarr ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+             begin
 
-    // 1. Passa o valor do seu TEdit (txtNome) para o parâmetro da procedure
-    Parameters.ParamByName('@Nome').Value := txtNome.Text;
 
-    // 2. Executa a procedure no SQL Server
-    ExecProc;
-  end;
-end;
+
+                with dmDados.DataModule1.stInsereCliente do
+                begin
+
+                  Close;
+
+                  // 1. Força o Delphi a ir buscar os parâmetros no SQL Server
+                  Parameters.Refresh;
+
+                  // 1. Passa o valor do seu TEdit (txtNome) para o parâmetro da procedure
+                  Parameters.ParamByName('@Nome').Value := txtNome.Text;
+
+                  // 2. Executa a procedure no SQL Server
+                  ExecProc;
+
+                end;
+
+                //abrindo e fechando a conexão pra atualizar atela
+                with dmDados.DataModule1.ADOQuery1 do
+                  begin
+                     close;
+                     open;
+                  end;
+
+                //limpoando o campo
+
+                txtNome.clear;
+              end
+
+          else
+          Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+
+      end;
 
 end.

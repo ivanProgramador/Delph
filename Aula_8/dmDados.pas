@@ -12,6 +12,10 @@ type
   TDataModule1 = class(TDataModule)
     ADOConnection1: TADOConnection;
     stInsereCliente: TADOStoredProc;
+    ADOQuery1: TADOQuery;
+    ADOQuery1ID_CLI: TAutoIncField;
+    ADOQuery1NOME_CLI: TStringField;
+    dsCliente: TDataSource;
   private
     { Private declarations }
   public
