@@ -60,7 +60,31 @@ END;
 GO
 --------------------------------------------------------------------------------
 
-Então no caso desse porjeto em espacifico eu não preciso de fato escrever sql dentro do codigo 
-so chamar as procedures e passar os parametros 
+Então no caso desse projeto em especifico eu não preciso de fato escrever sql dentro do codigo 
+só chamar as procedures e passar os parametros.
+
+
+codigo da prrocedure(DELPH) usando a porcedure SQL pra adicionar um novo usuario 
+-------------------------------------------------------------------------------------
+procedure TfrmClientes.btnSalvarClick(Sender: TObject);
+begin
+  with dmDados.DataModule1.stInsereCliente do
+  begin
+    Close;
+
+    // 1. Força o Delphi a ir buscar os parâmetros no SQL Server
+    Parameters.Refresh;
+
+    // 1. Passa o valor do seu TEdit (txtNome) para o parâmetro da procedure
+    Parameters.ParamByName('@Nome').Value := txtNome.Text;
+
+    // 2. Executa a procedure no SQL Server
+    ExecProc;
+  end;
+end;
+
+end.
+----------------------------------------------------------------------------------------- 
+  
 
 
