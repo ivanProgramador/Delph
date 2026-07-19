@@ -11,6 +11,7 @@ object frmClientes: TfrmClientes
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  OnShow = FormShow
   TextHeight = 15
   object Label1: TLabel
     Left = 8
@@ -58,6 +59,7 @@ object frmClientes: TfrmClientes
     Height = 25
     Caption = 'Excluir'
     TabOrder = 3
+    OnClick = btnExcluirClick
   end
   object dbCliente: TDBGrid
     Left = 74

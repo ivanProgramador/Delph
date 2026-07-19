@@ -17,6 +17,8 @@ type
     dbCliente: TDBGrid;
     procedure btnSalvarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,34 +37,76 @@ uses dmDados;
 procedure TfrmClientes.btnEditarClick(Sender: TObject);
   begin
 
-    //fechando qualquer conexão que tenha sido aberta antes desse bloco
-    close;
+      if Application.MessageBox('Deseja atualizar ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+             begin
 
-    //Aqui eu acesso meu DM vou no componente "stAtualizaCliente" pego o valor do parametro id pelo nome
-    // depois eu faço atribuição do parametro id ao valor que eu peguei da tablea que liusta os clientes
-    // la dentro tem um array de clientes o inidice zero do raray fields é o id porque o 1 seria o nome
-    // do cliente
+                  //fechando qualquer conexão que tenha sido aberta antes desse bloco
+                  close;
 
-    dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@id').Value := dbCliente.Fields[0].Value;
+                  //Aqui eu acesso meu DM vou no componente "stAtualizaCliente" pego o valor do parametro id pelo nome
+                  // depois eu faço atribuição do parametro id ao valor que eu peguei da tablea que liusta os clientes
+                  // la dentro tem um array de clientes o inidice zero do raray fields é o id porque o 1 seria o nome
+                  // do cliente
 
-    //aqui eu faço a amesma coisa so muda o indice pra 1 pra poder pegar o nome
+                  dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@id').Value := dbCliente.Fields[0].Value;
 
-    dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@Nome').Value := dbCliente.Fields[1].Value;
+                  //aqui eu faço a amesma coisa so muda o indice pra 1 pra poder pegar o nome
 
-    //executando a procedure no banco
-    DataModule1.stAtualizaCliente.ExecProc;
+                  dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@Nome').Value := dbCliente.Fields[1].Value;
 
-     //abrindo e fechando a conexão pra atualizar atela
-   with dmDados.DataModule1.ADOQuery1 do
-        begin
-             close;
-             open;
-        end;
+                  //executando a procedure no banco
+                  DataModule1.stAtualizaCliente.ExecProc;
+
+                   //abrindo e fechando a conexão pra atualizar atela
+                 with dmDados.DataModule1.ADOQuery1 do
+                      begin
+                           close;
+                           open;
+                      end;
+           end
+
+       else
+            begin
+                Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+            end;
+
    end;
 
 
 
 
+
+
+
+procedure TfrmClientes.btnExcluirClick(Sender: TObject);
+begin
+
+    if Application.MessageBox('Deseja excluir ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+
+             begin
+
+                with  dmDados.DataModule1.stExcluiCliente do
+                      begin
+                        close;
+                        dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@id').Value := dbCliente.Fields[0].Value;
+                        ExecProc;
+
+                end;
+
+                 //abrindo e fechando a conexão pra atualizar atela
+               with dmDados.DataModule1.ADOQuery1 do
+                  begin
+                     close;
+                     open;
+                  end;
+
+             end
+    else
+             begin
+                  Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+             end;
+
+end;
 
 
 
@@ -112,5 +156,12 @@ procedure TfrmClientes.btnSalvarClick(Sender: TObject);
 
 
 
+
+procedure TfrmClientes.FormShow(Sender: TObject);
+begin
+    // assim o formulario abrre ele ataualiza a tabela
+  dmDados.DataModule1.ADOQuery1.Close;
+  dmDados.DataModule1.ADOQuery1.Open;
+end;
 
 end.

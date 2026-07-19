@@ -49,20 +49,43 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Id'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Nome'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
+        Value = Null
       end>
     Left = 136
+    Top = 112
+  end
+  object stExcluiCliente: TADOStoredProc
+    Connection = ADOConnection1
+    DataSource = dsCliente
+    ProcedureName = 'sp_ApagarCliente'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@Id'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 240
     Top = 112
   end
 end

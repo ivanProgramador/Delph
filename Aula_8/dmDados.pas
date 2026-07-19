@@ -17,6 +17,7 @@ type
     ADOQuery1NOME_CLI: TStringField;
     dsCliente: TDataSource;
     stAtualizaCliente: TADOStoredProc;
+    stExcluiCliente: TADOStoredProc;
   private
     { Private declarations }
   public
