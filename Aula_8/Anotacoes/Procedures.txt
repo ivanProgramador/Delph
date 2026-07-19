@@ -91,6 +91,23 @@ end;
 
 end.
 ----------------------------------------------------------------------------------------- 
+
+para atualizar dados do cliente
+o processo é o  mesmo em relação a conexão
+ 
+  1-coloca um componente do tipo TADOStoredProcedure no DM 
+  2-nas prorpridades dele coloca na Connection ADOConection
+  3-na procedure name coloca o nome da procedure que esta no banco no meu caso "sp_EditarCliente" 
+
+Para excutar um UPDATE eu preciso dizer ao sistema qual é o id do cliente então ele precisa de 2 
+pra ver esses parametros tem ir na na propriedade Parameters
+
+ 
+
+
+
+
+------------------------------------------------------------------------------------------------------    
   
 
 

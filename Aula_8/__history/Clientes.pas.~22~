@@ -49,18 +49,12 @@ procedure TfrmClientes.btnEditarClick(Sender: TObject);
 
     dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@Nome').Value := dbCliente.Fields[1].Value;
 
-    //executando a procedure no banco
-    DataModule1.stAtualizaCliente.ExecProc;
-
-     //abrindo e fechando a conexão pra atualizar atela
-   with dmDados.DataModule1.ADOQuery1 do
-        begin
-             close;
-             open;
-        end;
-   end;
 
 
+
+
+
+  end;
 
 
 

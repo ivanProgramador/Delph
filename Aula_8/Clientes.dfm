@@ -49,6 +49,7 @@ object frmClientes: TfrmClientes
     Height = 25
     Caption = 'Atuaizar'
     TabOrder = 2
+    OnClick = btnEditarClick
   end
   object btnExcluir: TButton
     Left = 350
@@ -58,7 +59,7 @@ object frmClientes: TfrmClientes
     Caption = 'Excluir'
     TabOrder = 3
   end
-  object DBGrid1: TDBGrid
+  object dbCliente: TDBGrid
     Left = 74
     Top = 128
     Width = 351

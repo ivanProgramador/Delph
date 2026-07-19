@@ -14,9 +14,8 @@ type
     btnSalvar: TButton;
     btnEditar: TButton;
     btnExcluir: TButton;
-    dbCliente: TDBGrid;
+    DBGrid1: TDBGrid;
     procedure btnSalvarClick(Sender: TObject);
-    procedure btnEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,42 +31,7 @@ implementation
 
 uses dmDados;
 
-procedure TfrmClientes.btnEditarClick(Sender: TObject);
-  begin
-
-    //fechando qualquer conexão que tenha sido aberta antes desse bloco
-    close;
-
-    //Aqui eu acesso meu DM vou no componente "stAtualizaCliente" pego o valor do parametro id pelo nome
-    // depois eu faço atribuição do parametro id ao valor que eu peguei da tablea que liusta os clientes
-    // la dentro tem um array de clientes o inidice zero do raray fields é o id porque o 1 seria o nome
-    // do cliente
-
-    dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@id').Value := dbCliente.Fields[0].Value;
-
-    //aqui eu faço a amesma coisa so muda o indice pra 1 pra poder pegar o nome
-
-    dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@Nome').Value := dbCliente.Fields[1].Value;
-
-    //executando a procedure no banco
-    DataModule1.stAtualizaCliente.ExecProc;
-
-     //abrindo e fechando a conexão pra atualizar atela
-   with dmDados.DataModule1.ADOQuery1 do
-        begin
-             close;
-             open;
-        end;
-   end;
-
-
-
-
-
-
-
 procedure TfrmClientes.btnSalvarClick(Sender: TObject);
-
       begin
          //Antes do usuario fazer um ação como gravar dados em uma sistema é uma boa pratica sempre perguntar
          //se ele relamenete deseja fazer isso em casos de cadastros
@@ -109,8 +73,5 @@ procedure TfrmClientes.btnSalvarClick(Sender: TObject);
           Application.MessageBox('Açao cancelada','Atenção', MB_OK);
 
       end;
-
-
-
 
 end.

@@ -4,8 +4,8 @@ object DataModule1: TDataModule1
   object ADOConnection1: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=Aa123456;Persist Security Info=True' +
-      ';User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost'
+      'Provider=SQLOLEDB.1;Password=rqqo231;Persist Security Info=True;' +
+      'User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 40
@@ -19,6 +19,7 @@ object DataModule1: TDataModule1
     Top = 32
   end
   object ADOQuery1: TADOQuery
+    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     Parameters = <>
@@ -37,32 +38,7 @@ object DataModule1: TDataModule1
   end
   object dsCliente: TDataSource
     DataSet = ADOQuery1
-    Left = 40
-    Top = 112
-  end
-  object stAtualizaCliente: TADOStoredProc
-    Connection = ADOConnection1
-    ProcedureName = 'sp_EditarCliente'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-      end
-      item
-        Name = '@Id'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-      end
-      item
-        Name = '@Nome'
-        Attributes = [paNullable]
-        DataType = ftString
-        Size = 100
-      end>
-    Left = 136
-    Top = 112
+    Left = 48
+    Top = 128
   end
 end
