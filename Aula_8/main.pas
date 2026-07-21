@@ -10,8 +10,10 @@ type
   TfrmMain = class(TForm)
     imgUser: TImage;
     imgProdutos: TImage;
+    imgVendas: TImage;
     procedure imgUserClick(Sender: TObject);
     procedure imgProdutosClick(Sender: TObject);
+    procedure imgVendasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,7 +27,7 @@ implementation
 
 {$R *.dfm}
 
-uses Clientes, Produtos;
+uses Clientes, Produtos, Venda;
 
 procedure TfrmMain.imgProdutosClick(Sender: TObject);
 begin
@@ -35,6 +37,11 @@ end;
 procedure TfrmMain.imgUserClick(Sender: TObject);
 begin
      frmClientes.showModal;
+end;
+
+procedure TfrmMain.imgVendasClick(Sender: TObject);
+begin
+   frmVenda.showModal;
 end;
 
 end.
