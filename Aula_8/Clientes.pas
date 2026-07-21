@@ -88,7 +88,7 @@ begin
                 with  dmDados.DataModule1.stExcluiCliente do
                       begin
                         close;
-                        dmDados.DataModule1.stAtualizaCliente.Parameters.ParamByName('@id').Value := dbCliente.Fields[0].Value;
+                        dmDados.DataModule1.stExcluiCliente.Parameters.ParamByName('@id').Value := dbCliente.Fields[0].Value;
                         ExecProc;
 
                 end;
