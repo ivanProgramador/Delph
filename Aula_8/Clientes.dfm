@@ -28,7 +28,7 @@ object frmClientes: TfrmClientes
   end
   object txtNome: TEdit
     Left = 74
-    Top = 78
+    Top = 82
     Width = 351
     Height = 23
     CharCase = ecUpperCase
@@ -40,7 +40,7 @@ object frmClientes: TfrmClientes
     Width = 75
     Height = 25
     Caption = 'Salvar'
-    TabOrder = 1
+    TabOrder = 2
     OnClick = btnSalvarClick
   end
   object btnEditar: TButton
@@ -49,7 +49,7 @@ object frmClientes: TfrmClientes
     Width = 75
     Height = 25
     Caption = 'Atuaizar'
-    TabOrder = 2
+    TabOrder = 3
     OnClick = btnEditarClick
   end
   object btnExcluir: TButton
@@ -58,7 +58,7 @@ object frmClientes: TfrmClientes
     Width = 75
     Height = 25
     Caption = 'Excluir'
-    TabOrder = 3
+    TabOrder = 4
     OnClick = btnExcluirClick
   end
   object dbCliente: TDBGrid
@@ -67,7 +67,7 @@ object frmClientes: TfrmClientes
     Width = 351
     Height = 120
     DataSource = DataModule1.dsCliente
-    TabOrder = 4
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12

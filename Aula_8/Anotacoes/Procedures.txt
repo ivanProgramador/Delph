@@ -102,12 +102,83 @@ o processo é o  mesmo em relação a conexão
 Para excutar um UPDATE eu preciso dizer ao sistema qual é o id do cliente então ele precisa de 2 
 pra ver esses parametros tem ir na na propriedade Parameters
 
+------------------------------------------------------------------------------------------------------   
+
+procedures dos produtos
+
+INSERIR 
+-------------------------------------------------------------
+CREATE PROCEDURE dbo.stp_Produto_Inserir
+    @NOME_PROD VARCHAR(100),
+    @QTD_PRO   INT,
+    @VL_PROD   DECIMAL(18,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO dbo.TBPRODUTO (NOME_PROD, QTD_PRO, VL_PROD)
+    VALUES (@NOME_PROD, @QTD_PRO, @VL_PROD);
+
+    -- Retorna o ID gerado
+    SELECT SCOPE_IDENTITY() AS ID_PROD;
+END;
+GO
+---------------------------------------------------------------- 
+EDITAR 
+---------------------------------------------------------------
+CREATE PROCEDURE dbo.stp_Produto_Editar
+    @ID_PROD   INT,
+    @NOME_PROD VARCHAR(100),
+    @QTD_PRO   INT,
+    @VL_PROD   DECIMAL(18,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE dbo.TBPRODUTO
+    SET NOME_PROD = @NOME_PROD,
+        QTD_PRO   = @QTD_PRO,
+        VL_PROD   = @VL_PROD
+    WHERE ID_PROD = @ID_PROD;
+END;
+GO
+--------------------------------------------------------------------
+EXCLUIR
+----------------------------------------------------------------------
+CREATE PROCEDURE dbo.stp_Produto_Excluir
+    @ID_PROD INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM dbo.TBPRODUTO
+    WHERE ID_PROD = @ID_PROD;
+END;
+GO
+---------------------------------------------------------------------------
+
+LISTAR
+-------------------------------------------------------------------------
+CREATE PROCEDURE dbo.stp_Produto_Listar
+    @ID_PROD INT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @ID_PROD IS NULL
+        -- Se não passar ID, traz todos os produtos
+        SELECT ID_PROD, NOME_PROD, QTD_PRO, VL_PROD
+        FROM dbo.TBPRODUTO
+        ORDER BY ID_PROD DESC;
+    ELSE
+        -- Se passar o ID, traz apenas aquele registro específico
+        SELECT ID_PROD, NOME_PROD, QTD_PRO, VL_PROD
+        FROM dbo.TBPRODUTO
+        WHERE ID_PROD = @ID_PROD;
+END;
+GO
+--------------------------------------------------------------------------
  
-
-
-
-
-------------------------------------------------------------------------------------------------------    
   
 
 

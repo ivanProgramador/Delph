@@ -8,8 +8,10 @@ uses
 
 type
   TfrmMain = class(TForm)
-    Image1: TImage;
-    procedure Image1Click(Sender: TObject);
+    imgUser: TImage;
+    imgProdutos: TImage;
+    procedure imgUserClick(Sender: TObject);
+    procedure imgProdutosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,9 +25,14 @@ implementation
 
 {$R *.dfm}
 
-uses Clientes;
+uses Clientes, Produtos;
 
-procedure TfrmMain.Image1Click(Sender: TObject);
+procedure TfrmMain.imgProdutosClick(Sender: TObject);
+begin
+   frmProdutos.ShowModal;
+end;
+
+procedure TfrmMain.imgUserClick(Sender: TObject);
 begin
      frmClientes.showModal;
 end;

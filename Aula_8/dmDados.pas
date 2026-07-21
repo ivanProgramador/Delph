@@ -18,6 +18,16 @@ type
     dsCliente: TDataSource;
     stAtualizaCliente: TADOStoredProc;
     stExcluiCliente: TADOStoredProc;
+    QryProdutos: TADOQuery;
+    dsProdutos: TDataSource;
+    QryProdutosID_PROD: TAutoIncField;
+    QryProdutosNOME_PROD: TStringField;
+    QryProdutosQTD_PRO: TIntegerField;
+    QryProdutosVL_PROD: TBCDField;
+    spInsereProd: TADOStoredProc;
+    stAtualizaProd: TADOStoredProc;
+    stExcluirProd: TADOStoredProc;
+    spListarProd: TADOStoredProc;
   private
     { Private declarations }
   public

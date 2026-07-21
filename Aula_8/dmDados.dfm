@@ -1,6 +1,6 @@
 object DataModule1: TDataModule1
-  Height = 480
-  Width = 640
+  Height = 376
+  Width = 603
   object ADOConnection1: TADOConnection
     Connected = True
     ConnectionString = 
@@ -37,8 +37,8 @@ object DataModule1: TDataModule1
   end
   object dsCliente: TDataSource
     DataSet = ADOQuery1
-    Left = 40
-    Top = 112
+    Left = 496
+    Top = 32
   end
   object stAtualizaCliente: TADOStoredProc
     Connection = ADOConnection1
@@ -65,8 +65,8 @@ object DataModule1: TDataModule1
         Size = 100
         Value = Null
       end>
-    Left = 136
-    Top = 112
+    Left = 400
+    Top = 32
   end
   object stExcluiCliente: TADOStoredProc
     Connection = ADOConnection1
@@ -78,14 +78,129 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Id'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
-    Left = 240
-    Top = 112
+    Left = 312
+    Top = 32
+  end
+  object QryProdutos: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM TBPRODUTO')
+    Left = 32
+    Top = 120
+    object QryProdutosID_PROD: TAutoIncField
+      FieldName = 'ID_PROD'
+      ReadOnly = True
+    end
+    object QryProdutosNOME_PROD: TStringField
+      FieldName = 'NOME_PROD'
+      Size = 30
+    end
+    object QryProdutosQTD_PRO: TIntegerField
+      FieldName = 'QTD_PRO'
+    end
+    object QryProdutosVL_PROD: TBCDField
+      FieldName = 'VL_PROD'
+      Precision = 19
+    end
+  end
+  object dsProdutos: TDataSource
+    DataSet = QryProdutos
+    Left = 128
+    Top = 120
+  end
+  object spInsereProd: TADOStoredProc
+    Connection = ADOConnection1
+    ProcedureName = 'stp_Produto_Inserir'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@NOME_PROD'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = '@QTD_PRO'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@VL_PROD'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        NumericScale = 2
+        Precision = 18
+      end>
+    Left = 224
+    Top = 120
+  end
+  object stAtualizaProd: TADOStoredProc
+    Connection = ADOConnection1
+    ProcedureName = 'stp_Produto_Editar'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@ID_PROD'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@NOME_PROD'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = '@QTD_PRO'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@VL_PROD'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        NumericScale = 2
+        Precision = 18
+      end>
+    Left = 320
+    Top = 120
+  end
+  object stExcluirProd: TADOStoredProc
+    Connection = ADOConnection1
+    ProcedureName = 'stp_Produto_Excluir'
+    Parameters = <>
+    Left = 416
+    Top = 120
+  end
+  object spListarProd: TADOStoredProc
+    Connection = ADOConnection1
+    ProcedureName = 'stp_Produto_Listar'
+    Parameters = <>
+    Left = 496
+    Top = 120
   end
 end
