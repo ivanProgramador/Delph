@@ -20,7 +20,9 @@ type
     nbValor: TNumberBox;
     grdProdutos: TDBGrid;
     procedure btnSalvarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +37,64 @@ implementation
 {$R *.dfm}
 
 uses dmDados;
+
+procedure TfrmProdutos.btnEditarClick(Sender: TObject);
+   begin
+      if Application.MessageBox('Deseja salvarr ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+             begin
+               with   dmDados.DataModule1.spAtualizaProd do
+                begin
+                   Close;
+
+                    Parameters.ParamByName('@ID_PROD').Value   :=  grdProdutos.Fields[0].Value;
+                    Parameters.ParamByName('@NOME_PROD').Value :=  grdProdutos.Fields[1].Value;
+                    Parameters.ParamByName('@QTD_PRO').Value   :=  grdProdutos.Fields[2].Value;
+                    Parameters.ParamByName('@VL_PROD').Value   :=  grdProdutos.Fields[3].Value;
+
+                    ExecProc;
+
+                end;
+
+                 with dmDados.DataModule1.QryProdutos do
+                  begin
+                     close;
+                     open;
+                  end;
+
+             end
+      else
+        Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+
+     end;
+
+
+
+
+
+procedure TfrmProdutos.btnExcluirClick(Sender: TObject);
+    begin
+       if Application.MessageBox('Deseja Excluir ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+
+             begin
+               with dmDados.DataModule1.stExcluirProd do
+                begin
+                    close;
+                    Parameters.ParamByName('@ID_PROD').Value   :=  grdProdutos.Fields[0].Value;
+                 ExecProc;
+                end;
+
+                 with dmDados.DataModule1.QryProdutos do
+                  begin
+                     close;
+                     open;
+                  end;
+        end
+       else
+          Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+      end;
+
+
+
 
 procedure TfrmProdutos.btnSalvarClick(Sender: TObject);
 begin
@@ -73,14 +133,13 @@ begin
 
 end;
 
-procedure TfrmProdutos.FormShow(Sender: TObject);
+
+
+procedure TfrmProdutos.FormCreate(Sender: TObject);
 begin
-    // Abre a Query para popular a Grid assim que a tela aparece
-    with DataModule1.QryProdutos do
-    begin
-      Close;
-      Open;
-    end;
+   // assim o formulario abrre ele ataualiza a tabela
+  dmDados.DataModule1.QryProdutos.Close;
+  dmDados.DataModule1.QryProdutos.Open;
 end;
 
 end.

@@ -1,0 +1,119 @@
+unit Produtos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin,
+  Vcl.NumberBox, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmProdutos = class(TForm)
+    btnSalvar: TButton;
+    btnEditar: TButton;
+    btnExcluir: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    edtNome: TEdit;
+    spQuantidade: TSpinEdit;
+    nbValor: TNumberBox;
+    grdProdutos: TDBGrid;
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmProdutos: TfrmProdutos;
+
+implementation
+
+{$R *.dfm}
+
+uses dmDados;
+
+procedure TfrmProdutos.btnEditarClick(Sender: TObject);
+   begin
+      if Application.MessageBox('Deseja salvarr ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+             begin
+               with   dmDados.DataModule1.spAtualizaProd do
+                begin
+                   Close;
+
+                    Parameters.ParamByName('@ID_PROD').Value   :=  grdProdutos.Fields[0].Value;
+                    Parameters.ParamByName('@NOME_PROD').Value :=  grdProdutos.Fields[1].Value;
+                    Parameters.ParamByName('@QTD_PRO').Value   :=  grdProdutos.Fields[2].Value;
+                    Parameters.ParamByName('@VL_PROD').Value   :=  grdProdutos.Fields[3].Value;
+
+                    ExecProc;
+
+                end;
+
+                 with dmDados.DataModule1.QryProdutos do
+                  begin
+                     close;
+                     open;
+                  end;
+
+             end
+      else
+        Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+
+     end;
+
+
+
+
+
+procedure TfrmProdutos.btnSalvarClick(Sender: TObject);
+begin
+
+
+          if Application.MessageBox('Deseja salvarr ?','Atenção',4 + MB_ICONEXCLAMATION) = ID_YES then
+             begin
+
+              with dmDados.DataModule1.spInsereProd do
+                begin
+
+                  Close;
+
+                    Parameters.ParamByName('@NOME_PROD').Value := edtNome.Text;
+                    Parameters.ParamByName('@QTD_PRO').Value := spQuantidade.Text;
+                    Parameters.ParamByName('@VL_PROD').Value := nbValor.Text;
+
+                    ExecProc;
+                   end;
+
+
+                with dmDados.DataModule1.QryProdutos do
+                  begin
+                     close;
+                     open;
+                  end;
+
+              edtNome.clear;
+              spQuantidade.Clear;
+              nbValor.Clear;
+
+              end
+
+          else
+          Application.MessageBox('Açao cancelada','Atenção', MB_OK);
+
+end;
+
+
+
+procedure TfrmProdutos.FormCreate(Sender: TObject);
+begin
+   // assim o formulario abrre ele ataualiza a tabela
+  dmDados.DataModule1.QryProdutos.Close;
+  dmDados.DataModule1.QryProdutos.Open;
+end;
+
+end.

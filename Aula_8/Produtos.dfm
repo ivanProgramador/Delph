@@ -11,7 +11,7 @@ object frmProdutos: TfrmProdutos
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poMainFormCenter
-  OnShow = FormShow
+  OnCreate = FormCreate
   TextHeight = 15
   object Label1: TLabel
     Left = 56
@@ -68,6 +68,7 @@ object frmProdutos: TfrmProdutos
     Height = 25
     Caption = 'Atuaizar'
     TabOrder = 4
+    OnClick = btnEditarClick
   end
   object btnExcluir: TButton
     Left = 358
@@ -76,6 +77,7 @@ object frmProdutos: TfrmProdutos
     Height = 25
     Caption = 'Excluir'
     TabOrder = 5
+    OnClick = btnExcluirClick
   end
   object edtNome: TEdit
     Left = 127

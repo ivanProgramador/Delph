@@ -128,18 +128,21 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@NOME_PROD'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
+        Value = Null
       end
       item
         Name = '@QTD_PRO'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@VL_PROD'
@@ -147,12 +150,14 @@ object DataModule1: TDataModule1
         DataType = ftBCD
         NumericScale = 2
         Precision = 18
+        Value = Null
       end>
     Left = 224
     Top = 120
   end
-  object stAtualizaProd: TADOStoredProc
+  object spAtualizaProd: TADOStoredProc
     Connection = ADOConnection1
+    DataSource = dsProdutos
     ProcedureName = 'stp_Produto_Editar'
     Parameters = <
       item
@@ -160,24 +165,28 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ID_PROD'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@NOME_PROD'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
+        Value = Null
       end
       item
         Name = '@QTD_PRO'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@VL_PROD'
@@ -185,12 +194,14 @@ object DataModule1: TDataModule1
         DataType = ftBCD
         NumericScale = 2
         Precision = 18
+        Value = Null
       end>
     Left = 320
     Top = 120
   end
   object stExcluirProd: TADOStoredProc
     Connection = ADOConnection1
+    DataSource = dsProdutos
     ProcedureName = 'stp_Produto_Excluir'
     Parameters = <>
     Left = 416

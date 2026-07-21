@@ -25,7 +25,7 @@ type
     QryProdutosQTD_PRO: TIntegerField;
     QryProdutosVL_PROD: TBCDField;
     spInsereProd: TADOStoredProc;
-    stAtualizaProd: TADOStoredProc;
+    spAtualizaProd: TADOStoredProc;
     stExcluirProd: TADOStoredProc;
     spListarProd: TADOStoredProc;
   private

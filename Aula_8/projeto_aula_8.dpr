@@ -12,9 +12,9 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TfrmProdutos, frmProdutos);
   Application.Run;
 end.
