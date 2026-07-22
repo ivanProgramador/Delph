@@ -20,8 +20,8 @@ type
     Label4: TLabel;
     gdrProdutos: TDBGrid;
     pnlVenda: TPanel;
-    Button1: TButton;
-    Button2: TButton;
+    btnIncluiProd: TButton;
+    btnRemover: TButton;
     Button3: TButton;
     lblCodVenda: TLabel;
     COD: TLabel;
@@ -44,7 +44,9 @@ type
     procedure gdrClientesCellClick(Column: TColumn);
     procedure gdrProdutosCellClick(Column: TColumn);
     procedure spQtdProdExit(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnIncluiProdClick(Sender: TObject);
+    procedure btnRemoverClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -60,64 +62,108 @@ implementation
 
 uses dmDados;
 
-//inculindo intens na venda
 
-procedure TfrmVenda.Button1Click(Sender: TObject);
+
+procedure TfrmVenda.btnRemoverClick(Sender: TObject);
+
+   var
+     i: integer;
+     tot: Real;
+     valorItem: Double;
+     textoValor: string;
+
+   begin
+
+     if lsLista.ItemFocused <> nil then
+      begin
+
+        lsLista.DeleteSelected;
+
+        tot := 0;
+
+        for i := 0 to lsLista.Items.Count -1 do
+
+         begin
+
+              textoValor := lsLista.Items[i].SubItems[2];
+
+              textoValor := StringReplace(textoValor, 'R$', '', [rfReplaceAll, rfIgnoreCase]);
+              textoValor := Trim(textoValor);
+
+              if TryStrToFloat(textoValor, valorItem) then
+                 tot := tot + valorItem;
+         end;
+
+         lblTotalVenda.Caption := FormatFloat('R$ #,##0.00', tot);
+
+
+      end;
+
+   end;
+
+
+procedure TfrmVenda.btnIncluiProdClick(Sender: TObject);
   var
 
     lista : TlistItem;
     i: integer;
     tot: Real;
+    qtd: integer;
 
   begin
 
-    //passando os dados ao list view
-    lista := lsLista.Items.Add;
-    lista.Caption := edtNomeProd.Text;
+    qtd := StrToInt(spQtdProd.Text);
 
-    //apartir daqui são subitens porque o list view so considera
-    //como item o primeiro indice horizontal
-    //o resto são todos subitens
+    if qtd > 0 then
+      begin
 
-    lista.SubItems.Add(tnValorProduto.Text);
-    lista.SubItems.Add(spQtdProd.Text);
-    lista.SubItems.Add(tnTotalProduto.Text);
+        //passando os dados ao list view
+        lista := lsLista.Items.Add;
+        lista.Caption := edtNomeProd.Text;
 
-    //limpando a memoria
+        //apartir daqui são subitens porque o list view so considera
+        //como item o primeiro indice horizontal
+        //o resto são todos subitens
 
-    tot := 0;
+        lista.SubItems.Add(tnValorProduto.Text);
+        lista.SubItems.Add(spQtdProd.Text);
+        lista.SubItems.Add(tnTotalProduto.Text);
 
-    //parar obter o total da soma dos itens eu preciso somear todos os valores
-    //vou precisar pegar o valor de cada linha e somar
+        //limpando a memoria
 
-    //o i  inicia com 0 ate a quantidade de itens dentro da lista
-    //quando essa quantidade para de existir ela vira -1
+        tot := 0;
 
-    for i := 0 to lsLista.Items.Count -1 do
+        //parar obter o total da soma dos itens eu preciso somear todos os valores
+        //vou precisar pegar o valor de cada linha e somar
 
-     begin
+        //o i  inicia com 0 ate a quantidade de itens dentro da lista
+        //quando essa quantidade para de existir ela vira -1
 
-      //enquanto ela não via -1 ele reprte esse loop
-      //atribui o valor do total a ele mesmo +
-      //o valor que ele achar dentro do array de itens na posição i
-      // parar  acada posição exite uma subiten do listView no caso
-      //so me intersessa o valor do 2 que é o preço
-      //quando ele vai rodando esse lopp ele vai somando e no final
-      //ele joga a soma pra dentro do caption do lblTotalVenda
+        for i := 0 to lsLista.Items.Count -1 do
+
+         begin
+
+          //enquanto ela não via -1 ele reprte esse loop
+          //atribui o valor do total a ele mesmo +
+          //o valor que ele achar dentro do array de itens na posição i
+          // parar  acada posição exite uma subiten do listView no caso
+          //so me intersessa o valor do 2 que é o preço
+          //quando ele vai rodando esse lopp ele vai somando e no final
+          //ele joga a soma pra dentro do caption do lblTotalVenda
 
 
-       tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
-       lblTotalVenda.Caption := 'R$ ' + FloatToStr(tot);
+           tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
+           lblTotalVenda.Caption := 'R$ ' + FloatToStr(tot);
+         end;
+      end
+    else
+      ShowMessage('Digite uma quantidade valida ');
+
+
      end;
 
 
 
-
-
-
-
-
-  end;
 
 procedure TfrmVenda.edtFiltroCliChange(Sender: TObject);
 begin

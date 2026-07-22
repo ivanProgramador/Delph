@@ -239,7 +239,7 @@ object frmVenda: TfrmVenda
           Visible = True
         end>
     end
-    object SpinEdit1: TSpinEdit
+    object spQtdProd: TSpinEdit
       Left = 63
       Top = 224
       Width = 57
@@ -248,6 +248,7 @@ object frmVenda: TfrmVenda
       MinValue = 0
       TabOrder = 2
       Value = 0
+      OnExit = spQtdProdExit
     end
     object edtNomeProd: TEdit
       Left = 64
@@ -321,6 +322,12 @@ object frmVenda: TfrmVenda
       Height = 15
       Caption = 'Total'
     end
+    object lblTotalVenda: TLabel
+      Left = 152
+      Top = 216
+      Width = 3
+      Height = 15
+    end
     object Button1: TButton
       Left = 16
       Top = 32
@@ -328,8 +335,9 @@ object frmVenda: TfrmVenda
       Height = 25
       Caption = 'Incluir produto'
       TabOrder = 0
+      OnClick = Button1Click
     end
-    object Button2: TButton
+    object btnRemover: TButton
       Left = 136
       Top = 32
       Width = 97
@@ -345,10 +353,10 @@ object frmVenda: TfrmVenda
       Caption = 'Finalizar venda'
       TabOrder = 2
     end
-    object ListView1: TListView
+    object lsLista: TListView
       Left = 16
       Top = 63
-      Width = 713
+      Width = 721
       Height = 122
       Columns = <
         item

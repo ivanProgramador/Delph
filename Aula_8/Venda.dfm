@@ -328,22 +328,23 @@ object frmVenda: TfrmVenda
       Width = 3
       Height = 15
     end
-    object Button1: TButton
+    object btnIncluiProd: TButton
       Left = 16
       Top = 32
       Width = 97
       Height = 25
       Caption = 'Incluir produto'
       TabOrder = 0
-      OnClick = Button1Click
+      OnClick = btnIncluiProdClick
     end
-    object Button2: TButton
+    object btnRemover: TButton
       Left = 136
       Top = 32
       Width = 97
       Height = 25
       Caption = 'Retirar Produto'
       TabOrder = 1
+      OnClick = btnRemoverClick
     end
     object Button3: TButton
       Left = 264
