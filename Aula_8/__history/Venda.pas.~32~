@@ -40,6 +40,7 @@ type
     tnTotalProduto: TNumberBox;
     procedure edtFiltroCliChange(Sender: TObject);
     procedure edtFiltroProdChange(Sender: TObject);
+    procedure gdrClientesCellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -110,11 +111,22 @@ begin
             Exit;
           end;
 
-        Filter := Format('NOME_CLI LIKE ''%%%s%%%''',[edtFiltroProd.Text]);
+        Filter := Format('NOME_PROD LIKE ''%%%s%%''',[edtFiltroProd.Text]);
 
+        Filtered := true;
         Filtered := true;
 
      end;
+end;
+
+procedure TfrmVenda.gdrClientesCellClick(Column: TColumn);
+begin
+
+    //essa rpocedure é disparada quando o usuario seleciona uma celula
+    // da tabela então eu pego o indice 1 do array fields e mando o valor delee pra o text
+    // do edtNome
+
+    edtNome.Text := gdrClientes.Fields[1].Value;
 end;
 
 end.

@@ -69,26 +69,30 @@ object frmVenda: TfrmVenda
     object gdrClientes: TDBGrid
       Left = 16
       Top = 94
-      Width = 337
-      Height = 107
+      Width = 353
+      Height = 124
       DataSource = DataModule1.dsCliente
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnCellClick = gdrClientesCellClick
       Columns = <
         item
           Expanded = False
           FieldName = 'ID_CLI'
           Title.Caption = 'COD'
+          Width = 40
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOME_CLI'
           Title.Caption = 'Nome'
+          Width = 273
           Visible = True
         end>
     end
@@ -199,12 +203,14 @@ object frmVenda: TfrmVenda
       Width = 369
       Height = 107
       DataSource = DataModule1.dsProdutos
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnCellClick = gdrProdutosCellClick
       Columns = <
         item
           Expanded = False
@@ -216,6 +222,7 @@ object frmVenda: TfrmVenda
           Expanded = False
           FieldName = 'NOME_PROD'
           Title.Caption = 'Nome'
+          Width = 87
           Visible = True
         end
         item
@@ -228,10 +235,11 @@ object frmVenda: TfrmVenda
           Expanded = False
           FieldName = 'VL_PROD'
           Title.Caption = 'Valor'
+          Width = 110
           Visible = True
         end>
     end
-    object SpinEdit1: TSpinEdit
+    object spQtdProd: TSpinEdit
       Left = 63
       Top = 224
       Width = 57
@@ -240,6 +248,7 @@ object frmVenda: TfrmVenda
       MinValue = 0
       TabOrder = 2
       Value = 0
+      OnExit = spQtdProdExit
     end
     object edtNomeProd: TEdit
       Left = 64

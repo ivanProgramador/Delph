@@ -39,6 +39,9 @@ type
     Label10: TLabel;
     tnTotalProduto: TNumberBox;
     procedure edtFiltroCliChange(Sender: TObject);
+    procedure edtFiltroProdChange(Sender: TObject);
+    procedure gdrClientesCellClick(Column: TColumn);
+    procedure gdrProdutosCellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -67,13 +70,26 @@ begin
 
          Filtered := false;
 
+         // testando se tem algum texto diferente de vazio no text da pesquisa
+
           if Trim(edtFiltroCli.Text) = '' then
+
+          // se não tiver nada ele define o filtro zavio e para de tentar consultar
           begin
             Filter := '';
+
+            //sai do porcedimento
             Exit;
           end;
 
+
+          //caso tenha texto ele vai buscar
+          //a alinha abaixo faz uma like e troca o %S eplo vazlor da pesquisa
+          // o format ajuda a formatar a string sql
+
           Filter := Format('NOME_CLI LIKE ''%%%s%%''', [edtFiltroCli.Text]);
+
+          // agora eu ativo o filtro
           Filtered := True;
 
          // então com o resultado em mãos eu ligo a resposta filtada e ela entra na tabela
@@ -82,6 +98,42 @@ begin
 
          Filtered := true;
      end;
+end;
+
+procedure TfrmVenda.edtFiltroProdChange(Sender: TObject);
+begin
+     with dmDados.DataModule1.QryProdutos do
+     begin
+        Filtered := false;
+
+        if Trim(edtFiltroProd.Text) = '' then
+          begin
+            Filter := '';
+            Exit;
+          end;
+
+        Filter := Format('NOME_PROD LIKE ''%%%s%%''',[edtFiltroProd.Text]);
+
+        Filtered := true;
+        Filtered := true;
+
+     end;
+end;
+
+procedure TfrmVenda.gdrClientesCellClick(Column: TColumn);
+begin
+
+    //essa rpocedure é disparada quando o usuario seleciona uma celula
+    // da tabela então eu pego o indice 1 do array fields e mando o valor delee pra o text
+    // do edtNome
+
+    edtNome.Text := gdrClientes.Fields[1].Value;
+end;
+
+procedure TfrmVenda.gdrProdutosCellClick(Column: TColumn);
+begin
+    edtNomeProd.Text := gdrProdutos.Fields[1].Value;
+    tnValorProduto.Text := gdrProdutos.Fields[3].Value;
 end;
 
 end.

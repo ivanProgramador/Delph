@@ -39,6 +39,9 @@ type
     Label10: TLabel;
     tnTotalProduto: TNumberBox;
     procedure edtFiltroCliChange(Sender: TObject);
+    procedure edtFiltroProdChange(Sender: TObject);
+    procedure gdrClientesCellClick(Column: TColumn);
+    procedure gdrProdutosCellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -95,6 +98,43 @@ begin
 
          Filtered := true;
      end;
+end;
+
+procedure TfrmVenda.edtFiltroProdChange(Sender: TObject);
+begin
+     with dmDados.DataModule1.QryProdutos do
+     begin
+        Filtered := false;
+
+        if Trim(edtFiltroProd.Text) = '' then
+          begin
+            Filter := '';
+            Exit;
+          end;
+
+        Filter := Format('NOME_PROD LIKE ''%%%s%%''',[edtFiltroProd.Text]);
+
+        Filtered := true;
+        Filtered := true;
+
+     end;
+end;
+
+procedure TfrmVenda.gdrClientesCellClick(Column: TColumn);
+begin
+
+    //essa rpocedure é disparada quando o usuario seleciona uma celula
+    // da tabela então eu pego o indice 1 do array fields e mando o valor delee pra o text
+    // do edtNome pra funcionar tem que ativar o dgOnRowSelect
+
+    edtNome.Text := gdrClientes.Fields[1].Value;
+end;
+
+procedure TfrmVenda.gdrProdutosCellClick(Column: TColumn);
+begin
+    edtNomeProd.Text := gdrProdutos.Fields[1].Value;
+    tnValorProduto.Text := gdrProdutos.Fields[3].Value;
+
 end;
 
 end.
