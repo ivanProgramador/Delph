@@ -322,6 +322,12 @@ object frmVenda: TfrmVenda
       Height = 15
       Caption = 'Total'
     end
+    object lblTotalVenda: TLabel
+      Left = 152
+      Top = 216
+      Width = 3
+      Height = 15
+    end
     object Button1: TButton
       Left = 16
       Top = 32
@@ -329,6 +335,7 @@ object frmVenda: TfrmVenda
       Height = 25
       Caption = 'Incluir produto'
       TabOrder = 0
+      OnClick = Button1Click
     end
     object Button2: TButton
       Left = 136
@@ -346,10 +353,10 @@ object frmVenda: TfrmVenda
       Caption = 'Finalizar venda'
       TabOrder = 2
     end
-    object ListView1: TListView
+    object lsLista: TListView
       Left = 16
       Top = 63
-      Width = 713
+      Width = 721
       Height = 122
       Columns = <
         item

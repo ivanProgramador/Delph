@@ -28,7 +28,7 @@ type
     ListView1: TListView;
     Label5: TLabel;
     Label6: TLabel;
-    SpinEdit1: TSpinEdit;
+    spQtdProd: TSpinEdit;
     Label7: TLabel;
     lblNome: TLabel;
     edtNome: TEdit;
@@ -40,6 +40,9 @@ type
     tnTotalProduto: TNumberBox;
     procedure edtFiltroCliChange(Sender: TObject);
     procedure edtFiltroProdChange(Sender: TObject);
+    procedure gdrClientesCellClick(Column: TColumn);
+    procedure gdrProdutosCellClick(Column: TColumn);
+    procedure spQtdProdExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -110,12 +113,60 @@ begin
             Exit;
           end;
 
-        Filter := Format('NOME_CLI LIKE ''%%%s%%%''',[edtFiltroProd.Text]);
+        Filter := Format('NOME_PROD LIKE ''%%%s%%''',[edtFiltroProd.Text]);
 
         Filtered := true;
         Filtered := true;
 
      end;
+end;
+
+procedure TfrmVenda.gdrClientesCellClick(Column: TColumn);
+begin
+
+    //essa rpocedure é disparada quando o usuario seleciona uma celula
+    // da tabela então eu pego o indice 1 do array fields e mando o valor delee pra o text
+    // do edtNome pra funcionar tem que ativar o dgOnRowSelect
+
+    edtNome.Text := gdrClientes.Fields[1].Value;
+end;
+
+procedure TfrmVenda.gdrProdutosCellClick(Column: TColumn);
+begin
+    edtNomeProd.Text := gdrProdutos.Fields[1].Value;
+    tnValorProduto.Text := gdrProdutos.Fields[3].Value;
+
+end;
+
+
+//calculando o valor total depois que o usuario
+//termina de definir a quantidade que ele vai querer
+
+procedure TfrmVenda.spQtdProdExit(Sender: TObject);
+
+var
+  qtd: integer;
+  total: Real;
+
+begin
+
+  //convertendo o valor que vem do spin pra inteiro
+  qtd := StrToInt(spQtdProd.Text);
+
+  //usando o valor convertido pra muliplicar pelo valor do produto
+  //e jogar na variavel total
+
+  total := qtd * tnValorProduto.Value;
+
+  //colocando o valor do total dntro do texto do total produto
+  //tive quan conveter porque eu não posso passar um float direto para texto
+
+  tnTotalProduto.Text := FloatToStr(total);
+
+
+
+
+
 end;
 
 end.

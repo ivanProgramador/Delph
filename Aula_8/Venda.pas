@@ -25,7 +25,7 @@ type
     Button3: TButton;
     lblCodVenda: TLabel;
     COD: TLabel;
-    ListView1: TListView;
+    lsLista: TListView;
     Label5: TLabel;
     Label6: TLabel;
     spQtdProd: TSpinEdit;
@@ -38,11 +38,13 @@ type
     tnValorProduto: TNumberBox;
     Label10: TLabel;
     tnTotalProduto: TNumberBox;
+    lblTotalVenda: TLabel;
     procedure edtFiltroCliChange(Sender: TObject);
     procedure edtFiltroProdChange(Sender: TObject);
     procedure gdrClientesCellClick(Column: TColumn);
     procedure gdrProdutosCellClick(Column: TColumn);
     procedure spQtdProdExit(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,6 +59,65 @@ implementation
 {$R *.dfm}
 
 uses dmDados;
+
+//inculindo intens na venda
+
+procedure TfrmVenda.Button1Click(Sender: TObject);
+  var
+
+    lista : TlistItem;
+    i: integer;
+    tot: Real;
+
+  begin
+
+    //passando os dados ao list view
+    lista := lsLista.Items.Add;
+    lista.Caption := edtNomeProd.Text;
+
+    //apartir daqui são subitens porque o list view so considera
+    //como item o primeiro indice horizontal
+    //o resto são todos subitens
+
+    lista.SubItems.Add(tnValorProduto.Text);
+    lista.SubItems.Add(spQtdProd.Text);
+    lista.SubItems.Add(tnTotalProduto.Text);
+
+    //limpando a memoria
+
+    tot := 0;
+
+    //parar obter o total da soma dos itens eu preciso somear todos os valores
+    //vou precisar pegar o valor de cada linha e somar
+
+    //o i  inicia com 0 ate a quantidade de itens dentro da lista
+    //quando essa quantidade para de existir ela vira -1
+
+    for i := 0 to lsLista.Items.Count -1 do
+
+     begin
+
+      //enquanto ela não via -1 ele reprte esse loop
+      //atribui o valor do total a ele mesmo +
+      //o valor que ele achar dentro do array de itens na posição i
+      // parar  acada posição exite uma subiten do listView no caso
+      //so me intersessa o valor do 2 que é o preço
+      //quando ele vai rodando esse lopp ele vai somando e no final
+      //ele joga a soma pra dentro do caption do lblTotalVenda
+
+
+       tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
+       lblTotalVenda.Caption := 'R$ ' + FloatToStr(tot);
+     end;
+
+
+
+
+
+
+
+
+  end;
 
 procedure TfrmVenda.edtFiltroCliChange(Sender: TObject);
 begin
