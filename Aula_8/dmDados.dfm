@@ -4,8 +4,8 @@ object DataModule1: TDataModule1
   object ADOConnection1: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=Aa123456;Persist Security Info=True' +
-      ';User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost'
+      'Provider=SQLOLEDB.1;Password=rqqo231;Persist Security Info=True;' +
+      'User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 40
@@ -18,7 +18,8 @@ object DataModule1: TDataModule1
     Left = 224
     Top = 32
   end
-  object ADOQuery1: TADOQuery
+  object QryClientes: TADOQuery
+    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     Parameters = <>
@@ -26,17 +27,9 @@ object DataModule1: TDataModule1
       'SELECT * FROM TBCLIENTES')
     Left = 136
     Top = 32
-    object ADOQuery1ID_CLI: TAutoIncField
-      FieldName = 'ID_CLI'
-      ReadOnly = True
-    end
-    object ADOQuery1NOME_CLI: TStringField
-      FieldName = 'NOME_CLI'
-      Size = 50
-    end
   end
   object dsCliente: TDataSource
-    DataSet = ADOQuery1
+    DataSet = QryClientes
     Left = 496
     Top = 32
   end

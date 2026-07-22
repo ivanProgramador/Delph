@@ -2,8 +2,8 @@ object frmVenda: TfrmVenda
   Left = 0
   Top = 0
   Caption = 'Venda'
-  ClientHeight = 553
-  ClientWidth = 804
+  ClientHeight = 533
+  ClientWidth = 823
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,10 +13,10 @@ object frmVenda: TfrmVenda
   Position = poDesktopCenter
   TextHeight = 15
   object pnlClientes: TPanel
-    Left = 16
+    Left = 8
     Top = 8
     Width = 377
-    Height = 249
+    Height = 265
     TabOrder = 0
     object Label1: TLabel
       Left = 136
@@ -44,31 +44,67 @@ object frmVenda: TfrmVenda
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object edtNomeCli: TEdit
+    object lblNome: TLabel
+      Left = 16
+      Top = 224
+      Width = 47
+      Height = 20
+      Caption = 'Nome:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtFiltroCli: TEdit
       Left = 92
       Top = 65
-      Width = 228
+      Width = 261
       Height = 23
+      CharCase = ecUpperCase
       TabOrder = 0
+      OnChange = edtFiltroCliChange
     end
     object gdrClientes: TDBGrid
       Left = 16
       Top = 94
-      Width = 304
-      Height = 120
+      Width = 337
+      Height = 107
+      DataSource = DataModule1.dsCliente
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_CLI'
+          Title.Caption = 'COD'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME_CLI'
+          Title.Caption = 'Nome'
+          Visible = True
+        end>
+    end
+    object edtNome: TEdit
+      Left = 69
+      Top = 225
+      Width = 276
+      Height = 23
+      TabOrder = 2
     end
   end
   object pnlProdutos: TPanel
-    Left = 416
+    Left = 391
     Top = 8
-    Width = 369
-    Height = 249
+    Width = 424
+    Height = 265
     TabOrder = 1
     object Label3: TLabel
       Left = 152
@@ -84,8 +120,8 @@ object frmVenda: TfrmVenda
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 24
-      Top = 64
+      Left = 8
+      Top = 51
       Width = 47
       Height = 20
       Caption = 'Nome:'
@@ -96,31 +132,146 @@ object frmVenda: TfrmVenda
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Edit1: TEdit
-      Left = 96
-      Top = 65
-      Width = 233
+    object Label7: TLabel
+      Left = 8
+      Top = 224
+      Width = 34
+      Height = 20
+      Caption = 'QTD:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 8
+      Top = 194
+      Width = 47
+      Height = 20
+      Caption = 'Nome:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 126
+      Top = 224
+      Width = 41
+      Height = 20
+      Caption = 'Valor:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label10: TLabel
+      Left = 256
+      Top = 227
+      Width = 39
+      Height = 20
+      Caption = 'Total:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtFiltroProd: TEdit
+      Left = 61
+      Top = 52
+      Width = 316
       Height = 23
+      CharCase = ecUpperCase
       TabOrder = 0
+      OnChange = edtFiltroProdChange
     end
     object gdrProdutos: TDBGrid
       Left = 8
-      Top = 94
-      Width = 320
-      Height = 120
+      Top = 81
+      Width = 369
+      Height = 107
+      DataSource = DataModule1.dsProdutos
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_PROD'
+          Title.Caption = 'COD'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME_PROD'
+          Title.Caption = 'Nome'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QTD_PRO'
+          Title.Caption = 'QTD'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VL_PROD'
+          Title.Caption = 'Valor'
+          Visible = True
+        end>
+    end
+    object SpinEdit1: TSpinEdit
+      Left = 63
+      Top = 224
+      Width = 57
+      Height = 24
+      MaxValue = 0
+      MinValue = 0
+      TabOrder = 2
+      Value = 0
+    end
+    object edtNomeProd: TEdit
+      Left = 64
+      Top = 195
+      Width = 313
+      Height = 23
+      TabOrder = 3
+    end
+    object tnValorProduto: TNumberBox
+      Left = 173
+      Top = 224
+      Width = 66
+      Height = 23
+      CurrencyFormat = nbcfNone
+      DisplayFormat = 'R$ ,0.00'
+      Mode = nbmCurrency
+      TabOrder = 4
+    end
+    object tnTotalProduto: TNumberBox
+      Left = 301
+      Top = 224
+      Width = 76
+      Height = 23
+      Mode = nbmCurrency
+      TabOrder = 5
     end
   end
   object pnlVenda: TPanel
-    Left = 16
-    Top = 272
-    Width = 769
-    Height = 265
+    Left = 8
+    Top = 279
+    Width = 807
+    Height = 254
     TabOrder = 2
     object lblCodVenda: TLabel
       Left = 440
@@ -148,6 +299,20 @@ object frmVenda: TfrmVenda
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label5: TLabel
+      Left = 16
+      Top = 216
+      Width = 60
+      Height = 15
+      Caption = 'TotalVenda:'
+    end
+    object Label6: TLabel
+      Left = 104
+      Top = 216
+      Width = 25
+      Height = 15
+      Caption = 'Total'
+    end
     object Button1: TButton
       Left = 16
       Top = 32
@@ -174,11 +339,24 @@ object frmVenda: TfrmVenda
     end
     object ListView1: TListView
       Left = 16
-      Top = 88
+      Top = 63
       Width = 713
-      Height = 150
-      Columns = <>
+      Height = 122
+      Columns = <
+        item
+          Caption = 'Nome'
+        end
+        item
+          Caption = 'Valor'
+        end
+        item
+          Caption = 'QTD'
+        end
+        item
+          Caption = 'Total'
+        end>
       TabOrder = 3
+      ViewStyle = vsReport
     end
   end
 end

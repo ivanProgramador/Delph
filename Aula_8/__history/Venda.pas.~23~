@@ -1,0 +1,87 @@
+unit Venda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Samples.Spin, Vcl.NumberBox;
+
+type
+  TfrmVenda = class(TForm)
+    pnlClientes: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtFiltroCli: TEdit;
+    gdrClientes: TDBGrid;
+    pnlProdutos: TPanel;
+    Label3: TLabel;
+    edtFiltroProd: TEdit;
+    Label4: TLabel;
+    gdrProdutos: TDBGrid;
+    pnlVenda: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    lblCodVenda: TLabel;
+    COD: TLabel;
+    ListView1: TListView;
+    Label5: TLabel;
+    Label6: TLabel;
+    SpinEdit1: TSpinEdit;
+    Label7: TLabel;
+    lblNome: TLabel;
+    edtNome: TEdit;
+    edtNomeProd: TEdit;
+    Label8: TLabel;
+    Label9: TLabel;
+    tnValorProduto: TNumberBox;
+    Label10: TLabel;
+    tnTotalProduto: TNumberBox;
+    procedure edtFiltroCliChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmVenda: TfrmVenda;
+
+implementation
+
+{$R *.dfm}
+
+uses dmDados;
+
+procedure TfrmVenda.edtFiltroCliChange(Sender: TObject);
+begin
+      // quando eu faço a chamada dessa "QryClientes"
+      // o sistema faz auma busca na tabela e traz a lista toda
+      // então quando eu digo "do" depois dessa chamada basiacamente estou dizendo faça com essa lista
+
+      with dmDados.DataModule1.QryClientes do
+
+        begin
+         // o filtro de peqauisa deve iniciar limpo pra depois eu colocar alguma coisa nele
+
+         Filtered := false;
+
+          if Trim(edtFiltroCli.Text) = '' then
+          begin
+            Filter := '';
+            Exit;
+          end;
+
+          Filter := Format('NOME_CLI LIKE ''%%%s%%''', [edtFiltroCli.Text]);
+          Filtered := True;
+
+         // então com o resultado em mãos eu ligo a resposta filtada e ela entra na tabela
+         // atraves da query que ao inves de trazer todos os resultados ela traz so oque sobrou depois do filtro
+         // eo conteudo dela vai mudando conforme o conteudo do campo
+
+         Filtered := true;
+     end;
+end;
+
+end.

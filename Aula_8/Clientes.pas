@@ -58,7 +58,7 @@ procedure TfrmClientes.btnEditarClick(Sender: TObject);
                   DataModule1.stAtualizaCliente.ExecProc;
 
                    //abrindo e fechando a conexão pra atualizar atela
-                 with dmDados.DataModule1.ADOQuery1 do
+                 with dmDados.DataModule1.QryClientes do
                       begin
                            close;
                            open;
@@ -94,7 +94,7 @@ begin
                 end;
 
                  //abrindo e fechando a conexão pra atualizar atela
-               with dmDados.DataModule1.ADOQuery1 do
+               with dmDados.DataModule1.QryClientes do
                   begin
                      close;
                      open;
@@ -138,7 +138,7 @@ procedure TfrmClientes.btnSalvarClick(Sender: TObject);
                 end;
 
                 //abrindo e fechando a conexão pra atualizar atela
-                with dmDados.DataModule1.ADOQuery1 do
+                with dmDados.DataModule1.QryClientes do
                   begin
                      close;
                      open;
@@ -160,8 +160,8 @@ procedure TfrmClientes.btnSalvarClick(Sender: TObject);
 procedure TfrmClientes.FormShow(Sender: TObject);
 begin
     // assim o formulario abrre ele ataualiza a tabela
-  dmDados.DataModule1.ADOQuery1.Close;
-  dmDados.DataModule1.ADOQuery1.Open;
+  dmDados.DataModule1.QryClientes.Close;
+  dmDados.DataModule1.QryClientes.Open;
 end;
 
 end.
