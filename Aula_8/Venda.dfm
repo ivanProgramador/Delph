@@ -11,6 +11,7 @@ object frmVenda: TfrmVenda
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  OnShow = FormShow
   TextHeight = 15
   object pnlClientes: TPanel
     Left = 8
@@ -282,7 +283,7 @@ object frmVenda: TfrmVenda
     Width = 807
     Height = 254
     TabOrder = 2
-    object lblCodVenda: TLabel
+    object tCodVenda: TLabel
       Left = 440
       Top = 32
       Width = 134
@@ -295,12 +296,11 @@ object frmVenda: TfrmVenda
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object COD: TLabel
+    object lblCodVenda: TLabel
       Left = 602
       Top = 32
-      Width = 40
+      Width = 5
       Height = 25
-      Caption = 'COD'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19

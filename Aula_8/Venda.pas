@@ -23,8 +23,8 @@ type
     btnIncluiProd: TButton;
     btnRemover: TButton;
     Button3: TButton;
+    tCodVenda: TLabel;
     lblCodVenda: TLabel;
-    COD: TLabel;
     lsLista: TListView;
     Label5: TLabel;
     Label6: TLabel;
@@ -46,6 +46,7 @@ type
     procedure spQtdProdExit(Sender: TObject);
     procedure btnIncluiProdClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -226,6 +227,19 @@ begin
         Filtered := true;
 
      end;
+end;
+
+procedure TfrmVenda.FormShow(Sender: TObject);
+begin
+    with dmDados.DataModule1.QryCodVenda do
+      begin
+        close;
+        open();
+
+        lblCodVenda.Caption := IntToStr(dmDados.DataModule1.QryCodVendaCOLUMN1.Value);
+
+
+      end;
 end;
 
 procedure TfrmVenda.gdrClientesCellClick(Column: TColumn);

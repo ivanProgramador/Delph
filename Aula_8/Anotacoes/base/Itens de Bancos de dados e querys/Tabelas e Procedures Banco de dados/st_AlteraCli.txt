@@ -1,0 +1,8 @@
+CREATE PROCEDURE st_AlteraCli  @id   Integer
+                              ,@nome Varchar(50)
+AS
+BEGIN
+  UPDATE TBCLIENTES
+  SET    NOME_CLI = @nome
+  WHERE  ID_CLI = @id
+END

@@ -26,6 +26,11 @@ type
     spAtualizaProd: TADOStoredProc;
     stExcluirProd: TADOStoredProc;
     spListarProd: TADOStoredProc;
+    spInsereVenda: TADOStoredProc;
+    QryClientesID_CLI: TAutoIncField;
+    QryClientesNOME_CLI: TStringField;
+    QryCodVenda: TADOQuery;
+    QryCodVendaCOLUMN1: TIntegerField;
   private
     { Private declarations }
   public

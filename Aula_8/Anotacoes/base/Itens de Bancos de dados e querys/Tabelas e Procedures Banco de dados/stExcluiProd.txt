@@ -1,0 +1,7 @@
+CREATE PROCEDURE stExcluiProd @id Integer
+AS
+BEGIN
+
+  DELETE FROM TBPRODUTOS
+  WHERE ID_PROD = @id
+END

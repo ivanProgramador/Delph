@@ -1,0 +1,14 @@
+CREATE PROCEDURE st_AtualizaProd @id Integer
+                                ,@nome varchar(50)
+			        ,@qtd  integer
+				,@vl   Money
+AS  
+BEGIN
+
+  UPDATE TBPRODUTOS
+  SET NOME_PROD = @nome
+     ,QTD_PRO   = @qtd
+	 ,VL_PROD   = @vl
+  WHERE ID_PROD = @id
+END
+

@@ -19,14 +19,25 @@ object DataModule1: TDataModule1
     Top = 32
   end
   object QryClientes: TADOQuery
-    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
-    Parameters = <>
+    Parameters = <
+      item
+        Size = -1
+        Value = Null
+      end>
     SQL.Strings = (
       'SELECT * FROM TBCLIENTES')
     Left = 136
     Top = 32
+    object QryClientesID_CLI: TAutoIncField
+      FieldName = 'ID_CLI'
+      ReadOnly = True
+    end
+    object QryClientesNOME_CLI: TStringField
+      FieldName = 'NOME_CLI'
+      Size = 50
+    end
   end
   object dsCliente: TDataSource
     DataSet = QryClientes
@@ -206,5 +217,63 @@ object DataModule1: TDataModule1
     Parameters = <>
     Left = 496
     Top = 120
+  end
+  object spInsereVenda: TADOStoredProc
+    Connection = ADOConnection1
+    ProcedureName = 'st_InsereItensVenda'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@nm_Prod'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = '@qtdVenda'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@codVEnda'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@erMsg'
+        Attributes = [paNullable]
+        DataType = ftString
+        Direction = pdInputOutput
+        Size = 255
+      end
+      item
+        Name = '@return'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Direction = pdInputOutput
+        Precision = 10
+      end>
+    Left = 32
+    Top = 200
+  end
+  object QryCodVenda: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT MAX(Id_Cod_Venda) FROM TBITENSVENDA')
+    Left = 128
+    Top = 200
+    object QryCodVendaCOLUMN1: TIntegerField
+      FieldName = 'COLUMN1'
+      ReadOnly = True
+    end
   end
 end
