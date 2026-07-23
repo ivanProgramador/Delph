@@ -4,16 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
 
 type
-  TfrmMain = class(TForm)
-    imgUser: TImage;
-    imgProdutos: TImage;
-    imgVendas: TImage;
-    procedure imgUserClick(Sender: TObject);
-    procedure imgProdutosClick(Sender: TObject);
-    procedure imgVendasClick(Sender: TObject);
+  TForm1 = class(TForm)
   private
     { Private declarations }
   public
@@ -21,27 +15,10 @@ type
   end;
 
 var
-  frmMain: TfrmMain;
+  Form1: TForm1;
 
 implementation
 
 {$R *.dfm}
-
-uses Clientes, Produtos, Venda;
-
-procedure TfrmMain.imgProdutosClick(Sender: TObject);
-begin
-   frmProdutos.ShowModal;
-end;
-
-procedure TfrmMain.imgUserClick(Sender: TObject);
-begin
-     frmClientes.showModal;
-end;
-
-procedure TfrmMain.imgVendasClick(Sender: TObject);
-begin
-   frmVenda.showModal;
-end;
 
 end.

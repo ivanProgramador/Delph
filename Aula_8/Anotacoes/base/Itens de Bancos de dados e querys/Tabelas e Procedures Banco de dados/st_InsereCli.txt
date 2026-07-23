@@ -1,6 +1,0 @@
-CREATE PROCEDURE st_InsereCli  @nome Varchar(50)
-AS
-BEGIN
-  INSERT INTO TBCLIENTES (NOME_CLI)
-  VALUES(@nome)
-END
