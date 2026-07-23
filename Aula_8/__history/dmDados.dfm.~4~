@@ -1,0 +1,35 @@
+object dm: Tdm
+  Height = 318
+  Width = 640
+  object conProjetoVenda: TADOConnection
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initi' +
+      'al Catalog=ProjetoVenda;Data Source=localhost;Use Procedure for ' +
+      'Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DE' +
+      'SKTOP-DPPTK8A;Use Encryption for Data=False;Tag with column coll' +
+      'ation when possible=False'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 40
+    Top = 16
+  end
+  object stInsereCliente: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_InsereCli'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@nome'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+      end>
+    Left = 152
+    Top = 16
+  end
+end

@@ -1,0 +1,80 @@
+
+CREATE PROCEDURE st_InsereItensVenda   @nm_Prod  Varchar(50)                                     
+		                      ,@qtdVenda Integer
+			              ,@codVEnda Integer
+				      ,@erMsg    Varchar(255) Output 
+				      ,@return   Integer      Output
+							  
+AS
+BEGIN
+
+  DECLARE  @idProd   Integer		  
+   		  ,@vlVenda  Money
+		  ,@estoque  Integer
+		  ,@qtd      Integer
+
+  SET @return = 1                                           
+  SET @erMsg = '';
+  
+  SELECT @idProd  = ID_PROD
+        ,@vlVenda = VL_Prod
+	    ,@estoque = QTD_Pro
+  FROM dbo.TBPRODUTOS WITH (NOLOCK)
+  WHERE NOME_PROD = @nm_Prod
+
+  Select @qtd = @estoque - @qtdVenda
+
+  IF (@estoque <= 0 )
+  BEGIN
+    SET @return = 2;
+    SET @erMsg = 'Produto '+ @nm_Prod + ' em Falta';
+
+	RETURN
+  END
+  
+  ELSE IF (@qtd <= 5 AND @qtd <= @estoque AND @qtd >=0 )
+  BEGIN
+    SET @return = 3;
+    SET @erMsg = 'Estoque Baixo ' + @nm_Prod ;  
+	
+	INSERT INTO TBITENSVENDA  ( ID_Cod_Venda
+	                           ,id_prod
+					           ,vl_prod
+							   ,QTD_Prod)
+    VALUES ( @codVEnda
+	        ,@idProd 		  
+		    ,@vlVenda
+			,@qtdVenda)    
+
+    UPDATE TBPRODUTOS
+    SET QTD_Pro = @estoque - @qtdVenda
+    WHERE ID_Prod = @idProd
+  END
+  
+  ELSE IF (@qtd <= 5 AND @qtd <= @estoque AND @qtd  < 0 )
+  BEGIN
+    SET @return = 2;
+    SET @erMsg = 'Estoque Indispovinel, Qtd vendida maior que estoque: ' + @nm_Prod + '  
+	    Estoque produto = ' + CAST(@estoque AS VARCHAR(2)) ; 
+    
+	RETURN
+  END
+  ELSE
+  BEGIN 
+
+	INSERT INTO TBITENSVENDA  ( ID_Cod_Venda
+	                           ,id_prod
+					           ,vl_prod
+							   ,QTD_Prod)
+    VALUES ( @codVEnda
+	        ,@idProd 		  
+		    ,@vlVenda
+			,@qtdVenda)   
+    
+
+    UPDATE TBPRODUTOS
+    SET QTD_Pro = @estoque - @qtdVenda
+    WHERE ID_Prod = @idProd
+  END
+END
+

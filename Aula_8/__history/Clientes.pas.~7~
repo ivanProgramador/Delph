@@ -1,0 +1,49 @@
+unit Clientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfrmCliente = class(TForm)
+    lblNomeCli: TLabel;
+    edtNome: TEdit;
+    bntSalvar: TButton;
+    btnAtualizar: TButton;
+    btnExcluir: TButton;
+    procedure bntSalvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCliente: TfrmCliente;
+
+implementation
+
+{$R *.dfm}
+
+uses dmDados;
+
+procedure TfrmCliente.bntSalvarClick(Sender: TObject);
+    begin
+
+        {trazendo o meu dm dados pra usar o componete st }
+        with dm.stInsereCliente do
+        begin
+           close;
+         {
+           como estou usando usadno ADO pra se comunicar com o sql server eu preciso
+           fazer esse caminho ate o parametro
+         }
+         dm.stInsereCliente.Parameters.ParamByName('@nome').Value := edtNome.Text;
+
+        end;
+
+     end;
+
+end.

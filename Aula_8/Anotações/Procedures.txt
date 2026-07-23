@@ -1,0 +1,20 @@
+Procedures são rotinas de base de dados pre-programadas
+ela servem prs execucar varios tipos de consultas na base 
+mas no meu caso eu rotinas crud que vão ser disparadas pelo 
+delph usando os componentes do meu DM. 
+
+A procedure abaixo vai ser usada parar garvarr registros de clientes na base
+oque ela recebe é o nome do cliente ja qua o id e definido de forma automática
+
+então ela pega o valor da variável @nome e coloca denro do campo NOME_CLI
+nesse insert e assim eu consigo usar o delph pra controlar a minha base   
+
+
+CREATE PROCEDURE st_InsereCli  @nome Varchar(50)
+AS
+BEGIN
+  INSERT INTO TBCLIENTES (NOME_CLI)
+  VALUES(@nome)
+END
+   
+ 

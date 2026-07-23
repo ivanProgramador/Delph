@@ -1,0 +1,9 @@
+
+// Item a ser colocado na query CLientes
+SELECT * FROM TBCLIENTES
+
+
+
+
+// Item a ser colocado na query Produtos
+SELECT * FROM tbProdutos

@@ -1,0 +1,17 @@
+CREATE PROCEDURE st_InsereVenda  @idCli    Integer
+				,@total    money	
+				,@codVenda Integer							       
+							  
+AS
+BEGIN
+	
+  INSERT INTO TBVENDAS  (ID_COD_Venda
+                        ,ID_Cli					    
+			,total
+			,DT_Venda)
+  VALUES  (@codVenda
+          ,@idCli 		  
+          ,@total 
+	  ,GETDATE() ) 
+
+END

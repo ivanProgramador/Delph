@@ -1,0 +1,14 @@
+A dinamica das telas funciona assim 
+o formulario main aparece primeiro e mostra as imagens 
+o usuario clica em uma delas e chama uma tela.
+
+O formulario main contem os componentes de imagens 
+qua posseuim uma aventoi chamdo onClick esse evento
+aciona a funcção showModal  deo formaulario fazendo 
+ele aparecer na tela.
+
+entrada de daso vai ser normalizada em caixa alta 
+eu preciso fazr isso pra poder padronizar as buscas
+dentro da minha base então eu vou colocar os charCases 
+todos para "ecUpperCase" Até chara uma forma melhor de 
+fazer buscas.     

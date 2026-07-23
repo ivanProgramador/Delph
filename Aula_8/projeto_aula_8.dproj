@@ -127,10 +127,14 @@
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="dm.pas">
-            <Form>DataModule1</Form>
+        <DCCReference Include="dmDados.pas">
+            <Form>dm</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Clientes.pas">
+            <Form>frmCliente</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

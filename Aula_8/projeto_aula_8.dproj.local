@@ -2,11 +2,16 @@
 <BorlandProject>
   <Transactions>
     <Transaction>2026/07/23 12:03:06.240,=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2026/07/23 12:03:27.217,C:\delph\Aula_8\main.dfm=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2026/07/23 12:03:27.217,C:\delph\Aula_8\main.pas=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/07/23 12:03:27.217,C:\delph\Aula_8\main.dfm=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2026/07/23 12:04:09.586,C:\delph\Aula_8\projeto_aula_8.dproj=C:\Users\comercial berp\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2026/07/23 12:07:52.157,=C:\delph\Aula_8\Unit1.pas</Transaction>
     <Transaction>2026/07/23 12:08:03.996,C:\delph\Aula_8\dm.pas=C:\delph\Aula_8\Unit1.pas</Transaction>
     <Transaction>2026/07/23 12:08:03.996,C:\delph\Aula_8\dm.dfm=C:\delph\Aula_8\Unit1.dfm</Transaction>
+    <Transaction>2026/07/23 12:22:34.507,=C:\delph\Aula_8\Unit2.pas</Transaction>
+    <Transaction>2026/07/23 12:23:19.091,C:\delph\Aula_8\Clientes.dfm=C:\delph\Aula_8\Unit2.dfm</Transaction>
+    <Transaction>2026/07/23 12:23:19.091,C:\delph\Aula_8\Clientes.pas=C:\delph\Aula_8\Unit2.pas</Transaction>
+    <Transaction>2026/07/23 18:01:25.053,C:\delph\Aula_8\dmDados.pas=C:\delph\Aula_8\dm.pas</Transaction>
+    <Transaction>2026/07/23 18:01:25.054,C:\delph\Aula_8\dmDados.dfm=C:\delph\Aula_8\dm.dfm</Transaction>
   </Transactions>
 </BorlandProject>

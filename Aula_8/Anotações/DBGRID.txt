@@ -1,0 +1,29 @@
+E componente se comporta como um espelho da tabela na base de dados
+pra fazer ele funciona r é necessario que um componete traga os dados pra 
+ele.
+
+TADOQuery esse componete recebe uma consulta de foma livre entro do atributo
+SQL eu posso consultar dados da maneira que for mais converniente pra mim
+ele precisa que a conexão seja apontada no atributo connection e eprecisa tambem ser ativado no atrubuto active = true pra ele poder funcionar 
+
+DataSource é um componente que faz a ligação entre o DBGrid o TADOQuery
+depois de adiconar ele eu tenhomque ir no parametro DataSet e colocar a 
+qryClientes que vai executar o meu select.
+
+Depois disso eu preciso ir no meu BDGrid no paramentro DataSource dele eu aponto para o dsClientes que eu criei no meu dm.
+
+quando eu fizer isso ele ja carrrega os dados pra tela
+
+1 -cria TADOQuery 
+2 - cria o DataSource
+3 - liga o dataSource no TADOQuery
+4 - vai no DBGrid e liga ele no DataSource
+
+-----------------------------------------------------------------------------
+
+
+ 
+		  
+   
+
+ 
