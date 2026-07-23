@@ -1,0 +1,293 @@
+unit Venda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Samples.Spin, Vcl.NumberBox;
+
+type
+  TfrmVenda = class(TForm)
+    pnlClientes: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtFiltroCli: TEdit;
+    gdrClientes: TDBGrid;
+    pnlProdutos: TPanel;
+    Label3: TLabel;
+    edtFiltroProd: TEdit;
+    Label4: TLabel;
+    gdrProdutos: TDBGrid;
+    pnlVenda: TPanel;
+    btnIncluiProd: TButton;
+    btnRemover: TButton;
+    Button3: TButton;
+    tCodVenda: TLabel;
+    lblCodVenda: TLabel;
+    lsLista: TListView;
+    Label5: TLabel;
+    Label6: TLabel;
+    spQtdProd: TSpinEdit;
+    Label7: TLabel;
+    lblNome: TLabel;
+    edtNome: TEdit;
+    edtNomeProd: TEdit;
+    Label8: TLabel;
+    Label9: TLabel;
+    tnValorProduto: TNumberBox;
+    Label10: TLabel;
+    tnTotalProduto: TNumberBox;
+    lblTotalVenda: TLabel;
+    procedure edtFiltroCliChange(Sender: TObject);
+    procedure edtFiltroProdChange(Sender: TObject);
+    procedure gdrClientesCellClick(Column: TColumn);
+    procedure gdrProdutosCellClick(Column: TColumn);
+    procedure spQtdProdExit(Sender: TObject);
+    procedure btnIncluiProdClick(Sender: TObject);
+    procedure btnRemoverClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmVenda: TfrmVenda;
+
+implementation
+
+{$R *.dfm}
+
+uses dmDados;
+
+
+
+procedure TfrmVenda.btnRemoverClick(Sender: TObject);
+
+   var
+     i: integer;
+     tot: Real;
+     valorItem: Double;
+     textoValor: string;
+
+   begin
+
+     if lsLista.ItemFocused <> nil then
+      begin
+
+        lsLista.DeleteSelected;
+
+        tot := 0;
+
+        for i := 0 to lsLista.Items.Count -1 do
+
+         begin
+
+              textoValor := lsLista.Items[i].SubItems[2];
+
+              textoValor := StringReplace(textoValor, 'R$', '', [rfReplaceAll, rfIgnoreCase]);
+              textoValor := Trim(textoValor);
+
+              if TryStrToFloat(textoValor, valorItem) then
+                 tot := tot + valorItem;
+         end;
+
+         lblTotalVenda.Caption := FormatFloat('R$ #,##0.00', tot);
+
+
+      end;
+
+   end;
+
+
+procedure TfrmVenda.btnIncluiProdClick(Sender: TObject);
+  var
+
+    lista : TlistItem;
+    i: integer;
+    tot: Real;
+    qtd: integer;
+
+  begin
+
+    qtd := StrToInt(spQtdProd.Text);
+
+    if qtd > 0 then
+      begin
+
+        //passando os dados ao list view
+        lista := lsLista.Items.Add;
+        lista.Caption := edtNomeProd.Text;
+
+        //apartir daqui são subitens porque o list view so considera
+        //como item o primeiro indice horizontal
+        //o resto são todos subitens
+
+        lista.SubItems.Add(tnValorProduto.Text);
+        lista.SubItems.Add(spQtdProd.Text);
+        lista.SubItems.Add(tnTotalProduto.Text);
+
+        //limpando a memoria
+
+        tot := 0;
+
+        //parar obter o total da soma dos itens eu preciso somear todos os valores
+        //vou precisar pegar o valor de cada linha e somar
+
+        //o i  inicia com 0 ate a quantidade de itens dentro da lista
+        //quando essa quantidade para de existir ela vira -1
+
+        for i := 0 to lsLista.Items.Count -1 do
+
+         begin
+
+          //enquanto ela não via -1 ele reprte esse loop
+          //atribui o valor do total a ele mesmo +
+          //o valor que ele achar dentro do array de itens na posição i
+          // parar  acada posição exite uma subiten do listView no caso
+          //so me intersessa o valor do 2 que é o preço
+          //quando ele vai rodando esse lopp ele vai somando e no final
+          //ele joga a soma pra dentro do caption do lblTotalVenda
+
+
+           tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
+           lblTotalVenda.Caption := 'R$ ' + FloatToStr(tot);
+         end;
+      end
+    else
+      ShowMessage('Digite uma quantidade valida ');
+
+
+     end;
+
+
+
+
+procedure TfrmVenda.edtFiltroCliChange(Sender: TObject);
+begin
+      // quando eu faço a chamada dessa "QryClientes"
+      // o sistema faz auma busca na tabela e traz a lista toda
+      // então quando eu digo "do" depois dessa chamada basiacamente estou dizendo faça com essa lista
+
+      with dmDados.DataModule1.QryClientes do
+
+        begin
+         // o filtro de peqauisa deve iniciar limpo pra depois eu colocar alguma coisa nele
+
+         Filtered := false;
+
+         // testando se tem algum texto diferente de vazio no text da pesquisa
+
+          if Trim(edtFiltroCli.Text) = '' then
+
+          // se não tiver nada ele define o filtro zavio e para de tentar consultar
+          begin
+            Filter := '';
+
+            //sai do porcedimento
+            Exit;
+          end;
+
+
+          //caso tenha texto ele vai buscar
+          //a alinha abaixo faz uma like e troca o %S eplo vazlor da pesquisa
+          // o format ajuda a formatar a string sql
+
+          Filter := Format('NOME_CLI LIKE ''%%%s%%''', [edtFiltroCli.Text]);
+
+          // agora eu ativo o filtro
+          Filtered := True;
+
+         // então com o resultado em mãos eu ligo a resposta filtada e ela entra na tabela
+         // atraves da query que ao inves de trazer todos os resultados ela traz so oque sobrou depois do filtro
+         // eo conteudo dela vai mudando conforme o conteudo do campo
+
+         Filtered := true;
+     end;
+end;
+
+procedure TfrmVenda.edtFiltroProdChange(Sender: TObject);
+begin
+     with dmDados.DataModule1.QryProdutos do
+     begin
+        Filtered := false;
+
+        if Trim(edtFiltroProd.Text) = '' then
+          begin
+            Filter := '';
+            Exit;
+          end;
+
+        Filter := Format('NOME_PROD LIKE ''%%%s%%''',[edtFiltroProd.Text]);
+
+        Filtered := true;
+        Filtered := true;
+
+     end;
+end;
+
+procedure TfrmVenda.FormShow(Sender: TObject);
+begin
+    with dmDados.DataModule1.QryCodVenda do
+      begin
+        close;
+        open();
+
+        lblCodVenda.Caption := IntToStr(dmDados.DataModule1.QryCodVendaCOLUMN1.Value);
+
+
+      end;
+end;
+
+procedure TfrmVenda.gdrClientesCellClick(Column: TColumn);
+begin
+
+    //essa rpocedure é disparada quando o usuario seleciona uma celula
+    // da tabela então eu pego o indice 1 do array fields e mando o valor delee pra o text
+    // do edtNome pra funcionar tem que ativar o dgOnRowSelect
+
+    edtNome.Text := gdrClientes.Fields[1].Value;
+end;
+
+procedure TfrmVenda.gdrProdutosCellClick(Column: TColumn);
+begin
+    edtNomeProd.Text := gdrProdutos.Fields[1].Value;
+    tnValorProduto.Text := gdrProdutos.Fields[3].Value;
+
+end;
+
+
+//calculando o valor total depois que o usuario
+//termina de definir a quantidade que ele vai querer
+
+procedure TfrmVenda.spQtdProdExit(Sender: TObject);
+
+var
+  qtd: integer;
+  total: Real;
+
+begin
+
+  //convertendo o valor que vem do spin pra inteiro
+  qtd := StrToInt(spQtdProd.Text);
+
+  //usando o valor convertido pra muliplicar pelo valor do produto
+  //e jogar na variavel total
+
+  total := qtd * tnValorProduto.Value;
+
+  //colocando o valor do total dntro do texto do total produto
+  //tive quan conveter porque eu não posso passar um float direto para texto
+
+  tnTotalProduto.Text := FloatToStr(total);
+
+
+
+
+
+end;
+
+end.

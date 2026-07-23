@@ -2,10 +2,9 @@ object DataModule1: TDataModule1
   Height = 376
   Width = 603
   object ADOConnection1: TADOConnection
-    Connected = True
     ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=rqqo231;Persist Security Info=True;' +
-      'User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost'
+      'Provider=SQLOLEDB.1;Password=Aa123456;Persist Security Info=True' +
+      ';User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 40
@@ -227,24 +226,28 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@nm_Prod'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end
       item
         Name = '@qtdVenda'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@codVEnda'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@erMsg'
@@ -252,6 +255,7 @@ object DataModule1: TDataModule1
         DataType = ftString
         Direction = pdInputOutput
         Size = 255
+        Value = Null
       end
       item
         Name = '@return'
@@ -259,6 +263,7 @@ object DataModule1: TDataModule1
         DataType = ftInteger
         Direction = pdInputOutput
         Precision = 10
+        Value = Null
       end>
     Left = 32
     Top = 200

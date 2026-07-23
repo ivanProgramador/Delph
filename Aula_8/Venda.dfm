@@ -311,14 +311,14 @@ object frmVenda: TfrmVenda
     object Label5: TLabel
       Left = 16
       Top = 216
-      Width = 60
+      Width = 61
       Height = 15
       Caption = 'TotalVenda:'
     end
     object Label6: TLabel
       Left = 104
       Top = 216
-      Width = 25
+      Width = 26
       Height = 15
       Caption = 'Total'
     end

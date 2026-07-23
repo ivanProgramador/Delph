@@ -103,6 +103,10 @@ procedure TfrmVenda.btnRemoverClick(Sender: TObject);
    end;
 
 
+
+
+
+
 procedure TfrmVenda.btnIncluiProdClick(Sender: TObject);
   var
 
