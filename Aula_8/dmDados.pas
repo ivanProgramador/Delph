@@ -13,6 +13,8 @@ type
     qryClientesID_CLI: TAutoIncField;
     qryClientesNOME_CLI: TStringField;
     dsClientes: TDataSource;
+    stAlteraCli: TADOStoredProc;
+    stExcluiCliente: TADOStoredProc;
   private
     { Private declarations }
   public

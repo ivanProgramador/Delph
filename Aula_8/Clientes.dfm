@@ -49,6 +49,7 @@ object frmCliente: TfrmCliente
     Height = 25
     Caption = 'Atualizar'
     TabOrder = 2
+    OnClick = btnAtualizarClick
   end
   object btnExcluir: TButton
     Left = 326
@@ -57,6 +58,7 @@ object frmCliente: TfrmCliente
     Height = 25
     Caption = 'Excluir'
     TabOrder = 3
+    OnClick = btnExcluirClick
   end
   object grdClientes: TDBGrid
     Left = 8

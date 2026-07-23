@@ -16,6 +16,8 @@ type
     btnExcluir: TButton;
     grdClientes: TDBGrid;
     procedure bntSalvarClick(Sender: TObject);
+    procedure btnAtualizarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -80,5 +82,67 @@ procedure TfrmCliente.bntSalvarClick(Sender: TObject);
 
     end;
 
+
+procedure TfrmCliente.btnAtualizarClick(Sender: TObject);
+    begin
+       if Application.MessageBox('Deseja Atualizar',' Atenção',4 + MB_ICONEXCLAMATION) = IDYES then
+        begin
+          with dm.stAlteraCli do
+            begin
+                close;
+                 {
+                   O atributo Fields da minha "grdClientes" é um array de campos
+                   pra editar um cliente eu preciso pegar o id dele então no Fieds
+                   eu escolho inidice 0 porque ele contem o id.
+                   depois epego o nome correpondente a ele na posição 1
+                   e executo a procedure
+                 }
+                 dm.stAlteraCli.Parameters.ParamByName('@id').Value := grdClientes.Fields[0].Value;
+                 dm.stAlteraCli.Parameters.ParamByName('@nome').Value := grdClientes.Fields[1].Value;
+
+                 ExecProc;
+             end;
+
+              with dm.qryClientes do
+
+              begin
+
+                close;
+                open;
+
+              end;
+
+
+        end
+       else
+       Application.MessageBox('Operação cancelada',' Atenção',4 + MB_ICONEXCLAMATION);
+    end;
+
+procedure TfrmCliente.btnExcluirClick(Sender: TObject);
+    begin
+      if Application.MessageBox('Deseja Excluir',' Atenção',4 + MB_ICONEXCLAMATION) = IDYES then
+         begin
+
+          with dm.stExcluiCliente do
+            begin
+                 dm.stExcluiCliente.Parameters.ParamByName('@id').Value := grdClientes.Fields[0].Value;
+                 ExecProc;
+            end;
+
+          with dm.qryClientes do
+
+              begin
+
+                close;
+                open;
+
+              end;
+         end
+      else
+       Application.MessageBox('Operação cancelada',' Atenção',4 + MB_ICONEXCLAMATION);
+
+
+
+    end;
 
 end.

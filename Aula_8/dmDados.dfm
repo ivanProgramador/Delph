@@ -56,4 +56,48 @@ object dm: Tdm
     Left = 312
     Top = 16
   end
+  object stAlteraCli: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_AlteraCli'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@id'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@nome'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+      end>
+    Left = 392
+    Top = 16
+  end
+  object stExcluiCliente: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'ST_APAGACLI'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@ID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 488
+    Top = 16
+  end
 end
