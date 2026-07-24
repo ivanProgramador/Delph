@@ -10,8 +10,10 @@ type
   TForm1 = class(TForm)
     imgCliente: TImage;
     imgProdutos: TImage;
+    imgVendas: TImage;
     procedure imgClienteClick(Sender: TObject);
     procedure imgProdutosClick(Sender: TObject);
+    procedure imgVendasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,7 +27,7 @@ implementation
 
 {$R *.dfm}
 
-uses Clientes, Produtos;
+uses Clientes, Produtos, Venda;
 
 procedure TForm1.imgClienteClick(Sender: TObject);
 begin
@@ -38,6 +40,11 @@ end;
 procedure TForm1.imgProdutosClick(Sender: TObject);
 begin
   frmProdutos.ShowModal;
+end;
+
+procedure TForm1.imgVendasClick(Sender: TObject);
+begin
+  frmVendas.ShowModal;
 end;
 
 end.

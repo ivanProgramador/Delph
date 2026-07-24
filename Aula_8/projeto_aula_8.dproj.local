@@ -9,12 +9,15 @@
     <Transaction>2026/07/23 12:08:03.996,C:\delph\Aula_8\dm.pas=C:\delph\Aula_8\Unit1.pas</Transaction>
     <Transaction>2026/07/23 12:08:03.996,C:\delph\Aula_8\dm.dfm=C:\delph\Aula_8\Unit1.dfm</Transaction>
     <Transaction>2026/07/23 12:22:34.507,=C:\delph\Aula_8\Unit2.pas</Transaction>
-    <Transaction>2026/07/23 12:23:19.091,C:\delph\Aula_8\Clientes.pas=C:\delph\Aula_8\Unit2.pas</Transaction>
     <Transaction>2026/07/23 12:23:19.091,C:\delph\Aula_8\Clientes.dfm=C:\delph\Aula_8\Unit2.dfm</Transaction>
+    <Transaction>2026/07/23 12:23:19.091,C:\delph\Aula_8\Clientes.pas=C:\delph\Aula_8\Unit2.pas</Transaction>
     <Transaction>2026/07/23 18:01:25.053,C:\delph\Aula_8\dmDados.pas=C:\delph\Aula_8\dm.pas</Transaction>
     <Transaction>2026/07/23 18:01:25.054,C:\delph\Aula_8\dmDados.dfm=C:\delph\Aula_8\dm.dfm</Transaction>
     <Transaction>2026/07/23 20:14:14.273,=C:\delph\Aula_8\Unit2.pas</Transaction>
-    <Transaction>2026/07/23 20:15:09.745,C:\delph\Aula_8\Produtos.pas=C:\delph\Aula_8\Unit2.pas</Transaction>
     <Transaction>2026/07/23 20:15:09.745,C:\delph\Aula_8\Produtos.dfm=C:\delph\Aula_8\Unit2.dfm</Transaction>
+    <Transaction>2026/07/23 20:15:09.745,C:\delph\Aula_8\Produtos.pas=C:\delph\Aula_8\Unit2.pas</Transaction>
+    <Transaction>2026/07/23 23:43:31.900,=C:\delph\Aula_8\Unit2.pas</Transaction>
+    <Transaction>2026/07/23 23:44:13.037,C:\delph\Aula_8\Venda.dfm=C:\delph\Aula_8\Unit2.dfm</Transaction>
+    <Transaction>2026/07/23 23:44:13.037,C:\delph\Aula_8\Venda.pas=C:\delph\Aula_8\Unit2.pas</Transaction>
   </Transactions>
 </BorlandProject>

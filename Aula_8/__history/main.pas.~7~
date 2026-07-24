@@ -1,0 +1,43 @@
+unit main;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    imgCliente: TImage;
+    imgProdutos: TImage;
+    procedure imgClienteClick(Sender: TObject);
+    procedure imgProdutosClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+uses Clientes, Produtos;
+
+procedure TForm1.imgClienteClick(Sender: TObject);
+begin
+   {O comando show modal abre o formaulario de clientes na tela
+    mas isso so é possivel se eu adiconar a classe dentro do meu form
+   }
+   frmCliente.ShowModal;
+end;
+
+procedure TForm1.imgProdutosClick(Sender: TObject);
+begin
+  frmProdutos.ShowModal;
+end;
+
+end.

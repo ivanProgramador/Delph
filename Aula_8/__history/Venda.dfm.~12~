@@ -1,0 +1,213 @@
+object frmVendas: TfrmVendas
+  Left = 0
+  Top = 0
+  Caption = 'venda'
+  ClientHeight = 489
+  ClientWidth = 945
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = 'Segoe UI'
+  Font.Style = [fsBold]
+  Position = poDesktopCenter
+  TextHeight = 20
+  object Label4: TLabel
+    Left = 40
+    Top = 450
+    Width = 99
+    Height = 20
+    Caption = 'Codigo venda:'
+  end
+  object lblCodigo: TLabel
+    Left = 160
+    Top = 424
+    Width = 4
+    Height = 20
+  end
+  object Label5: TLabel
+    Left = 253
+    Top = 450
+    Width = 39
+    Height = 20
+    Caption = 'Total:'
+  end
+  object lblTot: TLabel
+    Left = 288
+    Top = 424
+    Width = 4
+    Height = 20
+  end
+  object pnlCliente: TPanel
+    Left = -8
+    Top = 4
+    Width = 385
+    Height = 221
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 29
+      Top = 15
+      Width = 47
+      Height = 20
+      Caption = 'Nome:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtNomeCli: TEdit
+      Left = 82
+      Top = 12
+      Width = 278
+      Height = 28
+      TabOrder = 0
+    end
+    object dbgCliente: TDBGrid
+      Left = 29
+      Top = 50
+      Width = 331
+      Height = 146
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -15
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = [fsBold]
+    end
+  end
+  object pnlProdutos: TPanel
+    Left = 512
+    Top = 4
+    Width = 433
+    Height = 221
+    TabOrder = 1
+    object Label2: TLabel
+      Left = 8
+      Top = 15
+      Width = 47
+      Height = 20
+      Caption = 'Nome:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 224
+      Top = 172
+      Width = 39
+      Height = 20
+      Caption = 'Total:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblQtd: TLabel
+      Left = 48
+      Top = 176
+      Width = 34
+      Height = 20
+      Caption = 'QTD:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtNomeProd: TEdit
+      Left = 72
+      Top = 12
+      Width = 313
+      Height = 28
+      TabOrder = 0
+    end
+    object tnValor: TNumberBox
+      Left = 271
+      Top = 172
+      Width = 121
+      Height = 28
+      Mode = nbmCurrency
+      TabOrder = 1
+    end
+    object spQtd: TSpinEdit
+      Left = 104
+      Top = 172
+      Width = 74
+      Height = 30
+      MaxValue = 0
+      MinValue = 0
+      TabOrder = 2
+      Value = 0
+    end
+    object DBGrid1: TDBGrid
+      Left = 8
+      Top = 50
+      Width = 376
+      Height = 120
+      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -15
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = [fsBold]
+    end
+  end
+  object btnIncluiItem: TButton
+    Left = 48
+    Top = 256
+    Width = 91
+    Height = 25
+    Caption = 'Inclui item'
+    TabOrder = 2
+  end
+  object btnRemover: TButton
+    Left = 366
+    Top = 256
+    Width = 115
+    Height = 25
+    Caption = 'Remover Item'
+    TabOrder = 3
+  end
+  object btnFechar: TButton
+    Left = 671
+    Top = 256
+    Width = 106
+    Height = 25
+    Caption = 'Fechar Venda'
+    TabOrder = 4
+  end
+  object lsLista: TListView
+    Left = 0
+    Top = 287
+    Width = 937
+    Height = 150
+    Columns = <
+      item
+        Caption = 'PRODUTO'
+        MaxWidth = 180
+        MinWidth = 180
+      end
+      item
+        Caption = 'VALOR'
+        MaxWidth = 80
+      end
+      item
+        Caption = 'QUANTIDADE'
+        MaxWidth = 80
+      end
+      item
+        Caption = 'TOTAL'
+        MaxWidth = 80
+      end>
+    TabOrder = 5
+    ViewStyle = vsReport
+  end
+end
