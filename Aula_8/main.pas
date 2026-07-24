@@ -8,8 +8,10 @@ uses
 
 type
   TForm1 = class(TForm)
-    Image1: TImage;
-    procedure Image1Click(Sender: TObject);
+    imgCliente: TImage;
+    imgProdutos: TImage;
+    procedure imgClienteClick(Sender: TObject);
+    procedure imgProdutosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,14 +25,19 @@ implementation
 
 {$R *.dfm}
 
-uses Clientes;
+uses Clientes, Produtos;
 
-procedure TForm1.Image1Click(Sender: TObject);
+procedure TForm1.imgClienteClick(Sender: TObject);
 begin
    {O comando show modal abre o formaulario de clientes na tela
     mas isso so é possivel se eu adiconar a classe dentro do meu form
    }
    frmCliente.ShowModal;
+end;
+
+procedure TForm1.imgProdutosClick(Sender: TObject);
+begin
+  frmProdutos.ShowModal;
 end;
 
 end.

@@ -5,7 +5,7 @@ CREATE PROCEDURE st_AtualizaProd @id Integer
 AS  
 BEGIN
 
-  UPDATE TBPRODUTOS
+  UPDATE TBPRODUTO
   SET NOME_PROD = @nome
      ,QTD_PRO   = @qtd
 	 ,VL_PROD   = @vl

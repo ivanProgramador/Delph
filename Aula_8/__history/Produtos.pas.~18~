@@ -1,0 +1,165 @@
+unit Produtos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.NumberBox,
+  Vcl.Samples.Spin, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmProdutos = class(TForm)
+    btnSalvar: TButton;
+    btnAtualizar: TButton;
+    btnExcluir: TButton;
+    Label1: TLabel;
+    edtNome: TEdit;
+    Label2: TLabel;
+    spQtd: TSpinEdit;
+    Label3: TLabel;
+    tnValor: TNumberBox;
+    grdProduto: TDBGrid;
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnAtualizarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmProdutos: TfrmProdutos;
+
+implementation
+
+{$R *.dfm}
+
+uses dmDados;
+
+procedure TfrmProdutos.btnAtualizarClick(Sender: TObject);
+  begin
+    if Application.MessageBox('Deseja Aualizar',' Atenção',4 + MB_ICONEXCLAMATION) = IDYES then
+      begin
+
+         with dm.stAtualizaProduto do
+              begin
+                 close;
+
+                   dm.stAtualizaProduto.Parameters.ParamByName('@id').Value := grdProduto.Fields[0].Value;
+                   dm.stAtualizaProduto.Parameters.ParamByName('@nome').Value := grdProduto.Fields[1].Value;;
+                   dm.stAtualizaProduto.Parameters.ParamByName('@qtd').Value := grdProduto.Fields[2].Value;;
+                   dm.stAtualizaProduto.Parameters.ParamByName('@vl').Value := grdProduto.Fields[3].Value;;
+
+               ExecProc;
+          end;
+
+              with dm.qryProdutos do
+
+              begin
+
+                close;
+                open;
+
+              end;
+
+              edtNome.Clear;
+              spQtd.Clear;
+              tnValor.Clear;
+
+
+           end
+
+    else
+           Application.MessageBox('Operação cancelada',' Atenção',4 + MB_ICONEXCLAMATION);
+
+
+
+  end;
+
+procedure TfrmProdutos.btnExcluirClick(Sender: TObject);
+begin
+  if Application.MessageBox('Deseja Excluir',' Atenção',4 + MB_ICONEXCLAMATION) = IDYES then
+      begin
+
+         with dm.stExcluiProduto do
+              begin
+                 close;
+
+                   dm.stExcluiProduto.Parameters.ParamByName('@id').Value := grdProduto.Fields[0].Value;
+               ExecProc;
+          end;
+
+              with dm.qryProdutos do
+
+              begin
+
+                close;
+                open;
+
+              end;
+
+              edtNome.Clear;
+              spQtd.Clear;
+              tnValor.Clear;
+
+
+           end
+
+    else
+           Application.MessageBox('Operação cancelada',' Atenção',4 + MB_ICONEXCLAMATION);
+
+
+end;
+
+procedure TfrmProdutos.btnSalvarClick(Sender: TObject);
+begin
+    if Application.MessageBox('Deseja salvar',' Atenção',4 + MB_ICONEXCLAMATION) = IDYES then
+      begin
+
+         with dm.stInsereProduto do
+              begin
+                 close;
+
+                   dm.stInsereProduto.Parameters.ParamByName('@nome').Value := edtNome.Text;
+                   dm.stInsereProduto.Parameters.ParamByName('@qtd').Value := spQtd.Text;
+                   dm.stInsereProduto.Parameters.ParamByName('@vl').Value := tnValor.Text;
+
+               ExecProc;
+          end;
+
+              with dm.qryProdutos do
+
+              begin
+
+                close;
+                open;
+
+              end;
+
+              edtNome.Clear;
+              spQtd.Clear;
+              tnValor.Clear;
+
+
+           end
+
+    else
+           Application.MessageBox('Operação cancelada',' Atenção',4 + MB_ICONEXCLAMATION);
+
+end;
+
+procedure TfrmProdutos.FormShow(Sender: TObject);
+begin
+   with dm.qryProdutos do
+
+    begin
+
+      close;
+      open;
+
+    end;
+end;
+
+end.

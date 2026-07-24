@@ -15,6 +15,15 @@ type
     dsClientes: TDataSource;
     stAlteraCli: TADOStoredProc;
     stExcluiCliente: TADOStoredProc;
+    qryProdutos: TADOQuery;
+    qryProdutosID_PROD: TAutoIncField;
+    qryProdutosNOME_PROD: TStringField;
+    qryProdutosQTD_PRO: TIntegerField;
+    qryProdutosVL_PROD: TBCDField;
+    dsProdutos: TDataSource;
+    stInsereProduto: TADOStoredProc;
+    stAtualizaProduto: TADOStoredProc;
+    stExcluiProduto: TADOStoredProc;
   private
     { Private declarations }
   public

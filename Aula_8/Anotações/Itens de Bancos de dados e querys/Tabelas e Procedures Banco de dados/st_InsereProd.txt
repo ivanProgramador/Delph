@@ -4,7 +4,7 @@ CREATE PROCEDURE st_InsereProd @nome varchar(50)
 AS
 BEGIN
   
-  INSERT INTO TBPRODUTOS (NOME_PROD
+  INSERT INTO TBPRODUTO (NOME_PROD
                          ,QTD_PRO
 			 ,VL_PROD)
   VALUES(@nome
