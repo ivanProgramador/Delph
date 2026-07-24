@@ -43,7 +43,6 @@ type
     procedure dbgProdutosCellClick(Column: TColumn);
     procedure spQtdExit(Sender: TObject);
     procedure btnIncluiItemClick(Sender: TObject);
-    procedure btnRemoverClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,11 +85,9 @@ procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
       //de todos os itens exitentes ele vai pegar o indice
       //que esta na posição i que seria a linha
       // depois ele vai acessar a posição 2 da linha onde fica o total
-      // depois ele vai passar esse total para o texto da "lblTot"
-      //convertido pra texto
+      // depois ele vai passar esse total parar o texto da "lblTot"
 
        tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
-
        lblTot.Caption := 'R$' + FloatToStr(tot);
 
      end;
@@ -98,18 +95,6 @@ procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
 
  end;
 
-
-
-
-
-procedure TfrmVendas.btnRemoverClick(Sender: TObject);
-    begin
-       if lsLista.ItemFocused <> nil then
-         begin
-           lsLista.DeleteSelected;
-         end;
-
-    end;
 
 
 

@@ -43,7 +43,6 @@ type
     procedure dbgProdutosCellClick(Column: TColumn);
     procedure spQtdExit(Sender: TObject);
     procedure btnIncluiItemClick(Sender: TObject);
-    procedure btnRemoverClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -98,18 +97,6 @@ procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
 
  end;
 
-
-
-
-
-procedure TfrmVendas.btnRemoverClick(Sender: TObject);
-    begin
-       if lsLista.ItemFocused <> nil then
-         begin
-           lsLista.DeleteSelected;
-         end;
-
-    end;
 
 
 

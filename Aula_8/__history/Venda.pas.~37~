@@ -42,8 +42,6 @@ type
     procedure dbgClienteCellClick(Column: TColumn);
     procedure dbgProdutosCellClick(Column: TColumn);
     procedure spQtdExit(Sender: TObject);
-    procedure btnIncluiItemClick(Sender: TObject);
-    procedure btnRemoverClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,61 +56,6 @@ implementation
 {$R *.dfm}
 
 uses dmDados;
-
-
-procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
-
- var
-    lista : TListItem;
-    i: integer;
-    tot: Real;
-
-  begin
-
-     lista := lsLista.Items.Add;
-     lista.Caption := edtNomeProd.Text;
-     lista.SubItems.Add(spQtd.Text);
-     lista.SubItems.Add(nbValor.Text);
-     lista.SubItems.Add(tnTotalProduto.Text);
-
-     tot := 0;
-
-     //o for vai percorrer todos os indices do lsItem
-
-     for i := 0  to lslista.Items.Count -1  do
-
-     begin
-
-      //de todos os itens exitentes ele vai pegar o indice
-      //que esta na posição i que seria a linha
-      // depois ele vai acessar a posição 2 da linha onde fica o total
-      // depois ele vai passar esse total para o texto da "lblTot"
-      //convertido pra texto
-
-       tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
-
-       lblTot.Caption := 'R$' + FloatToStr(tot);
-
-     end;
-
-
- end;
-
-
-
-
-
-procedure TfrmVendas.btnRemoverClick(Sender: TObject);
-    begin
-       if lsLista.ItemFocused <> nil then
-         begin
-           lsLista.DeleteSelected;
-         end;
-
-    end;
-
-
-
 
 procedure TfrmVendas.dbgClienteCellClick(Column: TColumn);
 begin

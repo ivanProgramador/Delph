@@ -143,16 +143,14 @@ object frmVendas: TfrmVendas
     Height = 25
     Caption = 'Inclui item'
     TabOrder = 1
-    OnClick = btnIncluiItemClick
   end
   object btnRemover: TButton
-    Left = 383
+    Left = 380
     Top = 305
     Width = 115
     Height = 25
     Caption = 'Remover Item'
     TabOrder = 2
-    OnClick = btnRemoverClick
   end
   object btnFechar: TButton
     Left = 815
@@ -195,7 +193,7 @@ object frmVendas: TfrmVendas
     TabOrder = 5
     object Label2: TLabel
       Left = 32
-      Top = 216
+      Top = 199
       Width = 39
       Height = 17
       Caption = 'Nome:'
@@ -207,8 +205,8 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 319
-      Top = 245
+      Left = 350
+      Top = 232
       Width = 36
       Height = 20
       Caption = 'Total:'
@@ -221,7 +219,7 @@ object frmVendas: TfrmVendas
     end
     object lblQtd: TLabel
       Left = 176
-      Top = 247
+      Top = 231
       Width = 28
       Height = 17
       Caption = 'QTD:'
@@ -241,7 +239,7 @@ object frmVendas: TfrmVendas
     end
     object Label8: TLabel
       Left = 32
-      Top = 247
+      Top = 231
       Width = 33
       Height = 17
       Caption = 'Valor:'
@@ -254,15 +252,15 @@ object frmVendas: TfrmVendas
       Caption = 'Nome:'
     end
     object edtNomeProd: TEdit
-      Left = 77
-      Top = 213
+      Left = 80
+      Top = 191
       Width = 385
       Height = 25
       TabOrder = 0
     end
-    object tnTotalProduto: TNumberBox
-      Left = 384
-      Top = 244
+    object tnValor: TNumberBox
+      Left = 400
+      Top = 228
       Width = 65
       Height = 25
       Mode = nbmCurrency
@@ -270,7 +268,7 @@ object frmVendas: TfrmVendas
     end
     object spQtd: TSpinEdit
       Left = 210
-      Top = 246
+      Top = 230
       Width = 103
       Height = 24
       Font.Charset = DEFAULT_CHARSET
@@ -283,7 +281,6 @@ object frmVendas: TfrmVendas
       ParentFont = False
       TabOrder = 2
       Value = 0
-      OnExit = spQtdExit
     end
     object dbgProdutos: TDBGrid
       Left = 16
@@ -296,7 +293,6 @@ object frmVendas: TfrmVendas
       Font.Height = -13
       Font.Name = 'Segoe UI'
       Font.Style = []
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -355,9 +351,9 @@ object frmVendas: TfrmVendas
           Visible = True
         end>
     end
-    object nbValor: TNumberBox
+    object NumberBox1: TNumberBox
       Left = 88
-      Top = 244
+      Top = 231
       Width = 82
       Height = 25
       Mode = nbmCurrency

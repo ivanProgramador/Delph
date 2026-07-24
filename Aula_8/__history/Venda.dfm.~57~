@@ -152,7 +152,6 @@ object frmVendas: TfrmVendas
     Height = 25
     Caption = 'Remover Item'
     TabOrder = 2
-    OnClick = btnRemoverClick
   end
   object btnFechar: TButton
     Left = 815

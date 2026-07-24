@@ -45,12 +45,10 @@ object dm: Tdm
     Left = 224
     Top = 16
     object qryClientesID_CLI: TAutoIncField
-      DisplayWidth = 5
       FieldName = 'ID_CLI'
       ReadOnly = True
     end
     object qryClientesNOME_CLI: TStringField
-      DisplayWidth = 29
       FieldName = 'NOME_CLI'
       Size = 50
     end
@@ -110,7 +108,6 @@ object dm: Tdm
     Top = 16
   end
   object qryProdutos: TADOQuery
-    Active = True
     Connection = conProjetoVenda
     CursorType = ctStatic
     Parameters = <>
@@ -177,37 +174,7 @@ object dm: Tdm
   object stAtualizaProduto: TADOStoredProc
     Connection = conProjetoVenda
     ProcedureName = 'st_AtualizaProd'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-      end
-      item
-        Name = '@id'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-      end
-      item
-        Name = '@nome'
-        Attributes = [paNullable]
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = '@qtd'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-      end
-      item
-        Name = '@vl'
-        Attributes = [paNullable]
-        DataType = ftBCD
-        Precision = 19
-      end>
+    Parameters = <>
     Left = 368
     Top = 88
   end

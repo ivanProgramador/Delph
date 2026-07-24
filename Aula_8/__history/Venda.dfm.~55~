@@ -143,16 +143,14 @@ object frmVendas: TfrmVendas
     Height = 25
     Caption = 'Inclui item'
     TabOrder = 1
-    OnClick = btnIncluiItemClick
   end
   object btnRemover: TButton
-    Left = 383
+    Left = 380
     Top = 305
     Width = 115
     Height = 25
     Caption = 'Remover Item'
     TabOrder = 2
-    OnClick = btnRemoverClick
   end
   object btnFechar: TButton
     Left = 815

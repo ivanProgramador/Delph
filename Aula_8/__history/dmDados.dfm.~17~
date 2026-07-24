@@ -39,7 +39,10 @@ object dm: Tdm
     Active = True
     Connection = conProjetoVenda
     CursorType = ctStatic
-    Parameters = <>
+    Parameters = <
+      item
+        Value = Null
+      end>
     SQL.Strings = (
       'SELECT * FROM TBCLIENTES')
     Left = 224
