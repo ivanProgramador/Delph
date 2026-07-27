@@ -70,10 +70,6 @@ var
 
 
     begin
-
-
-     //Eu lidar com varios produtos então tenho que colocar um for bem aqui
-
        with dm.stInsereItensVenda do
          begin
             close;
@@ -91,24 +87,11 @@ var
 
             ExecProc;
 
-            //depois que a procedure é executadsa ela tambem retorna mensagens
-            //e essas mesnagens prrecisam ser tratadas no delp
-
-
+            //depois que a procedure é executadsa ela eceuta os retornos
+            //e eles precisam ser tratados
 
             retorno := dm.stInsereItensVenda.Parameters.ParamByName('@return').Value;
             erMsg := dm.stInsereItensVenda.Parameters.ParamByName('@erMsg').Value;
-
-            if (retorno = 2) or (retorno = 3) then
-
-              begin
-
-                ShowMessage(erMsg);
-
-              end;
-
-
-
 
 
 

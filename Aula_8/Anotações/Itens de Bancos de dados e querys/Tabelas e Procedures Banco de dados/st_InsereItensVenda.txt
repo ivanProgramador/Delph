@@ -18,7 +18,7 @@ BEGIN
   
   SELECT @idProd  = ID_PROD
         ,@vlVenda = VL_Prod
-	    ,@estoque = QTD_Pro
+	    ,@estoque = QTD_PROD
   FROM dbo.TBPRODUTOS WITH (NOLOCK)
   WHERE NOME_PROD = @nm_Prod
 
@@ -47,8 +47,8 @@ BEGIN
 			,@qtdVenda)    
 
     UPDATE TBPRODUTOS
-    SET QTD_Pro = @estoque - @qtdVenda
-    WHERE ID_Prod = @idProd
+    SET QTD_PROD = @estoque - @qtdVenda
+    WHERE ID_PROD = @idProd
   END
   
   ELSE IF (@qtd <= 5 AND @qtd <= @estoque AND @qtd  < 0 )
@@ -73,8 +73,7 @@ BEGIN
     
 
     UPDATE TBPRODUTOS
-    SET QTD_Pro = @estoque - @qtdVenda
-    WHERE ID_Prod = @idProd
+    SET QTD_PROD = @estoque - @qtdVenda
+    WHERE ID_PROD = @idProd
   END
 END
-

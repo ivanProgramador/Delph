@@ -247,7 +247,7 @@ object dm: Tdm
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = 0
+        Value = Null
       end
       item
         Name = '@idCli'
@@ -325,10 +325,12 @@ object dm: Tdm
     Top = 176
   end
   object qryCodigoVenda: TADOQuery
-    Active = True
     Connection = conProjetoVenda
     CursorType = ctStatic
-    Parameters = <>
+    Parameters = <
+      item
+        Value = Null
+      end>
     SQL.Strings = (
       'SELECT  MAX(ID_Cod_Venda)  FROM  TBVENDAS')
     Left = 256

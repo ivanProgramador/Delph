@@ -157,7 +157,6 @@ object frmVendas: TfrmVendas
     Height = 25
     Caption = 'Fechar Venda'
     TabOrder = 3
-    OnClick = btnFecharClick
   end
   object lsLista: TListView
     Left = 8

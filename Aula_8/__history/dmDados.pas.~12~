@@ -26,8 +26,6 @@ type
     qryProdutosVL_PROD: TBCDField;
     stInsereVenda: TADOStoredProc;
     stInsereItensVenda: TADOStoredProc;
-    qryCodigoVenda: TADOQuery;
-    qryCodigoVendaCOLUMN1: TIntegerField;
   private
     { Private declarations }
   public

@@ -48,9 +48,9 @@ procedure TfrmProdutos.btnAtualizarClick(Sender: TObject);
                  close;
 
                    dm.stAtualizaProduto.Parameters.ParamByName('@id').Value := grdProduto.Fields[0].Value;
-                   dm.stAtualizaProduto.Parameters.ParamByName('@nome').Value := grdProduto.Fields[1].Value;
-                   dm.stAtualizaProduto.Parameters.ParamByName('@qtd').Value := grdProduto.Fields[2].Value;
-                   dm.stAtualizaProduto.Parameters.ParamByName('@vl').Value := grdProduto.Fields[3].Value;
+                   dm.stAtualizaProduto.Parameters.ParamByName('@nome').Value := grdProduto.Fields[1].Value;;
+                   dm.stAtualizaProduto.Parameters.ParamByName('@qtd').Value := grdProduto.Fields[2].Value;;
+                   dm.stAtualizaProduto.Parameters.ParamByName('@vl').Value := grdProduto.Fields[3].Value;;
 
                ExecProc;
           end;
@@ -88,7 +88,6 @@ begin
                  close;
 
                    dm.stExcluiProduto.Parameters.ParamByName('@id').Value := grdProduto.Fields[0].Value;
-
                ExecProc;
           end;
 
@@ -124,10 +123,8 @@ begin
                  close;
 
                    dm.stInsereProduto.Parameters.ParamByName('@nome').Value := edtNome.Text;
-                   dm.stInsereProduto.Parameters.ParamByName('@qtd').Value := StrToInt(spQtd.Text);
+                   dm.stInsereProduto.Parameters.ParamByName('@qtd').Value := spQtd.Text;
                    dm.stInsereProduto.Parameters.ParamByName('@vl').Value := tnValor.Text;
-
-                  
 
                ExecProc;
           end;

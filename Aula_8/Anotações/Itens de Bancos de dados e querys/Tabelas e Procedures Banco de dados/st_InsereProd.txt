@@ -5,7 +5,7 @@ AS
 BEGIN
   
   INSERT INTO TBPRODUTO (NOME_PROD
-                         ,QTD_PRO
+                         ,QTD_PROD
 			 ,VL_PROD)
   VALUES(@nome
 	    ,@qtd 

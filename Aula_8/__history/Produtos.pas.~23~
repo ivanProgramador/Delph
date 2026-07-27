@@ -88,7 +88,6 @@ begin
                  close;
 
                    dm.stExcluiProduto.Parameters.ParamByName('@id').Value := grdProduto.Fields[0].Value;
-
                ExecProc;
           end;
 

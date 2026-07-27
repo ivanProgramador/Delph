@@ -133,7 +133,7 @@ object frmProdutos: TfrmProdutos
       end
       item
         Expanded = False
-        FieldName = 'QTD_PROD'
+        FieldName = 'QTD_PRO'
         Title.Caption = 'QTD'
         Visible = True
       end
