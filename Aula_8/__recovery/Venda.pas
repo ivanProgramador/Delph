@@ -17,9 +17,9 @@ type
     btnRemover: TButton;
     btnFechar: TButton;
     Label4: TLabel;
-    lblCodigo: TLabel;
+    lblCodVenda: TLabel;
     Label5: TLabel;
-    lblTot: TLabel;
+    lblTotalVenda: TLabel;
     lsLista: TListView;
     edtNomeCli: TEdit;
     Label6: TLabel;
@@ -45,6 +45,9 @@ type
     procedure btnIncluiItemClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -59,6 +62,101 @@ implementation
 {$R *.dfm}
 
 uses dmDados;
+
+
+
+
+procedure TfrmVendas.btnFecharClick(Sender: TObject);
+var
+    retorno : integer;
+    erMsg: String;
+    i: Integer;
+begin
+    {
+      O fechamento de venda é feito em 3 partes:
+      1 - pegar a lista de produtos e associar a venda
+      2 - pegar o id do cliente e o valor total e o codigo da venda
+      3 - adicionar + 1 ao codigo para que a proxima venda não sobreponha a venda atual
+    }
+
+  // fase 1: botando os itens na venda
+
+      for I := 0 to lsLista.Items.Count - 1 do
+
+      begin
+
+        with dm.stInsereItensVenda do
+
+        begin
+
+          close;
+
+            Parameters.ParamByName('@nm_Prod').Value   := lsLista.Items[i].Caption;
+
+            // CORREÇÃO 1: A quantidade é SubItems[0]
+
+              Parameters.ParamByName('@qtdVenda').Value  := StrToInt(lsLista.Items[i].SubItems[0]);
+
+              Parameters.ParamByName('@codVEnda').Value  := lblCodVenda.Caption;
+
+              ExecProc;
+
+              retorno := Parameters.ParamByName('@return').Value;
+              erMSG   := Parameters.ParamByName('@erMsg').Value;
+
+              // Se der estoque baixo (3), exibe o aviso, mas CONTINUA
+
+              if (retorno = 3) then
+              begin
+
+                ShowMessage(erMsg);
+
+              end
+
+              // CORREÇÃO 2: Se não houver estoque suficiente (2), exibe mensagem e CANCELA o fechamento
+
+              else if (retorno = 2) then
+
+              begin
+
+                ShowMessage(erMsg);
+
+                Exit; // Interrompe o fechamento da venda
+
+              end;
+
+          end;
+      end;
+
+        // Fase 2: Insere a venda principal se passou por todos os itens
+
+          if (retorno = 1) or (retorno = 3) then
+          begin
+            with dm.stInsereVenda do
+            begin
+
+              close;
+
+              Parameters.ParamByName('@idCli').Value    := dbgCliente.Fields[0].Value;
+              Parameters.ParamByName('@total').Value    := lblTotalVenda.Caption;
+              Parameters.ParamByName('@codVenda').Value  := lblCodVenda.Caption;
+              ExecProc;
+
+            end;
+          end;
+
+        // Fase 3: Atualiza código para a próxima venda e dá refresh
+
+        lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
+
+        dm.qryProdutos.Refresh;
+      end;
+
+
+
+
+
+
 
 
 procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
@@ -90,14 +188,14 @@ procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
              begin
 
               //de todos os itens exitentes ele vai pegar o indice
-              //que esta na posi��o i que seria a linha
-              // depois ele vai acessar a posi��o 2 da linha onde fica o total
+              //que esta na posição i que seria a linha
+              // depois ele vai acessar a posição 2 da linha onde fica o total
               // depois ele vai passar esse total para o texto da "lblTot"
               //convertido pra texto
 
                tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
 
-               lblTot.Caption := 'R$' + FloatToStr(tot);
+               lblTotalVenda.Caption := 'R$' + FloatToStr(tot);
 
                edtNomeProd.Clear;
                spQtd.Clear;
@@ -124,23 +222,23 @@ procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
 
 procedure TfrmVendas.btnRemoverClick(Sender: TObject);
 var
-  i: Integer;
-  Tot: Double;
+    i: Integer;
+    Tot: Double;
 begin
-  if lsLista.Selected <> nil then
-    lsLista.Selected.Delete;
+      if lsLista.Selected <> nil then
+        lsLista.Selected.Delete;
 
-  Tot := 0;
+        Tot := 0;
 
-  for i := 0 to lsLista.Items.Count - 1 do
-    Tot := Tot + StrToFloat(lsLista.Items[i].SubItems[2]);
+        for i := 0 to lsLista.Items.Count - 1 do
+          Tot := Tot + StrToFloat(lsLista.Items[i].SubItems[2]);
 
-  lblTot.Caption := 'R$ ' + FloatToStr(Tot);
+        lblTotalVenda.Caption := 'R$ ' + FloatToStr(Tot);
 
-  edtNomeProd.Clear;
-  spQtd.Clear;
-  nbValor.Clear;
-  tnTotalProduto.Clear;
+        edtNomeProd.Clear;
+        spQtd.Clear;
+        nbValor.Clear;
+        tnTotalProduto.Clear;
 end;
 
 
@@ -211,18 +309,39 @@ begin
 
 end;
 
-procedure TfrmVendas.FormShow(Sender: TObject);
-begin
-   with dm.qryCodigoVenda do
-  begin
-    Close;
-    Open;
 
-    // Pega o valor da coluna COLUMN1 e converte para String
-    lblCodigo.Caption := FieldByName('COLUMN1').AsString;
+
+
+
+procedure TfrmVendas.FormCreate(Sender: TObject);
+begin
+   dm.qryProdutos.Refresh;
+end;
+
+procedure TfrmVendas.FormShow(Sender: TObject);
+ var
+  vProximoCodigo: Int64;
+
+  begin
+     with dm.qryCodigoVenda do
+       begin
+         close;
+         open;
+
+        // Se estiver nulo (sem vendas), assume 0 e soma 1 (resultado: 1)
+        if FieldByName('COLUMN1').IsNull then
+          vProximoCodigo := 1
+        else
+          vProximoCodigo := FieldByName('COLUMN1').AsLargeInt + 1;
+
+        lblCodVenda.Caption := IntToStr(vProximoCodigo);
+
+        dm.qryProdutos.Refresh;
+      end;
+
   end;
 
-end;
+
 
 procedure TfrmVendas.spQtdExit(Sender: TObject);
 

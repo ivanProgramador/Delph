@@ -1,79 +1,68 @@
+USE [ProjetoVenda]
+GO
+/****** Object:  StoredProcedure [dbo].[st_InsereItensVenda]    Script Date: 07/28/2026 23:45:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
-CREATE PROCEDURE st_InsereItensVenda   @nm_Prod  Varchar(50)                                     
-		                      ,@qtdVenda Integer
-			              ,@codVEnda Integer
-				      ,@erMsg    Varchar(255) Output 
-				      ,@return   Integer      Output
-							  
+ALTER PROCEDURE [dbo].[st_InsereItensVenda]   @nm_Prod     Varchar(50)                                     
+                                              ,@qtdVenda   Integer
+                                              ,@codVEnda   Integer
+                                              ,@erMsg      Varchar(255) Output 
+                                              ,@return     Integer      Output
+                              
 AS
 BEGIN
 
-  DECLARE  @idProd   Integer		  
-   		  ,@vlVenda  Money
-		  ,@estoque  Integer
-		  ,@qtd      Integer
+  DECLARE  @idProd   Integer        
+          ,@vlVenda  Money
+          ,@estoque  Integer
+          ,@qtd      Integer
 
-  SET @return = 1                                           
+  SET @return = 1                                              
   SET @erMsg = '';
   
+  -- Busca dados do produto
   SELECT @idProd  = ID_PROD
         ,@vlVenda = VL_Prod
-	    ,@estoque = QTD_PROD
+        ,@estoque = QTD_PROD
   FROM dbo.TBPRODUTOS WITH (NOLOCK)
   WHERE NOME_PROD = @nm_Prod
 
-  Select @qtd = @estoque - @qtdVenda
+  -- Calculo do estoque restante após a venda
+  SET @qtd = @estoque - @qtdVenda
 
-  IF (@estoque <= 0 )
+  -- 1. Produto sem estoque cadastrado/zerado
+  IF (@estoque <= 0)
   BEGIN
     SET @return = 2;
-    SET @erMsg = 'Produto '+ @nm_Prod + ' em Falta';
-
-	RETURN
+    SET @erMsg = 'Produto ' + @nm_Prod + ' em Falta';
+    RETURN
   END
   
-  ELSE IF (@qtd <= 5 AND @qtd <= @estoque AND @qtd >=0 )
+  -- 2. Tentando vender MAIS do que tem no estoque
+  IF (@qtdVenda > @estoque)
+  BEGIN
+    SET @return = 2;
+    SET @erMsg = 'Estoque Indisponivel, Qtd vendida maior que estoque: ' + @nm_Prod + CHAR(13) + CHAR(10) +
+                 'Estoque produto = ' + CAST(@estoque AS VARCHAR(10)); 
+    RETURN
+  END
+
+  -- Se passou das validações acima, realiza a inserção e atualização:
+  INSERT INTO TBITENSVENDA (ID_Cod_Venda, id_prod, vl_prod, QTD_Prod)
+  VALUES (@codVEnda, @idProd, @vlVenda, @qtdVenda);   
+
+  UPDATE TBPRODUTOS
+  SET QTD_PROD = @qtd
+  WHERE ID_PROD = @idProd;
+
+  -- 3. Avisa se o estoque RESTANTE ficou baixo (<= 5)
+  IF (@qtd <= 5)
   BEGIN
     SET @return = 3;
-    SET @erMsg = 'Estoque Baixo ' + @nm_Prod ;  
-	
-	INSERT INTO TBITENSVENDA  ( ID_Cod_Venda
-	                           ,id_prod
-					           ,vl_prod
-							   ,QTD_Prod)
-    VALUES ( @codVEnda
-	        ,@idProd 		  
-		    ,@vlVenda
-			,@qtdVenda)    
-
-    UPDATE TBPRODUTOS
-    SET QTD_PROD = @estoque - @qtdVenda
-    WHERE ID_PROD = @idProd
+    SET @erMsg = 'Estoque Baixo ' + @nm_Prod;  
   END
-  
-  ELSE IF (@qtd <= 5 AND @qtd <= @estoque AND @qtd  < 0 )
-  BEGIN
-    SET @return = 2;
-    SET @erMsg = 'Estoque Indispovinel, Qtd vendida maior que estoque: ' + @nm_Prod + '  
-	    Estoque produto = ' + CAST(@estoque AS VARCHAR(2)) ; 
-    
-	RETURN
-  END
-  ELSE
-  BEGIN 
 
-	INSERT INTO TBITENSVENDA  ( ID_Cod_Venda
-	                           ,id_prod
-					           ,vl_prod
-							   ,QTD_Prod)
-    VALUES ( @codVEnda
-	        ,@idProd 		  
-		    ,@vlVenda
-			,@qtdVenda)   
-    
-
-    UPDATE TBPRODUTOS
-    SET QTD_PROD = @estoque - @qtdVenda
-    WHERE ID_PROD = @idProd
-  END
 END

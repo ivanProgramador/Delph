@@ -11,6 +11,7 @@ object frmVendas: TfrmVendas
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  OnShow = FormShow
   TextHeight = 17
   object Label4: TLabel
     Left = 8
@@ -19,7 +20,7 @@ object frmVendas: TfrmVendas
     Height = 17
     Caption = 'Codigo venda:'
   end
-  object lblCodigo: TLabel
+  object lblCodVenda: TLabel
     Left = 128
     Top = 480
     Width = 4
@@ -32,7 +33,7 @@ object frmVendas: TfrmVendas
     Height = 17
     Caption = 'Total:'
   end
-  object lblTot: TLabel
+  object lblTotalVenda: TLabel
     Left = 296
     Top = 480
     Width = 4
@@ -103,11 +104,6 @@ object frmVendas: TfrmVendas
         item
           Expanded = False
           FieldName = 'ID_CLI'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = []
           Title.Caption = 'COD'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
@@ -146,12 +142,13 @@ object frmVendas: TfrmVendas
     OnClick = btnIncluiItemClick
   end
   object btnRemover: TButton
-    Left = 380
+    Left = 383
     Top = 305
     Width = 115
     Height = 25
     Caption = 'Remover Item'
     TabOrder = 2
+    OnClick = btnRemoverClick
   end
   object btnFechar: TButton
     Left = 815
@@ -160,6 +157,7 @@ object frmVendas: TfrmVendas
     Height = 25
     Caption = 'Fechar Venda'
     TabOrder = 3
+    OnClick = btnFecharClick
   end
   object lsLista: TListView
     Left = 8

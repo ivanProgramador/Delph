@@ -46,7 +46,6 @@ type
     procedure btnRemoverClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -68,64 +67,76 @@ uses dmDados;
 
 procedure TfrmVendas.btnFecharClick(Sender: TObject);
 var
-  retorno : integer;
+  retorno: Integer;
   erMsg: String;
   i: Integer;
 begin
   {
-    O fechamento de venda é feito em 3 partes:
-    1 - pegar a lista de produtos e associar a venda
-    2 - pegar o id do cliente e o valor total e o codigo da venda
-    3 - adicionar + 1 ao codigo para que a proxima venda não sobreponha a venda atual
+    Fase 1: Inserindo os itens na venda
   }
-
-  // fase 1: inserindo os itens na venda
-  for I := 0 to lsLista.Items.Count - 1 do
+  for i := 0 to lsLista.Items.Count - 1 do
   begin
     with dm.stInsereItensVenda do
     begin
-      close;
-      Parameters.ParamByName('@nm_Prod').Value   := lsLista.Items[i].Caption;
+      Close;
 
-      // CORREÇÃO 1: A quantidade é SubItems[0], não SubItems[2] (que é o Total)
-      Parameters.ParamByName('@qtdVenda').Value  := StrToInt(lsLista.Items[i].SubItems[0]);
-      Parameters.ParamByName('@codVEnda').Value  := lblCodVenda.Caption;
+      // Caption = Nome do Produto
+      Parameters.ParamByName('@nm_Prod').Value  := lsLista.Items[i].Caption;
+
+      // SubItems[0] = Quantidade (Ajustado de 1 para 0)
+      Parameters.ParamByName('@qtdVenda').Value := StrToIntDef(lsLista.Items[i].SubItems[0], 0);
+
+      // Código da Venda
+      Parameters.ParamByName('@codVEnda').Value := StrToIntDef(lblCodVenda.Caption, 0);
+
       ExecProc;
 
       retorno := Parameters.ParamByName('@return').Value;
-      erMSG   := Parameters.ParamByName('@erMsg').Value;
+      erMsg   := Parameters.ParamByName('@erMsg').Value;
 
-      // Se der estoque baixo (3), exibe o aviso, mas CONTINUA
-      if (retorno = 3) then
+      // Se não houver estoque suficiente (retorno 2), exibe o erro e ABORTA a venda
+      if retorno = 2 then
       begin
         ShowMessage(erMsg);
-      end
-      // CORREÇÃO 2: Se não houver estoque suficiente (2), exibe mensagem e CANCELA o fechamento
-      else if (retorno = 2) then
+        Exit; // Interrompe a execução para não prosseguir com a venda
+      end;
+
+      // Se apenas for estoque baixo (retorno 3), avisa o usuário mas continua
+      if retorno = 3 then
       begin
         ShowMessage(erMsg);
-        Exit; // Interrompe o fechamento da venda
       end;
     end;
   end;
 
-  // Fase 2: Insere a venda principal se passou por todos os itens
-  if (retorno = 1) or (retorno = 3) then
+  {
+    Fase 2: Gravar o cabeçalho da venda (Cliente, Total e Código)
+    Esta etapa só é atingida se NENHUM item retornou bloqueio (retorno = 2)
+  }
+  with dm.stInsereVenda do
   begin
-    with dm.stInsereVenda do
-    begin
-      close;
-      Parameters.ParamByName('@idCli').Value    := dbgCliente.Fields[0].Value;
-      Parameters.ParamByName('@total').Value    := lblTotalVenda.Caption;
-      Parameters.ParamByName('@codVenda').Value  := lblCodVenda.Caption;
-      ExecProc;
-    end;
+    Close;
+    Parameters.ParamByName('@idCli').Value    := dbgCliente.Fields[0].Value;
+    Parameters.ParamByName('@total').Value    := StrToFloatDef(lblTotalVenda.Caption, 0);
+
+    // Corrigido: usando lblCodVenda em vez de lblTotalVenda
+    Parameters.ParamByName('@codVenda').Value := StrToIntDef(lblCodVenda.Caption, 0);
+    ExecProc;
   end;
 
-  // Fase 3: Atualiza código para a próxima venda e dá refresh
-  lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
-  dm.qryProdutos.Refresh;
+  {
+    Fase 3: Atualizar o próximo código de venda no formulário
+  }
+  dm.qryCodigoVenda.Close;
+  dm.qryCodigoVenda.Open;
+
+  if not dm.qryCodigoVenda.IsEmpty then
+    lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.Fields[0].AsInteger + 1);
+
+  ShowMessage('Venda realizada com sucesso!');
 end;
+
+
 
 
 
@@ -288,32 +299,16 @@ end;
 
 
 
-procedure TfrmVendas.FormCreate(Sender: TObject);
-begin
-   dm.qryProdutos.Refresh;
-end;
-
 procedure TfrmVendas.FormShow(Sender: TObject);
- var
-  vProximoCodigo: Int64;
-
   begin
      with dm.qryCodigoVenda do
        begin
          close;
          open;
 
-        // Se estiver nulo (sem vendas), assume 0 e soma 1 (resultado: 1)
-        if FieldByName('COLUMN1').IsNull then
-          vProximoCodigo := 1
-        else
-          vProximoCodigo := FieldByName('COLUMN1').AsLargeInt + 1;
+          lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
 
-        lblCodVenda.Caption := IntToStr(vProximoCodigo);
-
-        dm.qryProdutos.Refresh;
-      end;
-
+       end;
   end;
 
 

@@ -17,9 +17,9 @@ type
     btnRemover: TButton;
     btnFechar: TButton;
     Label4: TLabel;
-    lblCodigo: TLabel;
+    lblCodVenda: TLabel;
     Label5: TLabel;
-    lblTot: TLabel;
+    lblTotalVenda: TLabel;
     lsLista: TListView;
     edtNomeCli: TEdit;
     Label6: TLabel;
@@ -46,6 +46,8 @@ type
     procedure btnRemoverClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -62,47 +64,117 @@ implementation
 uses dmDados;
 
 
+
+
 procedure TfrmVendas.btnFecharClick(Sender: TObject);
 
 var
-   retorno: integer;
-   erMsg: String;
+  retorno : integer;
+  erMsg: String;
+  i: Integer;
+
+begin
+
+   {
+     O fechamento de venda é feito em 3 partes
+     1 - pegra a lista de produtos e associar a venda
+     2 - pegar o id do cliente e o valor total e o codigo da venda
+     3 - adicionar + 1 ao codigo para que a proxma venda não sobreponha a venda atual
+   }
 
 
-    begin
-       with dm.stInsereItensVenda do
-         begin
-            close;
-
-            //na procedure esses são os  3 parametros de entrada
-            //na hora de acessar um item de Um List View tem que ficar atento
-            // ele é uma array onde o primeiro indiece é um Caption e o resto é
-            //subtem
-
-            dm.stInsereItensVenda.Parameters.ParamByName('@nm_Prod').Value  := lsLista.Items[i].Caption;
-
-            dm.stInsereItensVenda.Parameters.ParamByName('@qtdVenda').Value := lsLista[i].SubItems[1];
-
-            dm.stInsereItensVenda.Parameters.ParamByName('@codVEnda').Value := lblCodigo.Caption;
-
-            ExecProc;
-
-            //depois que a procedure é executadsa ela eceuta os retornos
-            //e eles precisam ser tratados
-
-            retorno := dm.stInsereItensVenda.Parameters.ParamByName('@return').Value;
-            erMsg := dm.stInsereItensVenda.Parameters.ParamByName('@erMsg').Value;
+   //fase 1 inserindo os iten na venda
 
 
+    for I:= 0 to lsLista.Items.Count -1 do
+
+      begin
+
+
+           with dm.stInsereItensVenda do
+             begin
+
+               close;
+
+
+                 dm.stInsereItensVenda.Parameters.ParamByName('@nm_Prod').Value   := lsLista.Items[i].Caption;
+                 dm.stInsereItensVenda.Parameters.ParamByName('@qtdVenda').Value  := lsLista.Items[i].SubItems[2];
+                 dm.stInsereItensVenda.Parameters.ParamByName('@codVEnda').Value  := lblCodVenda.Caption;
+                 ExecProc;
+
+                 {
+                    a variável retorno tem 3 possibilidades
+
+                    1 - pode vender não tem nenhum problema
+                    2 - não pode vender porque não tem estoque pra cobrir a venda
+                    3 - o estoque ta baixo mas dá pra vender ainda
+                 }
+
+                 retorno := dm.stInsereItensVenda.Parameters.ParamByName('@return').Value;
+                 erMSG   := dm.stInsereItensVenda.Parameters.ParamByName('@erMsg').Value;
+
+                 {
+                  tratando os retornos 2 e 3
+                 }
+
+                 if (retorno = 2) or (retorno = 3) then
+                 begin
+
+                    ShowMessage(erMsg);
+
+                 end;
+
+             end;
+      end;
+
+      {
+        Depois de colocar os itens na venda eu tenho que definir quem foi o cliente que comprou
+        o codigo da venda em questão e o total dessa venda issro sera feito pela porcedure insereVenda
+        mas a venda so pode ser feita se o retono for
+
+        1 - nenhuma restrição
+        3 - o estoque esta baixo mas dá pra vender
+      }
+
+      if (retorno = 1) or (retorno = 3) then
+        begin
+
+            with dm.stInsereVenda do
+
+             begin
+
+               close;
+
+                 dm.stInsereVenda.Parameters.ParamByName('@idCli').Value  := dbgCliente.Fields[0].Value;
+                 dm.stInsereVenda.Parameters.ParamByName('@total').Value  := lblTotalVenda.Caption;
+                 dm.stInsereVenda.Parameters.ParamByName('@codVenda').Value := lblCodVenda.Caption;
+
+               ExecProc;
+
+             end;
+
+        end;
+
+        {
+           Depois da venda concluida eu preciso adiconnar mais um ao codigo que esta sendo mostrado no
+           formulario seão a proxima venda vai sobrescrever a venda anterior
+        }
+
+        lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
+
+        dm.qryProdutos.Refresh;
 
 
 
 
 
 
-         end;
 
-    end;
+end;
+
+
+
+
 
 
 
@@ -145,7 +217,7 @@ procedure TfrmVendas.btnIncluiItemClick(Sender: TObject);
 
                tot := tot + StrToFloat(lsLista.Items[i].SubItems[2]);
 
-               lblTot.Caption := 'R$' + FloatToStr(tot);
+               lblTotalVenda.Caption := 'R$' + FloatToStr(tot);
 
                edtNomeProd.Clear;
                spQtd.Clear;
@@ -183,7 +255,7 @@ begin
         for i := 0 to lsLista.Items.Count - 1 do
           Tot := Tot + StrToFloat(lsLista.Items[i].SubItems[2]);
 
-        lblTot.Caption := 'R$ ' + FloatToStr(Tot);
+        lblTotalVenda.Caption := 'R$ ' + FloatToStr(Tot);
 
         edtNomeProd.Clear;
         spQtd.Clear;
@@ -259,18 +331,39 @@ begin
 
 end;
 
-procedure TfrmVendas.FormShow(Sender: TObject);
-begin
-   with dm.qryCodigoVenda do
-  begin
-    Close;
-    Open;
 
-    // Pega o valor da coluna COLUMN1 e converte para String
-    lblCodigo.Caption := FieldByName('COLUMN1').AsString;
+
+
+
+procedure TfrmVendas.FormCreate(Sender: TObject);
+begin
+   dm.qryProdutos.Refresh;
+end;
+
+procedure TfrmVendas.FormShow(Sender: TObject);
+ var
+  vProximoCodigo: Int64;
+
+  begin
+     with dm.qryCodigoVenda do
+       begin
+         close;
+         open;
+
+        // Se estiver nulo (sem vendas), assume 0 e soma 1 (resultado: 1)
+        if FieldByName('COLUMN1').IsNull then
+          vProximoCodigo := 1
+        else
+          vProximoCodigo := FieldByName('COLUMN1').AsLargeInt + 1;
+
+        lblCodVenda.Caption := IntToStr(vProximoCodigo);
+
+        dm.qryProdutos.Refresh;
+      end;
+
   end;
 
-end;
+
 
 procedure TfrmVendas.spQtdExit(Sender: TObject);
 

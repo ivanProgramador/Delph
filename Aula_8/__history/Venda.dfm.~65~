@@ -11,6 +11,7 @@ object frmVendas: TfrmVendas
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  OnShow = FormShow
   TextHeight = 17
   object Label4: TLabel
     Left = 8
@@ -120,7 +121,6 @@ object frmVendas: TfrmVendas
           Title.Font.Height = -13
           Title.Font.Name = 'Segoe UI'
           Title.Font.Style = [fsBold]
-          Width = 64
           Visible = True
         end>
     end
@@ -157,6 +157,7 @@ object frmVendas: TfrmVendas
     Height = 25
     Caption = 'Fechar Venda'
     TabOrder = 3
+    OnClick = btnFecharClick
   end
   object lsLista: TListView
     Left = 8

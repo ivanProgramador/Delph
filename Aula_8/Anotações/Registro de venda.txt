@@ -1,0 +1,36 @@
+A primeira parte consistem em identificar o codigo da venda que deve ser fechada essa venda tem sempre que possui o maior codigo da tebela de vendas extametne pra el sempre contr a numerção mais atual.seguindo a logica se eu tenho a venda a proxima será a venda 2 e isso deve ser repetir a cada nova venda.
+
+No delph para pegar esse ultimo nuemro  eu preciso usar um componente do tipo 
+" TADOQuery " ele permite qque faça queries livres na base de dados e posssa 
+usar os retornos dentro do delp, parar fazer isso ele precisa saber qual será 
+a conexão que ele vai usar e depois no ataibuto sql eu escccrveo o texto da 
+minha querie, que faz uma consulta geral e comparar todos os codigos e idetifica
+o maior e me retorna ele atraves de um campo eu deixei o nome como "COLUMN1".   
+ele apatrrece no editor de campos do componente
+
+" SELECT  MAX(ID_Cod_Venda)  FROM  TBVENDAS " 
+
+O resultado dessa consulta deve ser associado ao eneto onShow porque assim qque o formulario for apresentado,
+a venda ja deve ter um codigo atual que possa ser lido e somado.
+
+para associar esse valor ao caption de um label abaixo eu chamo o evento onShow do meu formulario de venda 
+essa procedure vai pegar o meu dm e atraves dele acessar o componente da qryCodVenda 
+eu sempre faço o close pra fechar qualqquer conexão que tenha sido aberta antes disso e depois abro denovo
+pra pegar o codigo.   
+
+procedure TfrmVendas.FormShow(Sender: TObject);
+  begin
+     with dm.qryCodigoVenda do
+       begin
+         close;
+         open;
+
+         lblCodVenda.Caption := dm.qryCodigoVenda.FieldByName('COLUMN1').AsString;
+
+       end;
+  end;
+
+  
+        
+
+  
