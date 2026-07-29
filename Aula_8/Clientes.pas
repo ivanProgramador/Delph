@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids,
-  Vcl.DBGrids;
+  Vcl.DBGrids, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
   TfrmCliente = class(TForm)
@@ -15,6 +15,7 @@ type
     btnAtualizar: TButton;
     btnExcluir: TButton;
     grdClientes: TDBGrid;
+    Image1: TImage;
     procedure bntSalvarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);

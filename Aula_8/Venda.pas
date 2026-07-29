@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Samples.Spin, Vcl.NumberBox, Vcl.ComCtrls;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Samples.Spin, Vcl.NumberBox, Vcl.ComCtrls,
+  Vcl.Imaging.pngimage;
 
 type
   TfrmVendas = class(TForm)
@@ -37,6 +38,7 @@ type
     dbgProdutos: TDBGrid;
     nbValor: TNumberBox;
     edtBuscaProd: TEdit;
+    Image1: TImage;
     procedure edtBuscaCliChange(Sender: TObject);
     procedure edtBuscaProdChange(Sender: TObject);
     procedure dbgClienteCellClick(Column: TColumn);
@@ -68,64 +70,89 @@ uses dmDados;
 
 procedure TfrmVendas.btnFecharClick(Sender: TObject);
 var
-  retorno : integer;
-  erMsg: String;
-  i: Integer;
+    retorno : integer;
+    erMsg: String;
+    i: Integer;
 begin
-  {
-    O fechamento de venda é feito em 3 partes:
-    1 - pegar a lista de produtos e associar a venda
-    2 - pegar o id do cliente e o valor total e o codigo da venda
-    3 - adicionar + 1 ao codigo para que a proxima venda não sobreponha a venda atual
-  }
+    {
+      O fechamento de venda é feito em 3 partes:
+      1 - pegar a lista de produtos e associar a venda
+      2 - pegar o id do cliente e o valor total e o codigo da venda
+      3 - adicionar + 1 ao codigo para que a proxima venda não sobreponha a venda atual
+    }
 
-  // fase 1: inserindo os itens na venda
-  for I := 0 to lsLista.Items.Count - 1 do
-  begin
-    with dm.stInsereItensVenda do
-    begin
-      close;
-      Parameters.ParamByName('@nm_Prod').Value   := lsLista.Items[i].Caption;
+  // fase 1: botando os itens na venda
 
-      // CORREÇÃO 1: A quantidade é SubItems[0], não SubItems[2] (que é o Total)
-      Parameters.ParamByName('@qtdVenda').Value  := StrToInt(lsLista.Items[i].SubItems[0]);
-      Parameters.ParamByName('@codVEnda').Value  := lblCodVenda.Caption;
-      ExecProc;
+      for I := 0 to lsLista.Items.Count - 1 do
 
-      retorno := Parameters.ParamByName('@return').Value;
-      erMSG   := Parameters.ParamByName('@erMsg').Value;
-
-      // Se der estoque baixo (3), exibe o aviso, mas CONTINUA
-      if (retorno = 3) then
       begin
-        ShowMessage(erMsg);
-      end
-      // CORREÇÃO 2: Se não houver estoque suficiente (2), exibe mensagem e CANCELA o fechamento
-      else if (retorno = 2) then
-      begin
-        ShowMessage(erMsg);
-        Exit; // Interrompe o fechamento da venda
+
+        with dm.stInsereItensVenda do
+
+        begin
+
+          close;
+
+            Parameters.ParamByName('@nm_Prod').Value   := lsLista.Items[i].Caption;
+
+            // CORREÇÃO 1: A quantidade é SubItems[0]
+
+              Parameters.ParamByName('@qtdVenda').Value  := StrToInt(lsLista.Items[i].SubItems[0]);
+
+              Parameters.ParamByName('@codVEnda').Value  := lblCodVenda.Caption;
+
+              ExecProc;
+
+              retorno := Parameters.ParamByName('@return').Value;
+              erMSG   := Parameters.ParamByName('@erMsg').Value;
+
+              // Se der estoque baixo (3), exibe o aviso, mas CONTINUA
+
+              if (retorno = 3) then
+              begin
+
+                ShowMessage(erMsg);
+
+              end
+
+              // CORREÇÃO 2: Se não houver estoque suficiente (2), exibe mensagem e CANCELA o fechamento
+
+              else if (retorno = 2) then
+
+              begin
+
+                ShowMessage(erMsg);
+
+                Exit; // Interrompe o fechamento da venda
+
+              end;
+
+          end;
       end;
-    end;
-  end;
 
-  // Fase 2: Insere a venda principal se passou por todos os itens
-  if (retorno = 1) or (retorno = 3) then
-  begin
-    with dm.stInsereVenda do
-    begin
-      close;
-      Parameters.ParamByName('@idCli').Value    := dbgCliente.Fields[0].Value;
-      Parameters.ParamByName('@total').Value    := lblTotalVenda.Caption;
-      Parameters.ParamByName('@codVenda').Value  := lblCodVenda.Caption;
-      ExecProc;
-    end;
-  end;
+        // Fase 2: Insere a venda principal se passou por todos os itens
 
-  // Fase 3: Atualiza código para a próxima venda e dá refresh
-  lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
-  dm.qryProdutos.Refresh;
-end;
+          if (retorno = 1) or (retorno = 3) then
+          begin
+            with dm.stInsereVenda do
+            begin
+
+              close;
+
+              Parameters.ParamByName('@idCli').Value    := dbgCliente.Fields[0].Value;
+              Parameters.ParamByName('@total').Value    := lblTotalVenda.Caption;
+              Parameters.ParamByName('@codVenda').Value  := lblCodVenda.Caption;
+              ExecProc;
+
+            end;
+          end;
+
+        // Fase 3: Atualiza código para a próxima venda e dá refresh
+
+        lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
+
+        dm.qryProdutos.Refresh;
+      end;
 
 
 

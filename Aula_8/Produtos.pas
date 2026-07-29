@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.NumberBox,
-  Vcl.Samples.Spin, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Samples.Spin, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls;
 
 type
   TfrmProdutos = class(TForm)
@@ -19,6 +20,7 @@ type
     Label3: TLabel;
     tnValor: TNumberBox;
     grdProduto: TDBGrid;
+    Image1: TImage;
     procedure btnSalvarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

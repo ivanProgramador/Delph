@@ -4,16 +4,22 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  Vcl.Menus, Vcl.ComCtrls;
 
 type
   TForm1 = class(TForm)
-    imgCliente: TImage;
-    imgProdutos: TImage;
-    imgVendas: TImage;
-    procedure imgClienteClick(Sender: TObject);
-    procedure imgProdutosClick(Sender: TObject);
+    MainMenu1: TMainMenu;
+    StatusBar1: TStatusBar;
+    Clientes1: TMenuItem;
+    Produtos1: TMenuItem;
+    Vendas1: TMenuItem;
+    Image1: TImage;
     procedure imgVendasClick(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
+    procedure Produtos1Click(Sender: TObject);
+    procedure Vendas1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,22 +35,38 @@ implementation
 
 uses Clientes, Produtos, Venda;
 
-procedure TForm1.imgClienteClick(Sender: TObject);
+procedure TForm1.Clientes1Click(Sender: TObject);
 begin
-   {O comando show modal abre o formaulario de clientes na tela
+    {
+    O comando show modal abre o formaulario de clientes na tela
     mas isso so é possivel se eu adiconar a classe dentro do meu form
    }
    frmCliente.ShowModal;
 end;
 
-procedure TForm1.imgProdutosClick(Sender: TObject);
+
+
+
+procedure TForm1.FormShow(Sender: TObject);
 begin
-  frmProdutos.ShowModal;
+ StatusBar1.Panels[1].Text := ' Data : ' + DateToStr(Date);
+ StatusBar1.Panels[2].Text := ' Hora : ' + TimeToStr(Time);
+
 end;
 
 procedure TForm1.imgVendasClick(Sender: TObject);
 begin
   frmVendas.ShowModal;
+end;
+
+procedure TForm1.Produtos1Click(Sender: TObject);
+begin
+  frmProdutos.ShowModal;
+end;
+
+procedure TForm1.Vendas1Click(Sender: TObject);
+begin
+   frmVendas.ShowModal;
 end;
 
 end.
