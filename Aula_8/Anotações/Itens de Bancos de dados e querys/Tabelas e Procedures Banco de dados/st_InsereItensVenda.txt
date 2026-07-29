@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[st_InsereItensVenda]   @nm_Prod     Varchar(50)                                     
+CREATE PROCEDURE [dbo].[st_InsereItensVenda]   @nm_Prod     Varchar(50)                                     
                                               ,@qtdVenda   Integer
                                               ,@codVEnda   Integer
                                               ,@erMsg      Varchar(255) Output 

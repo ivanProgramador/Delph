@@ -28,6 +28,8 @@ type
     stInsereItensVenda: TADOStoredProc;
     qryCodigoVenda: TADOQuery;
     qryCodigoVendaCOLUMN1: TIntegerField;
+    dsRelatorio: TDataSource;
+    qryRelat: TADOQuery;
   private
     { Private declarations }
   public

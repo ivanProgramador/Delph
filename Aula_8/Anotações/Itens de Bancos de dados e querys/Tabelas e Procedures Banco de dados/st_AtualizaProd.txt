@@ -7,7 +7,7 @@ BEGIN
 
   UPDATE TBPRODUTOS
   SET NOME_PROD = @nome
-     ,QTD_PRO   = @qtd
+     ,QTD_PROD   = @qtd
 	 ,VL_PROD   = @vl
   WHERE ID_PROD = @id
 END

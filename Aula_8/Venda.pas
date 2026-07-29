@@ -152,6 +152,9 @@ begin
         lblCodVenda.Caption := IntToStr(dm.qryCodigoVenda.FieldByName('COLUMN1').Value + 1);
 
         dm.qryProdutos.Refresh;
+
+        dm.qryRelat.Refresh;
+
       end;
 
 

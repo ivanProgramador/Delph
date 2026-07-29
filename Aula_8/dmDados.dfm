@@ -4,11 +4,11 @@ object dm: Tdm
   object conProjetoVenda: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=Aa123456;Persist Security Info=True' +
-      ';User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost;U' +
-      'se Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;' +
-      'Workstation ID=DESKTOP-DPPTK8A;Use Encryption for Data=False;Tag' +
-      ' with column collation when possible=False'
+      'Provider=SQLOLEDB.1;Password=rqqo231;Persist Security Info=True;' +
+      'User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost;Us' +
+      'e Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;W' +
+      'orkstation ID=DESKTOP-DPPTK8A;Use Encryption for Data=False;Tag ' +
+      'with column collation when possible=False'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 40
@@ -41,7 +41,7 @@ object dm: Tdm
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'SELECT * FROM TBCLIENTES')
+      'SELECT * FROM TBCLIENTE')
     Left = 224
     Top = 16
     object qryClientesID_CLI: TAutoIncField
@@ -116,7 +116,7 @@ object dm: Tdm
     DataSource = dsClientes
     Parameters = <>
     SQL.Strings = (
-      'SELECT * FROM TBPRODUTOS')
+      'SELECT * FROM TBPRODUTO')
     Left = 40
     Top = 88
     object qryProdutosID_PROD: TAutoIncField
@@ -325,7 +325,6 @@ object dm: Tdm
     Top = 176
   end
   object qryCodigoVenda: TADOQuery
-    Active = True
     Connection = conProjetoVenda
     CursorType = ctStatic
     Parameters = <>
@@ -337,5 +336,31 @@ object dm: Tdm
       FieldName = 'COLUMN1'
       ReadOnly = True
     end
+  end
+  object dsRelatorio: TDataSource
+    DataSet = qryRelat
+    Left = 504
+    Top = 176
+  end
+  object qryRelat: TADOQuery
+    Connection = conProjetoVenda
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT TBVENDAS.ID_Cod_Venda'
+      '      ,NOME_CLI'
+      #9'  ,DT_Venda'
+      #9'  ,NOME_PROD'
+      #9'  ,TBITENSVENDA.QTD_Prod'
+      #9'  ,TBITENSVENDA.VL_PROD'
+      #9'  ,Total'
+      'FROM TBITENSVENDA'
+      'INNER JOIN TBVENDAS'
+      'ON TBVENDAS.ID_Cod_Venda = TBITENSVENDA.ID_Cod_Venda'
+      'INNER JOIN TBPRODUTO'
+      'ON TBPRODUTO.ID_PROD = TBITENSVENDA.ID_Prod'
+      'INNER JOIN TBCLIENTE'
+      'ON TBCLIENTE.ID_CLI = TBVENDAS.ID_Cli')
+    Left = 368
+    Top = 176
   end
 end

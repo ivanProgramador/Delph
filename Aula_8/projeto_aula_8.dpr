@@ -6,7 +6,8 @@ uses
   dmDados in 'dmDados.pas' {dm: TDataModule},
   Clientes in 'Clientes.pas' {frmCliente},
   Produtos in 'Produtos.pas' {frmProdutos},
-  Venda in 'Venda.pas' {frmVendas};
+  Venda in 'Venda.pas' {frmVendas},
+  Relatorio in 'Relatorio.pas' {frmRelatorio};
 
 {$R *.res}
 
@@ -18,5 +19,6 @@ begin
   Application.CreateForm(TfrmCliente, frmCliente);
   Application.CreateForm(TfrmProdutos, frmProdutos);
   Application.CreateForm(TfrmVendas, frmVendas);
+  Application.CreateForm(TfrmRelatorio, frmRelatorio);
   Application.Run;
 end.
