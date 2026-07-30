@@ -19,6 +19,7 @@ type
     procedure bntSalvarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -145,5 +146,12 @@ procedure TfrmCliente.btnExcluirClick(Sender: TObject);
 
 
     end;
+
+procedure TfrmCliente.FormShow(Sender: TObject);
+begin
+ dm.qryClientes.Close;
+ dm.qryClientes.Open;
+
+end;
 
 end.

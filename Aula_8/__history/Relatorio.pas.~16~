@@ -1,0 +1,75 @@
+unit Relatorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelatorio = class(TForm)
+    rlRelatorio: TRLReport;
+    RLBand1: TRLBand;
+    RLLabel1: TRLLabel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLImage1: TRLImage;
+    RLDraw1: TRLDraw;
+    RLGroup1: TRLGroup;
+    RLBand2: TRLBand;
+    RLLabel2: TRLLabel;
+    RLLabel3: TRLLabel;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLBand3: TRLBand;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLLabel6: TRLLabel;
+    RLLabel7: TRLLabel;
+    RLBand4: TRLBand;
+    RLDBText3: TRLDBText;
+    edtValor: TRLDBText;
+    edtQtd: TRLDBText;
+    edtTotalUnit: TRLDBText;
+    procedure edtQtdAfterPrint(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelatorio: TfrmRelatorio;
+
+implementation
+
+{$R *.dfm}
+
+uses dmDados;
+
+procedure TfrmRelatorio.edtQtdAfterPrint(Sender: TObject);
+
+ var
+   qtd,valor:Real;
+
+begin
+
+   qtd := StrToFloat(edtQtd.Caption);
+
+   {
+     a função string repalce serve parara mudar de pronto paara virgula os valores no relatóio pra exibição
+     o padrão nativo sempre é ponto mas no brail usamos virgula por isso ela é necessaria
+
+   }
+
+   valor := StrToFloat(copy(StringReplace(edtValor.Caption,'.',',',[]),3));
+
+   edtTotalUnit.Caption := FloatToStr(qtd * valor);
+
+
+
+
+
+
+end;
+
+end.

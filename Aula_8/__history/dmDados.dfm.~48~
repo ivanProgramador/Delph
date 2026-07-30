@@ -1,0 +1,368 @@
+object dm: Tdm
+  Height = 318
+  Width = 613
+  object conProjetoVenda: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=Aa123456;Persist Security Info=True' +
+      ';User ID=sa;Initial Catalog=ProjetoVenda;Data Source=localhost;U' +
+      'se Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;' +
+      'Workstation ID=DESKTOP-DPPTK8A;Use Encryption for Data=False;Tag' +
+      ' with column collation when possible=False'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 40
+    Top = 16
+  end
+  object stInsereCliente: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_InsereCli'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@nome'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end>
+    Left = 136
+    Top = 16
+  end
+  object qryClientes: TADOQuery
+    Connection = conProjetoVenda
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM TBCLIENTE')
+    Left = 224
+    Top = 16
+    object qryClientesID_CLI: TAutoIncField
+      DisplayWidth = 5
+      FieldName = 'ID_CLI'
+      ReadOnly = True
+    end
+    object qryClientesNOME_CLI: TStringField
+      DisplayWidth = 29
+      FieldName = 'NOME_CLI'
+      Size = 50
+    end
+  end
+  object dsClientes: TDataSource
+    DataSet = qryClientes
+    Left = 312
+    Top = 16
+  end
+  object stAlteraCli: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_AlteraCli'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@id'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@nome'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end>
+    Left = 392
+    Top = 16
+  end
+  object stExcluiCliente: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'ST_APAGACLI'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@ID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 488
+    Top = 16
+  end
+  object qryProdutos: TADOQuery
+    Active = True
+    Connection = conProjetoVenda
+    CursorType = ctStatic
+    DataSource = dsClientes
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM TBPRODUTOS')
+    Left = 40
+    Top = 88
+    object qryProdutosID_PROD: TAutoIncField
+      FieldName = 'ID_PROD'
+      ReadOnly = True
+    end
+    object qryProdutosNOME_PROD: TStringField
+      FieldName = 'NOME_PROD'
+      Size = 50
+    end
+    object qryProdutosQTD_PROD: TIntegerField
+      FieldName = 'QTD_PROD'
+    end
+    object qryProdutosVL_PROD: TBCDField
+      FieldName = 'VL_PROD'
+      Precision = 19
+    end
+  end
+  object dsProdutos: TDataSource
+    DataSet = qryProdutos
+    Left = 128
+    Top = 88
+  end
+  object stInsereProduto: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_InsereProd'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@nome'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = '@qtd'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@vl'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        Precision = 19
+        Value = Null
+      end>
+    Left = 256
+    Top = 88
+  end
+  object stAtualizaProduto: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_AtualizaProd'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@id'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@nome'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = '@qtd'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@vl'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        Precision = 19
+        Value = Null
+      end>
+    Left = 368
+    Top = 88
+  end
+  object stExcluiProduto: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'stExcluiProd'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@id'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 472
+    Top = 88
+  end
+  object stInsereVenda: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_InsereVenda'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@idCli'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@total'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        Precision = 19
+        Value = Null
+      end
+      item
+        Name = '@codVenda'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 32
+    Top = 176
+  end
+  object stInsereItensVenda: TADOStoredProc
+    Connection = conProjetoVenda
+    ProcedureName = 'st_InsereItensVenda'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@nm_Prod'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = '@qtdVenda'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@codVEnda'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@erMsg'
+        Attributes = [paNullable]
+        DataType = ftString
+        Direction = pdInputOutput
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = '@return'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Direction = pdInputOutput
+        Precision = 10
+        Value = Null
+      end>
+    Left = 144
+    Top = 176
+  end
+  object qryCodigoVenda: TADOQuery
+    Active = True
+    Connection = conProjetoVenda
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT  MAX(ID_Cod_Venda)  FROM  TBVENDAS')
+    Left = 256
+    Top = 176
+    object qryCodigoVendaCOLUMN1: TIntegerField
+      FieldName = 'COLUMN1'
+      ReadOnly = True
+    end
+  end
+  object dsRelatorio: TDataSource
+    DataSet = qryRelat
+    Left = 504
+    Top = 176
+  end
+  object qryRelat: TADOQuery
+    Active = True
+    Connection = conProjetoVenda
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT TBVENDAS.ID_Cod_Venda'
+      '      ,NOME_CLI'
+      #9'  ,DT_Venda'
+      #9'  ,NOME_PROD'
+      #9'  ,TBITENSVENDA.QTD_Prod'
+      #9'  ,TBITENSVENDA.VL_PROD'
+      #9'  ,Total'
+      'FROM TBITENSVENDA'
+      'INNER JOIN TBVENDAS'
+      'ON TBVENDAS.ID_Cod_Venda = TBITENSVENDA.ID_Cod_Venda'
+      'INNER JOIN TBPRODUTOS'
+      'ON TBPRODUTOS.ID_PROD = TBITENSVENDA.ID_Prod'
+      'INNER JOIN TBCLIENTES'
+      'ON TBCLIENTES.ID_CLI = TBVENDAS.ID_Cli')
+    Left = 368
+    Top = 176
+  end
+end

@@ -15,11 +15,13 @@ type
     Produtos1: TMenuItem;
     Vendas1: TMenuItem;
     Image1: TImage;
+    Relatrio1: TMenuItem;
     procedure imgVendasClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Vendas1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Relatrio1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,7 +35,7 @@ implementation
 
 {$R *.dfm}
 
-uses Clientes, Produtos, Venda;
+uses Clientes, Produtos, Venda, Relatorio, dmDados;
 
 procedure TForm1.Clientes1Click(Sender: TObject);
 begin
@@ -62,6 +64,15 @@ end;
 procedure TForm1.Produtos1Click(Sender: TObject);
 begin
   frmProdutos.ShowModal;
+end;
+
+procedure TForm1.Relatrio1Click(Sender: TObject);
+begin
+
+  dm.qryRelat.Close;
+  DM.qryRelat.Open;
+  frmRelatorio.rlRelatorio.Preview();
+
 end;
 
 procedure TForm1.Vendas1Click(Sender: TObject);
